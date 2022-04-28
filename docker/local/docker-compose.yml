@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  node:
+    extends:
+      file: ${DLLOCAL_PATH}/containers/node/lts-alpine-vue.yml
+      service: node
+    container_name: ${COMPOSE_PROJECT_NAME}-node
+    extra_hosts:
+      - "${URL}:${DALUKASLOCAL_IP}"
+    volumes:
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/codebase:/app:cached
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+ 
