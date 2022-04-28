@@ -5,7 +5,9 @@ import { Module, Action, Mutation, VuexModule } from 'vuex-module-decorators';
 export interface User {
   name: string;
   email: string;
-  password: string;
+  organization: string;
+  password?: string;
+  roles: string[];
 }
 
 export interface UserAuthInfo {
@@ -50,14 +52,14 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   }
 
   @Mutation
-  [Mutations.SET_AUTH](user) {
+  [Mutations.SET_AUTH](user: User) {
     this.isAuthenticated = true;
     this.user = user;
     this.errors = {};
   }
 
   @Mutation
-  [Mutations.SET_USER](user) {
+  [Mutations.SET_USER](user: User) {
     this.user = user;
   }
 
@@ -101,9 +103,8 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   async [Actions.REGISTER](credentials) {
     await ApiService.get('csrf-cookie').then(async () => {
       return ApiService.post('register', credentials)
-        .then(({ data }) => {
-          console.log(data);
-          this.context.commit(Mutations.SET_AUTH, data);
+        .then(() => {
+          this.context.dispatch(Actions.VERIFY_AUTH);
         })
         .catch(({ response }) => {
           this.context.commit(Mutations.SET_ERROR, response.data.errors);
@@ -126,7 +127,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   async [Actions.VERIFY_AUTH]() {
     await ApiService.query('me', {})
       .then(({ data }) => {
-        this.context.commit(Mutations.SET_AUTH, data);
+        this.context.commit(Mutations.SET_AUTH, data.data);
       })
       .catch(({ response }) => {
         this.context.commit(Mutations.SET_ERROR, response.data.errors);

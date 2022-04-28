@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import store from '@/store';
 import { Mutations, Actions } from '@/store/enums/StoreEnums';
+import auth from '@/router/middleware/auth';
+import admin from '@/router/middleware/admin';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -9,9 +11,22 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/layout/Layout.vue'),
     children: [
       {
-        path: '/dashboard',
+        path: 'dashboard',
         name: 'dashboard',
         component: () => import('@/views/Dashboard.vue'),
+      },
+    ],
+  },
+  {
+    path: '/admin',
+    redirect: '/admin/dashboard',
+    component: () => import('@/layout/Layout.vue'),
+    beforeEnter: [auth, admin],
+    children: [
+      {
+        path: 'dashboard',
+        name: 'adminDashboard',
+        component: () => import('@/views/AdminDashboard.vue'),
       },
     ],
   },
@@ -54,7 +69,9 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach(async () => {
+router.beforeEach(async (to, from, next) => {
+  console.log('going to:', to.fullPath);
+
   // reset config to initial state
   store.commit(Mutations.RESET_LAYOUT_CONFIG);
 
@@ -62,6 +79,7 @@ router.beforeEach(async () => {
   if (!user) {
     await store.dispatch(Actions.VERIFY_AUTH);
   }
+  next();
 
   // Scroll page to top on every route change
   setTimeout(() => {

@@ -157,139 +157,8 @@
     <!--end::Menu separator-->
 
     <!--begin::Menu item-->
-    <div
-      class="menu-item px-5"
-      data-kt-menu-trigger="hover"
-      data-kt-menu-placement="left-start"
-      data-kt-menu-flip="center, top"
-    >
-      <router-link to="/pages/profile/overview" class="menu-link px-5">
-        <span class="menu-title position-relative">
-          Language
-          <span
-            class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0"
-          >
-            {{ currentLangugeLocale.name }}
-            <img
-              class="w-15px h-15px rounded-1 ms-2"
-              :src="currentLangugeLocale.flag"
-              alt="metronic"
-            />
-          </span>
-        </span>
-      </router-link>
-
-      <!--begin::Menu sub-->
-      <div class="menu-sub menu-sub-dropdown w-175px py-4">
-        <!--begin::Menu item-->
-        <div class="menu-item px-3">
-          <a
-            href="#"
-            class="menu-link d-flex px-5"
-            :class="{ active: currentLanguage('en') }"
-            @click="setLang('en')"
-          >
-            <span class="symbol symbol-20px me-4">
-              <img
-                class="rounded-1"
-                src="media/flags/united-states.svg"
-                alt="metronic"
-              />
-            </span>
-            English
-          </a>
-        </div>
-        <!--end::Menu item-->
-
-        <!--begin::Menu item-->
-        <div class="menu-item px-3">
-          <a
-            href="#"
-            class="menu-link d-flex px-5"
-            :class="{ active: currentLanguage('es') }"
-            @click="setLang('es')"
-          >
-            <span class="symbol symbol-20px me-4">
-              <img
-                class="rounded-1"
-                src="media/flags/spain.svg"
-                alt="metronic"
-              />
-            </span>
-            Spanish
-          </a>
-        </div>
-        <!--end::Menu item-->
-
-        <!--begin::Menu item-->
-        <div class="menu-item px-3">
-          <a
-            href="#"
-            class="menu-link d-flex px-5"
-            :class="{ active: currentLanguage('de') }"
-            @click="setLang('de')"
-          >
-            <span class="symbol symbol-20px me-4">
-              <img
-                class="rounded-1"
-                src="media/flags/germany.svg"
-                alt="metronic"
-              />
-            </span>
-            German
-          </a>
-        </div>
-        <!--end::Menu item-->
-
-        <!--begin::Menu item-->
-        <div class="menu-item px-3">
-          <a
-            href="#"
-            class="menu-link d-flex px-5"
-            :class="{ active: currentLanguage('ja') }"
-            @click="setLang('ja')"
-          >
-            <span class="symbol symbol-20px me-4">
-              <img
-                class="rounded-1"
-                src="media/flags/japan.svg"
-                alt="metronic"
-              />
-            </span>
-            Japanese
-          </a>
-        </div>
-        <!--end::Menu item-->
-
-        <!--begin::Menu item-->
-        <div class="menu-item px-3">
-          <a
-            href="#"
-            class="menu-link d-flex px-5"
-            :class="{ active: currentLanguage('fr') }"
-            @click="setLang('fr')"
-          >
-            <span class="symbol symbol-20px me-4">
-              <img
-                class="rounded-1"
-                src="media/flags/france.svg"
-                alt="metronic"
-              />
-            </span>
-            French
-          </a>
-        </div>
-        <!--end::Menu item-->
-      </div>
-      <!--end::Menu sub-->
-    </div>
-    <!--end::Menu item-->
-
-    <!--begin::Menu item-->
-    <div class="menu-item px-5 my-1">
-      <router-link to="/pages/profile/overview" class="menu-link px-5">
-        Account Settings
-      </router-link>
+    <div v-if="user.roles.includes('admin')" class="menu-item px-5 my-1">
+      <router-link to="/admin" class="menu-link px-5">Admin Portal</router-link>
     </div>
     <!--end::Menu item-->
 
@@ -308,6 +177,7 @@ import { useI18n } from 'vue-i18n/index';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { Actions } from '@/store/enums/StoreEnums';
+import { User } from '@/store/modules/AuthModule';
 
 export default defineComponent({
   name: 'KtUserMenu',
@@ -316,7 +186,7 @@ export default defineComponent({
     const router = useRouter();
     const i18n = useI18n();
     const store = useStore();
-    const user = store.getters.currentUser;
+    const user: User = store.getters.currentUser;
 
     i18n.locale.value = localStorage.getItem('lang')
       ? (localStorage.getItem('lang') as string)

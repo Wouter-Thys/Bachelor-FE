@@ -42,34 +42,19 @@
   </div>
   <!-- end:: Body -->
   <KTScrollTop />
-  <KTMessengerDrawer />
-  <KTUserMenu />
-  <KTCreateApp />
-  <KTInviteFriendsModal />
-
-  <KTToolbarButtons />
-  <KTDemosDrawer />
-  <KTHelpDrawer />
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, onMounted, watch, nextTick } from 'vue';
 import { useStore } from 'vuex';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import KTAside from '@/layout/aside/Aside.vue';
 import KTHeader from '@/layout/header/Header.vue';
 import KTFooter from '@/layout/footer/Footer.vue';
 import HtmlClass from '@/core/services/LayoutService';
 import KTToolbar from '@/layout/toolbar/Toolbar.vue';
 import KTScrollTop from '@/layout/extras/ScrollTop.vue';
-import KTUserMenu from '@/layout/header/partials/ActivityDrawer.vue';
 import KTLoader from '@/components/Loader.vue';
-import KTCreateApp from '@/components/modals/wizards/CreateAppModal.vue';
-import KTInviteFriendsModal from '@/components/modals/general/InviteFriendsModal.vue';
-import KTToolbarButtons from '@/layout/extras/ToolbarButtons.vue';
-import KTDemosDrawer from '@/layout/extras/DemosDrawer.vue';
-import KTHelpDrawer from '@/layout/extras/HelpDrawer.vue';
-import KTMessengerDrawer from '@/layout/extras/MessengerDrawer.vue';
 import { Actions } from '@/store/enums/StoreEnums';
 import { MenuComponent } from '@/assets/ts/components';
 import { reinitializeComponents } from '@/core/plugins/keenthemes';
@@ -93,19 +78,11 @@ export default defineComponent({
     KTFooter,
     KTToolbar,
     KTScrollTop,
-    KTCreateApp,
-    KTInviteFriendsModal,
-    KTUserMenu,
-    KTToolbarButtons,
-    KTDemosDrawer,
-    KTHelpDrawer,
-    KTMessengerDrawer,
     KTLoader,
   },
   setup() {
     const store = useStore();
     const route = useRoute();
-    const router = useRouter();
 
     // show page loading
     // store.dispatch(Actions.ADD_BODY_CLASSNAME, 'page-loading');
@@ -122,11 +99,6 @@ export default defineComponent({
     });
 
     onMounted(() => {
-      //check if current user is authenticated
-      if (!store.getters.isUserAuthenticated) {
-        // router.push({ name: 'sign-in' });
-      }
-
       nextTick(() => {
         reinitializeComponents();
       });
@@ -141,11 +113,6 @@ export default defineComponent({
       () => route.path,
       () => {
         MenuComponent.hideDropdowns(undefined);
-
-        // check if current user is authenticated
-        if (!store.getters.isUserAuthenticated) {
-          // router.push({ name: 'sign-in' });
-        }
 
         removeModalBackdrop();
         nextTick(() => {
