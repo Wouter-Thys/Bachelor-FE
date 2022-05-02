@@ -1,32 +1,23 @@
 <template>
   <!--begin::Dashboard-->
-  <div class="row gy-5 g-xl-8">
-    <div class="col-xxl-4">
-      <MixedWidget2
-        widget-classes="card-xl-stretch mb-xl-8"
-        widget-color="danger"
-        chart-height="200"
-        stroke-color="#cb1e46"
-      ></MixedWidget2>
+
+  <Suspense>
+    <div class="row gy-5 gx-xl-8">
+      <div class="col-xxl-4">
+        <UserPendingLandlord
+          v-model:selected-user="selectedUser"
+        ></UserPendingLandlord>
+      </div>
+      <div class="col-xxl-8">
+        <UsersPendingLandlord
+          v-model:users="users"
+          v-model:selected-user="selectedUser"
+          v-model:is-loading="isLoading"
+          widget-classes="card-xxl-stretch mb-5 mb-xl-8"
+        ></UsersPendingLandlord>
+      </div>
     </div>
-    <div class="col-xxl-4">
-      <ListWidget5
-        widget-classes="card-xxl-stretch mb-5 mb-xl-10"
-      ></ListWidget5>
-    </div>
-    <div class="col-xxl-4">
-      <MixedWidget7
-        widget-classes="card-xxl-stretch-50 mb-5 mb-xl-8"
-        chart-color="primary"
-        chart-height="150"
-      ></MixedWidget7>
-      <MixedWidget10
-        widget-classes="card-xxl-stretch-50 mb-5 mb-xl-8"
-        chart-color="primary"
-        chart-height="168"
-      ></MixedWidget10>
-    </div>
-  </div>
+  </Suspense>
   <Suspense>
     <div class="row gy-5 gx-xl-8">
       <div class="col-xxl-12">
@@ -34,42 +25,48 @@
       </div>
     </div>
   </Suspense>
-  <Suspense>
-    <div class="row gy-5 gx-xl-8">
-      <div class="col-xxl-12">
-        <UsersPendingLandlord
-          widget-classes="card-xxl-stretch mb-5 mb-xl-8"
-        ></UsersPendingLandlord>
-      </div>
-    </div>
-  </Suspense>
   <!--end::Dashboard-->
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent, onMounted, ref, watch } from 'vue';
 import usersTable from '@/custom_components/admin/usersTable.vue';
 import UsersPendingLandlord from '@/custom_components/admin/usersPendingLandlordTable.vue';
-import ListWidget5 from '@/components/widgets/lists/Widget5.vue';
-import MixedWidget2 from '@/components/widgets/mixed/Widget2.vue';
-import MixedWidget7 from '@/components/widgets/mixed/Widget7.vue';
-import MixedWidget10 from '@/components/widgets/mixed/Widget10.vue';
+import UserPendingLandlord from '@/custom_components/admin/userPendingLandlordCard.vue';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
+import ApiService from '@/core/services/ApiService';
+import { User } from '@/store/modules/AuthModule';
 
 export default defineComponent({
   name: 'MainDashboard',
   components: {
     usersTable,
     UsersPendingLandlord,
-    ListWidget5,
-    MixedWidget2,
-    MixedWidget7,
-    MixedWidget10,
+    UserPendingLandlord,
   },
   setup() {
+    const users = ref<User[]>([]);
+    const loadUser = ref<User>();
+    const isLoading = ref(true);
+    const selectedUser = ref({});
+
     onMounted(() => {
       setCurrentPageTitle('Admin Dashboard');
+      ApiService.get('/users-pending-landlord').then(({ data }) => {
+        users.value = data.data;
+        selectedUser.value = data.data[0];
+        return (isLoading.value = false);
+      });
     });
+    watch(selectedUser, (value) => {
+      console.log(value);
+    });
+    return {
+      users,
+      loadUser,
+      isLoading,
+      selectedUser,
+    };
   },
 });
 </script>

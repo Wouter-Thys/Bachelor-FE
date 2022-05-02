@@ -45,6 +45,16 @@
         <div class="fv-row mb-7 mt-7">
           <label class="form-label fw-bolder text-dark fs-6">Image</label>
           <Field
+            v-if="user.roles.includes('pending-landlord')"
+            ref="fileInputRef"
+            class="form-control form-control-lg form-control-solid"
+            type="file"
+            name="image"
+            accept=".png, .jpg, .jpeg"
+            disabled
+          />
+          <Field
+            v-else
             ref="fileInputRef"
             class="form-control form-control-lg form-control-solid"
             type="file"
@@ -53,7 +63,10 @@
           />
         </div>
 
-        <div class="fv-plugins-message-container">
+        <div
+          v-if="!user.roles.includes('pending-landlord')"
+          class="fv-plugins-message-container"
+        >
           <div class="fv-help-block">
             <ErrorMessage name="image" />
           </div>
@@ -118,12 +131,11 @@ export default defineComponent({
 
     const onSubmit = async (data) => {
       const formData = new FormData();
-      formData.append('file', data.image[0]);
+      formData.append('image', data.image[0]);
 
       await ApiService.post('/request-landlord', formData)
         .then((data) => {
           if (data.status === 201) {
-            // store.dispatch(Actions.VERIFY_AUTH);
             router.push({ name: 'dashboard' });
           }
         })

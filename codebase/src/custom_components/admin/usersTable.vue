@@ -141,9 +141,7 @@ export default defineComponent({
   name: 'UsersTable',
   components: {},
 
-  props: {
-    widgetClasses: String,
-  },
+  props: {},
   setup: async () => {
     const checkedRows = ref([]);
 
