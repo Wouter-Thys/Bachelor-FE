@@ -1,8 +1,9 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import store from '@/store';
 import { Mutations, Actions } from '@/store/enums/StoreEnums';
-import auth from '@/router/middleware/auth';
 import admin from '@/router/middleware/admin';
+import landlord from '@/router/middleware/landlord';
+import isAuth from '@/router/middleware/isAuth';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin',
     redirect: '/admin/dashboard',
     component: () => import('@/layout/Layout.vue'),
-    beforeEnter: [auth, admin],
+    beforeEnter: [admin],
     children: [
       {
         path: 'dashboard',
@@ -30,9 +31,29 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+
+  {
+    path: '/landlord',
+    redirect: '/landlord/sign-up',
+    component: () => import('@/layout/Layout.vue'),
+    children: [
+      {
+        beforeEnter: [landlord],
+        path: 'sign-up',
+        name: 'landlordSignUp',
+        component: () => import('@/views/landlord/SignUp.vue'),
+      },
+      {
+        path: 'dashboard',
+        name: 'landlordDashboard',
+        component: () => import('@/views/landlord/LandlordDashboard.vue'),
+      },
+    ],
+  },
   {
     path: '/',
     component: () => import('@/components/page-layouts/Auth.vue'),
+    beforeEnter: [isAuth],
     children: [
       {
         path: '/sign-in',

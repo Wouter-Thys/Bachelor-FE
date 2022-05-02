@@ -7,6 +7,12 @@ const MainMenu = [
         svgIcon: 'media/icons/duotune/art/art002.svg',
         fontIcon: 'bi-app-indicator',
       },
+      {
+        heading: 'Landlord',
+        route: '/landlord',
+        svgIcon: 'media/icons/duotune/art/art002.svg',
+        fontIcon: 'bi-app-indicator',
+      },
     ],
   },
 ];

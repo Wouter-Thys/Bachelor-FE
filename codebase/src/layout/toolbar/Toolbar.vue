@@ -18,7 +18,7 @@
         </h1>
         <!--end::Title-->
 
-        <!--begin::Breadcrumb-->
+        <!--begin::Breadcrumb
         <ul
           v-if="breadcrumbs"
           class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1"
@@ -41,15 +41,13 @@
             {{ title }}
           </li>
         </ul>
-        <!--end::Breadcrumb-->
+        end::Breadcrumb-->
       </div>
       <!--end::Page title-->
 
-      <!--begin::Actions-->
+      <!--begin::Actions
       <div class="d-flex align-items-center py-3 py-md-1">
-        <!--begin::Wrapper-->
         <div class="me-4">
-          <!--begin::Menu-->
           <a
             href="#"
             class="btn btn-custom btn-active-white btn-flex btn-color-white btn-active-color-primary fw-bolder"
@@ -64,11 +62,7 @@
           </a>
 
           <Dropdown1></Dropdown1>
-          <!--end::Menu-->
         </div>
-        <!--end::Wrapper-->
-
-        <!--begin::Button-->
         <a
           id="kt_toolbar_primary_button"
           href="#"
@@ -78,9 +72,8 @@
         >
           Create
         </a>
-        <!--end::Button-->
       </div>
-      <!--end::Actions-->
+      end::Actions-->
     </div>
     <!--end::Container-->
   </div>
@@ -89,13 +82,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Dropdown1 from '@/components/dropdown/Dropdown1.vue';
+// import Dropdown1 from '@/components/dropdown/Dropdown1.vue';
 import { toolbarWidthFluid } from '@/core/helpers/config';
 
 export default defineComponent({
   name: 'KToolbar',
   components: {
-    Dropdown1,
+    // Dropdown1,
   },
   props: {
     breadcrumbs: Array,

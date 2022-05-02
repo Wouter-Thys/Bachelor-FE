@@ -27,29 +27,11 @@
       ></MixedWidget10>
     </div>
   </div>
-  <Suspense>
-    <div class="row gy-5 gx-xl-8">
-      <div class="col-xxl-12">
-        <usersTable widget-classes="card-xxl-stretch mb-5 mb-xl-8"></usersTable>
-      </div>
-    </div>
-  </Suspense>
-  <Suspense>
-    <div class="row gy-5 gx-xl-8">
-      <div class="col-xxl-12">
-        <UsersPendingLandlord
-          widget-classes="card-xxl-stretch mb-5 mb-xl-8"
-        ></UsersPendingLandlord>
-      </div>
-    </div>
-  </Suspense>
   <!--end::Dashboard-->
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
-import usersTable from '@/custom_components/admin/usersTable.vue';
-import UsersPendingLandlord from '@/custom_components/admin/usersPendingLandlordTable.vue';
 import ListWidget5 from '@/components/widgets/lists/Widget5.vue';
 import MixedWidget2 from '@/components/widgets/mixed/Widget2.vue';
 import MixedWidget7 from '@/components/widgets/mixed/Widget7.vue';
@@ -59,8 +41,6 @@ import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 export default defineComponent({
   name: 'MainDashboard',
   components: {
-    usersTable,
-    UsersPendingLandlord,
     ListWidget5,
     MixedWidget2,
     MixedWidget7,
@@ -68,7 +48,7 @@ export default defineComponent({
   },
   setup() {
     onMounted(() => {
-      setCurrentPageTitle('Admin Dashboard');
+      setCurrentPageTitle('Landlord Dashboard');
     });
   },
 });

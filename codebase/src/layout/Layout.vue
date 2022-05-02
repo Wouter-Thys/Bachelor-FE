@@ -24,11 +24,7 @@
         }"
       >
         <!-- begin:: Aside Left -->
-        <KTAside
-          v-if="asideEnabled"
-          :light-logo="themeLightLogo"
-          :dark-logo="themeDarkLogo"
-        />
+
         <!-- end:: Aside Left -->
         <!-- begin:: Content Body -->
         <div class="content flex-row-fluid">
@@ -48,7 +44,6 @@
 import { defineComponent, computed, onMounted, watch, nextTick } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
-import KTAside from '@/layout/aside/Aside.vue';
 import KTHeader from '@/layout/header/Header.vue';
 import KTFooter from '@/layout/footer/Footer.vue';
 import HtmlClass from '@/core/services/LayoutService';
@@ -73,7 +68,6 @@ import {
 export default defineComponent({
   name: 'MasterLayout',
   components: {
-    KTAside,
     KTHeader,
     KTFooter,
     KTToolbar,

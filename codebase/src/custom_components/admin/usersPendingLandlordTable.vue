@@ -4,7 +4,9 @@
     <!--begin::Header-->
     <div class="card-header border-0 pt-6">
       <h3 class="card-title align-items-start flex-column">
-        <span class="card-label fw-bolder fs-3 mb-1">All Users</span>
+        <span class="card-label fw-bolder fs-3 mb-1">
+          Users requesting landlord role
+        </span>
 
         <span class="text-muted mt-1 fw-bold fs-7">
           Over {{ users.length }} members
@@ -138,7 +140,7 @@ import ApiService from '@/core/services/ApiService';
 import { User } from '@/store/modules/AuthModule';
 
 export default defineComponent({
-  name: 'UsersTable',
+  name: 'UsersPendingLandlord',
   components: {},
 
   props: {
@@ -147,9 +149,11 @@ export default defineComponent({
   setup: async () => {
     const checkedRows = ref([]);
 
-    const users = await ApiService.get('/users').then(({ data }) => {
-      return data.data as User[];
-    });
+    const users = await ApiService.get('/users-pending-landlord').then(
+      ({ data }) => {
+        return data.data as User[];
+      }
+    );
     console.log(users);
 
     return {
