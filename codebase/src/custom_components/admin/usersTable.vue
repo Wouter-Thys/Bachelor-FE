@@ -148,7 +148,6 @@ export default defineComponent({
     const users = await ApiService.get('/users').then(({ data }) => {
       return data.data as User[];
     });
-    console.log(users);
 
     return {
       checkedRows,

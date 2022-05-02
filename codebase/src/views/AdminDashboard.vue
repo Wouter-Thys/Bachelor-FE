@@ -58,9 +58,6 @@ export default defineComponent({
         return (isLoading.value = false);
       });
     });
-    watch(selectedUser, (value) => {
-      console.log(value);
-    });
     return {
       users,
       loadUser,
