@@ -145,7 +145,7 @@ export default defineComponent({
   setup: async () => {
     const checkedRows = ref([]);
 
-    const users = await ApiService.get('/users').then(({ data }) => {
+    const users = await ApiService.get('/admin/users').then(({ data }) => {
       return data.data as User[];
     });
 

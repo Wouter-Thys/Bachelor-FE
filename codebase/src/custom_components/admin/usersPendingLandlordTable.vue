@@ -1,6 +1,6 @@
 <template>
   <!--begin::Tables Widget 9-->
-  <div class="card">
+  <div v-if="users.length" class="card">
     <!--begin::Header-->
     <div class="card-header border-0 pt-6">
       <h3 class="card-title align-items-start flex-column">
@@ -23,7 +23,7 @@
       <vue-good-table
         :columns="tableHeader"
         :is-loading="isLoading"
-        :pagination-options="{ enabled: true }"
+        :pagination-options="{ enabled: true, perPage: 5 }"
         :rows="users"
         style-class="vgt-table striped"
         theme="polar-bear"
@@ -68,18 +68,24 @@
                 </span>
               </span>
             </span>
-            <span v-if="props.column.field === 'actions'" class="btn-group">
-              <button class="btn btn-icon btn-success vgt-center-align">
-                <i class="las la-download fs-3" />
-              </button>
-              <button class="btn btn-icon btn-danger vgt-center-align">
-                <i class="las la-trash fs-3" />
-              </button>
-            </span>
-            <span v-else>
-              {{ props.formattedRow[props.column.field] }}
-            </span>
           </a>
+          <span v-if="props.column.field === 'actions'" class="btn-group">
+            <button
+              class="btn btn-icon btn-success vgt-center-align"
+              @click="onAcceptedClick(props.row.id, true)"
+            >
+              <i class="fa-solid fa-check"></i>
+            </button>
+            <button
+              class="btn btn-icon btn-danger vgt-center-align"
+              @click="onAcceptedClick(props.row.id, false)"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </span>
+          <span v-else>
+            {{ props.formattedRow[props.column.field] }}
+          </span>
         </template>
       </vue-good-table>
       <!--end::Table container-->
@@ -90,9 +96,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { User } from '@/store/modules/AuthModule';
 import 'vue-good-table-next/dist/vue-good-table-next.css';
+import useUsers from '@/core/composables/users';
 
 export default defineComponent({
   name: 'UsersPendingLandlord',
@@ -105,20 +112,22 @@ export default defineComponent({
       type: Object as PropType<User[]>,
       default: Array,
     },
-    selectedUser: {
-      type: Object,
-      default: Object,
-      require: true,
-    },
     isLoading: {
       type: Boolean,
       default: true,
     },
   },
-  emits: ['update:selectedUser'],
+  emits: ['update:selectedUser', 'get-users'],
   setup: async (props, context) => {
+    const { putUserLandlordRequest } = useUsers();
+
     const onRowClick = (params) => {
-      context.emit('update:selectedUser', params.row);
+      context.emit('update:selectedUser', params.row.id);
+    };
+    const onAcceptedClick = async (id: number, bool: boolean) => {
+      await putUserLandlordRequest(id, bool).then(() => {
+        return context.emit('get-users');
+      });
     };
     const tableHeader = [
       {
@@ -158,6 +167,7 @@ export default defineComponent({
     ];
     return {
       onRowClick,
+      onAcceptedClick,
       tableHeader,
     };
   },

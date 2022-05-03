@@ -39,7 +39,7 @@ import MixedWidget10 from '@/components/widgets/mixed/Widget10.vue';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 
 export default defineComponent({
-  name: 'MainDashboard',
+  name: 'LandlordDashboard',
   components: {
     ListWidget5,
     MixedWidget2,
