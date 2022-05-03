@@ -82,8 +82,6 @@ import MixedWidget5 from '@/components/widgets/mixed/Widget5.vue';
 import MixedWidget7 from '@/components/widgets/mixed/Widget7.vue';
 import MixedWidget10 from '@/components/widgets/mixed/Widget10.vue';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
-import { Actions } from '@/store/enums/StoreEnums';
-import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'MainDashboard',
@@ -101,8 +99,6 @@ export default defineComponent({
     MixedWidget10,
   },
   setup() {
-    const store = useStore();
-    store.dispatch(Actions.VERIFY_AUTH);
     onMounted(() => {
       setCurrentPageTitle('Dashboard');
     });

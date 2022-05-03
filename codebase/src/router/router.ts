@@ -34,16 +34,16 @@ const routes: Array<RouteRecordRaw> = [
 
   {
     path: '/landlord',
-    redirect: '/landlord/sign-up',
+    redirect: '/landlord/dashboard',
     component: () => import('@/layout/Layout.vue'),
     children: [
       {
-        beforeEnter: [landlord],
         path: 'sign-up',
         name: 'landlordSignUp',
         component: () => import('@/views/landlord/SignUp.vue'),
       },
       {
+        beforeEnter: [landlord],
         path: 'dashboard',
         name: 'landlordDashboard',
         component: () => import('@/views/landlord/LandlordDashboard.vue'),
@@ -100,6 +100,7 @@ router.beforeEach(async (to, from, next) => {
   if (!user) {
     await store.dispatch(Actions.VERIFY_AUTH);
   }
+
   next();
 
   // Scroll page to top on every route change

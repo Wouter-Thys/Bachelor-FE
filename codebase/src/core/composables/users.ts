@@ -31,6 +31,13 @@ export default function useUsers() {
     });
   };
 
+  const getUsers = async () => {
+    await ApiService.get('/admin/users').then((r) => {
+      isLoading.value = false;
+      return (users.value = r.data.data);
+    });
+  };
+
   return {
     isLoading,
     errors,
@@ -41,5 +48,6 @@ export default function useUsers() {
     getUserLandlordRequest,
     getUsersLandlordRequest,
     putUserLandlordRequest,
+    getUsers,
   };
 }

@@ -23,7 +23,11 @@
   <Suspense>
     <div class="row gy-5 gx-xl-8">
       <div class="col-xxl-12">
-        <usersTable widget-classes="card-xxl-stretch mb-5 mb-xl-8"></usersTable>
+        <usersTable
+          :key="allUsersKey"
+          v-model:is-loading="isLoading"
+          widget-classes="card-xxl-stretch mb-5 mb-xl-8"
+        ></usersTable>
       </div>
     </div>
   </Suspense>
@@ -47,14 +51,19 @@ export default defineComponent({
   },
   setup() {
     const selectedUser = ref<null | number>(null);
+    const allUsersKey = ref(0);
     const { usersLandlordRequest, getUsersLandlordRequest, isLoading } =
       useUsers();
 
     const getUsersLR = async () => {
+      isLoading.value = true;
       await getUsersLandlordRequest().then(() => {
+        isLoading.value = false;
         usersLandlordRequest.value.length
           ? (selectedUser.value = usersLandlordRequest.value[0].id)
           : (selectedUser.value = null);
+        allUsersKey.value += 1;
+        isLoading.value = false;
       });
     };
 
@@ -67,6 +76,7 @@ export default defineComponent({
       isLoading,
       selectedUser,
       getUsersLR,
+      allUsersKey,
     };
   },
 });

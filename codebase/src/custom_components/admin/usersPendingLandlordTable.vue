@@ -21,7 +21,7 @@
     <div class="card-body p-0 pt-3">
       <!--begin::Table container-->
       <vue-good-table
-        :columns="tableHeader"
+        :columns="tableHeaderUsers"
         :is-loading="isLoading"
         :pagination-options="{ enabled: true, perPage: 5 }"
         :rows="users"
@@ -100,6 +100,7 @@ import { defineComponent, PropType } from 'vue';
 import { User } from '@/store/modules/AuthModule';
 import 'vue-good-table-next/dist/vue-good-table-next.css';
 import useUsers from '@/core/composables/users';
+import { tableHeaderUsers } from '@/core/table_headers/admin';
 
 export default defineComponent({
   name: 'UsersPendingLandlord',
@@ -129,46 +130,10 @@ export default defineComponent({
         return context.emit('get-users');
       });
     };
-    const tableHeader = [
-      {
-        label: 'Name',
-        field: 'beforeName',
-      },
-      {
-        label: 'Name',
-        field: 'name',
-        hidden: true,
-      },
-      {
-        label: 'Email',
-        field: 'beforeEmail',
-      },
-      {
-        label: 'Email',
-        field: 'email',
-        hidden: true,
-      },
-      {
-        label: 'Organization',
-        field: 'beforeOrganization',
-      },
-      {
-        label: 'Organization',
-        field: 'organization',
-        hidden: true,
-      },
-      {
-        label: 'Actions',
-        field: 'actions',
-        html: true,
-        sortable: false,
-        tdClass: 'vgt-center-align',
-      },
-    ];
     return {
       onRowClick,
       onAcceptedClick,
-      tableHeader,
+      tableHeaderUsers,
     };
   },
 });

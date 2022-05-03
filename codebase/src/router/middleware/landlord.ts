@@ -15,9 +15,9 @@ export default async (
   }
 
   if (user.roles) {
-    if (user.roles.includes('landlord')) {
+    if (!user.roles.includes('landlord')) {
       return next({
-        path: '/landlord/dashboard',
+        path: '/landlord/sign-up',
       });
     }
   }
