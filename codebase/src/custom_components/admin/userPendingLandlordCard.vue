@@ -27,8 +27,41 @@
           </div>
         </div>
         <div class="d-flex flex-center flex-column mb-9">
-          <p class="fs-3 text-gray-800 fw-bolder mb-3">
+          <p
+            v-if="userLandlordRequest.email"
+            class="fs-3 text-gray-800 fw-bolder mb-3"
+          >
             {{ userLandlordRequest.email }}
+            <span
+              v-if="userLandlordRequest.email_verified_at"
+              class="badge badge-lg badge-light-success d-inline m-1"
+            >
+              Verified
+            </span>
+            <span
+              v-if="!userLandlordRequest.email_verified_at"
+              class="badge badge-lg badge-light-danger d-inline m-1"
+            >
+              Not Verified
+            </span>
+          </p>
+          <p
+            v-if="userLandlordRequest.phone_number"
+            class="fs-3 text-gray-800 fw-bolder mb-3"
+          >
+            {{ userLandlordRequest.phone_number }}
+            <span
+              v-if="userLandlordRequest.phone_number_verified_at"
+              class="badge badge-lg badge-light-success d-inline m-1"
+            >
+              Verified
+            </span>
+            <span
+              v-if="!userLandlordRequest.phone_number_verified_at"
+              class="badge badge-lg badge-light-danger d-inline m-1"
+            >
+              Not Verified
+            </span>
           </p>
           <p class="fs-3 text-gray-800 fw-bolder mb-3">
             {{ userLandlordRequest.organization }}

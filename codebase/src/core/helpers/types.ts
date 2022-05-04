@@ -5,9 +5,14 @@ export type TUser = {
   organization: string;
   roles: string[];
   landlordRequestImage?: string;
+  phone_number?: string;
+  phone_number_verified_at?: Date | null;
+  email_verified_at?: Date | null;
 };
 
-export type IApiErrorResponse = {
-  errors: Error[] | null;
+export type TApiResponse = {
+  status?: string;
+  success?: boolean;
   message: string | null;
+  data: null | TUser | TUser[] | {};
 };

@@ -4,6 +4,7 @@ import { Mutations, Actions } from '@/store/enums/StoreEnums';
 import admin from '@/router/middleware/admin';
 import landlord from '@/router/middleware/landlord';
 import isAuth from '@/router/middleware/isAuth';
+import user from '@/router/middleware/user';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -15,6 +16,25 @@ const routes: Array<RouteRecordRaw> = [
         path: 'dashboard',
         name: 'dashboard',
         component: () => import('@/views/Dashboard.vue'),
+      },
+      {
+        beforeEnter: [user],
+        path: 'profile',
+        name: 'profile',
+        redirect: '/profile/dashboard',
+        component: () => import('@/views/Profile/account.vue'),
+        children: [
+          {
+            path: 'overview',
+            name: 'profileOverview',
+            component: () => import('@/views/Profile/overview.vue'),
+          },
+          {
+            path: 'settings',
+            name: 'profileSettings',
+            component: () => import('@/views/Profile/settings.vue'),
+          },
+        ],
       },
     ],
   },
