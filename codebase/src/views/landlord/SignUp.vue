@@ -112,6 +112,7 @@ import ApiService from '@/core/services/ApiService';
 import { User } from '@/store/modules/AuthModule';
 import { ErrorMessage, Field, Form } from 'vee-validate';
 import { object, mixed } from 'yup';
+import { Actions } from '@/store/enums/StoreEnums';
 
 export default defineComponent({
   name: 'SignUpLandlord',
@@ -132,11 +133,12 @@ export default defineComponent({
     const onSubmit = async (data) => {
       const formData = new FormData();
       formData.append('image', data.image[0]);
-
       await ApiService.post('/request-landlord', formData)
-        .then((data) => {
-          if (data.status === 201) {
-            router.push({ name: 'dashboard' });
+        .then(async (data) => {
+          console.log(data);
+          if (data.status === 200) {
+            await store.dispatch(Actions.VERIFY_AUTH);
+            await router.push({ name: 'dashboard' });
           }
         })
         .catch(function () {

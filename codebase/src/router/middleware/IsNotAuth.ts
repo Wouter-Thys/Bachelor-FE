@@ -6,10 +6,11 @@ export default async (
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  if (store.getters.isUserAuthenticated) {
-    return next({
-      path: '/dashboard',
-    });
+  if (!store.getters.isUserAuthenticated) {
+    return next();
   }
-  return next();
+
+  return next({
+    path: '/dashboard',
+  });
 };

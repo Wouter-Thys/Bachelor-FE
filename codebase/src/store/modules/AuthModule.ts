@@ -3,6 +3,7 @@ import { Actions, Mutations } from '@/store/enums/StoreEnums';
 import { Module, Action, Mutation, VuexModule } from 'vuex-module-decorators';
 
 export interface User {
+  id: number;
   name: string;
   email: string;
   organization: string;

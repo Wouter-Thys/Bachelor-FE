@@ -8,18 +8,12 @@ export default async (
   next: NavigationGuardNext
 ) => {
   const user: User = store.getters.currentUser;
-  if (!store.getters.isUserAuthenticated) {
-    return next({
-      path: '/dashboard',
-    });
-  }
-
   if (user.roles) {
-    if (!user.roles.includes('user')) {
-      return next({
-        path: '/dashboard',
-      });
+    if (user.roles.includes('admin')) {
+      return next();
     }
   }
-  return next();
+  return next({
+    path: '/dashboard',
+  });
 };

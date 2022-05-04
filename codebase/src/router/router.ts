@@ -1,10 +1,11 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import store from '@/store';
 import { Mutations, Actions } from '@/store/enums/StoreEnums';
-import admin from '@/router/middleware/admin';
-import landlord from '@/router/middleware/landlord';
-import isAuth from '@/router/middleware/isAuth';
-import user from '@/router/middleware/user';
+import admin from '@/router/middleware/Admin';
+import landlord from '@/router/middleware/Landlord';
+import isAuth from '@/router/middleware/IsAuth';
+import user from '@/router/middleware/User';
+import isNotAuth from '@/router/middleware/IsNotAuth';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Dashboard.vue'),
       },
       {
-        beforeEnter: [user],
+        beforeEnter: [isAuth, user],
         path: 'profile',
         name: 'profile',
         redirect: '/profile/dashboard',
@@ -42,7 +43,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin',
     redirect: '/admin/dashboard',
     component: () => import('@/layout/Layout.vue'),
-    beforeEnter: [admin],
+    beforeEnter: [isAuth, admin],
     children: [
       {
         path: 'dashboard',
@@ -58,12 +59,13 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/layout/Layout.vue'),
     children: [
       {
+        beforeEnter: [isAuth, user],
         path: 'sign-up',
         name: 'landlordSignUp',
         component: () => import('@/views/landlord/SignUp.vue'),
       },
       {
-        beforeEnter: [landlord],
+        beforeEnter: [isAuth, user, landlord],
         path: 'dashboard',
         name: 'landlordDashboard',
         component: () => import('@/views/landlord/LandlordDashboard.vue'),
@@ -73,7 +75,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: () => import('@/components/page-layouts/Auth.vue'),
-    beforeEnter: [isAuth],
+    beforeEnter: [isNotAuth],
     children: [
       {
         path: '/sign-in',

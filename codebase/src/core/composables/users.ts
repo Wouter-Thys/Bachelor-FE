@@ -14,7 +14,7 @@ export default function useUsers() {
   const getUserLandlordRequest = async (id) => {
     errors.value = { data: null, message: null };
     await apiService
-      .get('/admin/user-pending-landlord', id)
+      .get('/admin/pending-landlords', id)
       .then((r) => {
         return (userLandlordRequest.value = r.data.data);
       })
@@ -25,14 +25,14 @@ export default function useUsers() {
   const putUserLandlordRequest = async (id: string | number, bool: boolean) => {
     errors.value = { data: null, message: null };
     await apiService
-      .update('/admin/user-pending-landlord', id, { data: bool })
+      .update('/admin/pending-landlords', id, { data: bool })
       .catch((e) => {
-        console.log(e.response.data.message);
+        console.log(e.response);
       });
   };
   const getUsersLandlordRequest = async () => {
     errors.value = { data: null, message: null };
-    await ApiService.get('/admin/users-pending-landlord')
+    await ApiService.get('/admin/pending-landlords')
       .then((r) => {
         isLoading.value = false;
         return (usersLandlordRequest.value = r.data.data);
