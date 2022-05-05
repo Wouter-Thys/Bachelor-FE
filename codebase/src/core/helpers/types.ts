@@ -11,8 +11,6 @@ export type TUser = {
 };
 
 export type TApiResponse = {
-  status?: string;
-  success?: boolean;
   message: string | null;
   data: null | TUser | TUser[] | {};
 };

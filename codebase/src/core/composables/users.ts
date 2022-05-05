@@ -58,7 +58,6 @@ export default function useUsers() {
     errors.value = { data: null, message: null };
     await ApiService.get('/me')
       .then((r) => {
-        console.log(r.data.data);
         isLoading.value = false;
         return (user.value = r.data.data);
       })

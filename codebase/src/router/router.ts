@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
         beforeEnter: [isAuth, user],
         path: 'profile',
         name: 'profile',
-        redirect: 'profile/dashboard',
+        redirect: '/profile/overview',
         component: () => import('@/views/Profile/account.vue'),
         children: [
           {

@@ -133,7 +133,7 @@ export default defineComponent({
     const onSubmit = async (data) => {
       const formData = new FormData();
       formData.append('image', data.image[0]);
-      await ApiService.post('/request-landlord', formData)
+      await ApiService.post('/user/request-landlord', formData)
         .then(async (data) => {
           console.log(data);
           if (data.status === 200) {
