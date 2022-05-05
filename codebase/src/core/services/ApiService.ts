@@ -95,10 +95,14 @@ class ApiService {
   /**
    * @description Send the DELETE HTTP request
    * @param resource: string
+   * @param slug
    * @returns Promise<AxiosResponse>
    */
-  public static delete(resource: string): Promise<AxiosResponse> {
-    return ApiService.vueInstance.axios.delete(resource);
+  public static delete(
+    resource: string,
+    slug: string | number
+  ): Promise<AxiosResponse> {
+    return ApiService.vueInstance.axios.delete(`${resource}/${slug}`);
   }
 }
 

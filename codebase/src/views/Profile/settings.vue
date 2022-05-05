@@ -311,7 +311,6 @@
               <div class="d-flex">
                 <button
                   id="kt_password_submit"
-                  ref="updatePasswordButton"
                   type="submit"
                   class="btn btn-primary me-2 px-6"
                 >
@@ -355,20 +354,21 @@
       class="card-header border-0 cursor-pointer"
       role="button"
       data-bs-toggle="collapse"
-      data-bs-target="#kt_account_deactivate"
+      data-bs-target="#kt_account_delete_account"
       aria-expanded="true"
-      aria-controls="kt_account_deactivate"
+      aria-controls="kt_account_delete_account"
     >
       <div class="card-title m-0">
         <h3 class="fw-boldest m-0">Delete Account</h3>
       </div>
     </div>
-    <div id="kt_account_deactivate" class="collapse show">
+    <div id="kt_account_delete_account" class="collapse show">
       <Form
-        id="kt_account_deactivate_form"
+        id="kt_account_delete_account_form"
+        v-slot="{ errors }"
         class="form"
         :validation-schema="deleteAccountValidator"
-        @submit="deactivateAccount"
+        @submit="deleteAccountFn"
       >
         <div class="card-body border-top p-9">
           <div
@@ -387,19 +387,24 @@
           </div>
           <div class="form-check form-check-solid fv-row">
             <Field
-              id="deactivate"
-              name="deactivate"
+              id="deleteAccount"
+              name="deleteAccount"
               class="form-check-input"
               type="checkbox"
+              :value="true"
+              :class="{ 'is-invalid': errors.deleteAccount }"
             />
-            <label class="form-check-label fw-bold ps-2 fs-6" for="deactivate">
+            <label
+              class="form-check-label fw-bold ps-2 fs-6"
+              for="deleteAccount"
+            >
               Confirm Account Deletion
             </label>
           </div>
         </div>
         <div class="card-footer d-flex justify-content-end py-6 px-9">
           <button
-            id="kt_account_deactivate_account_submit"
+            id="kt_account_delete_account_account_submit"
             type="submit"
             class="btn btn-danger fw-bold"
           >
@@ -425,6 +430,7 @@ import * as Yup from 'yup';
 import ApiService from '@/core/services/ApiService';
 import { useStore } from 'vuex';
 import { Actions } from '@/store/enums/StoreEnums';
+import router from '@/router/router';
 
 export default defineComponent({
   name: 'AccountSettings',
@@ -435,14 +441,14 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const updateEmailButton = ref<HTMLElement | null>(null);
-    const updatePasswordButton = ref<HTMLElement | null>(null);
 
     const emailFormDisplay = ref(false);
     const passwordFormDisplay = ref(false);
 
     const deleteAccountValidator = Yup.object().shape({
-      deactivate: Yup.boolean().required().label('deactivate'),
+      deleteAccount: Yup.bool().required(
+        'this is required if u want to delete ur account!'
+      ),
     });
 
     const userDetailsValidator = Yup.object().shape({
@@ -476,8 +482,17 @@ export default defineComponent({
         });
     };
 
-    const deactivateAccount = (data) => {
-      console.log(data);
+    const deleteAccountFn = async (data) => {
+      if (data.deleteAccount) {
+        await ApiService.delete('/user/users', user.value.id)
+          .then(async (r) => {
+            await store.dispatch(Actions.LOGOUT);
+            await router.push({ name: 'sign-in' });
+          })
+          .catch((e) => {
+            console.log(e.response.data.message);
+          });
+      }
     };
 
     const updateEmail = async (data) => {
@@ -512,15 +527,13 @@ export default defineComponent({
     return {
       user,
       saveUserChanges,
-      deactivateAccount,
+      deleteAccountFn,
       emailFormDisplay,
       passwordFormDisplay,
       userDetailsValidator,
       deleteAccountValidator,
       changeEmail,
       changePassword,
-      updateEmailButton,
-      updatePasswordButton,
       updateEmail,
       updatePassword,
     };
