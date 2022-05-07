@@ -48,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'dashboard',
         name: 'adminDashboard',
-        component: () => import('@/views/AdminDashboard.vue'),
+        component: () => import('@/views/admin/Dashboard.vue'),
       },
     ],
   },
@@ -68,7 +68,13 @@ const routes: Array<RouteRecordRaw> = [
         beforeEnter: [isAuth, user, landlord],
         path: 'dashboard',
         name: 'landlordDashboard',
-        component: () => import('@/views/landlord/LandlordDashboard.vue'),
+        component: () => import('@/views/landlord/Dashboard.vue'),
+      },
+      {
+        beforeEnter: [isAuth, user, landlord],
+        path: 'add-terrain',
+        name: 'landlordAddTerrain',
+        component: () => import('@/views/landlord/AddNewTerrain.vue'),
       },
     ],
   },

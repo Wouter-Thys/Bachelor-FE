@@ -27,7 +27,6 @@ export default defineComponent({
   },
 });
 </script>
-
 <style lang="scss">
 @import '~bootstrap-icons/font/bootstrap-icons.css';
 @import '~apexcharts/dist/apexcharts.css';
