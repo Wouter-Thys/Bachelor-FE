@@ -23,17 +23,17 @@ const routes: Array<RouteRecordRaw> = [
         path: 'profile',
         name: 'profile',
         redirect: '/profile/overview',
-        component: () => import('@/views/Profile/account.vue'),
+        component: () => import('@/views/Profile/Account.vue'),
         children: [
           {
             path: 'overview',
             name: 'profileOverview',
-            component: () => import('@/views/Profile/overview.vue'),
+            component: () => import('@/views/Profile/Overview.vue'),
           },
           {
             path: 'settings',
             name: 'profileSettings',
-            component: () => import('@/views/Profile/settings.vue'),
+            component: () => import('@/views/Profile/Settings.vue'),
           },
         ],
       },

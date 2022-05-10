@@ -50,11 +50,13 @@
     "vue-meta": "^2.4.0",
     "vue-router": "^4.0.3",
     "vue3-apexcharts": "^1.4.1",
+    "vue3-dropzone": "^0.0.7",
     "vuex": "^4.0.0",
     "yup": "^0.32.8"
   },
   "devDependencies": {
     "@types/array-sort": "^1.0.0",
+    "@types/dropzone": "^5.7.4",
     "@types/prismjs": "^1.16.2",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",

@@ -32,163 +32,394 @@
                 <span class="stepper-number">2</span>
               </div>
               <div class="stepper-label">
-                <h3 class="stepper-title">Frameworks</h3>
-                <div class="stepper-desc">Define your app framework</div>
+                <h3 class="stepper-title">Extra details</h3>
+                <div class="stepper-desc">Extra details about your terrain</div>
+              </div>
+            </div>
+            <div class="stepper-item" data-kt-stepper-element="nav">
+              <div class="stepper-line w-40px"></div>
+              <div class="stepper-icon w-40px h-40px">
+                <i class="stepper-check fas fa-check"></i>
+                <span class="stepper-number">3</span>
+              </div>
+              <div class="stepper-label">
+                <h3 class="stepper-title">Images</h3>
+                <div class="stepper-desc">
+                  Add images to show off your terrain
+                </div>
+              </div>
+            </div>
+            <div class="stepper-item" data-kt-stepper-element="nav">
+              <div class="stepper-line w-40px"></div>
+              <div class="stepper-icon w-40px h-40px">
+                <i class="stepper-check fas fa-check"></i>
+                <span class="stepper-number">4</span>
+              </div>
+              <div class="stepper-label">
+                <h3 class="stepper-title">Rating</h3>
+                <div class="stepper-desc">
+                  Give your rating for this terrain
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="flex-row-fluid py-lg-5 px-lg-15">
-          <Form class="form" novalidate="novalidate" @submit="handleStep">
+          <form
+            ref="addTerrainSubmit"
+            class="form"
+            novalidate="novalidate"
+            @submit="handleStep"
+          >
             <div class="current" data-kt-stepper-element="content">
               <div class="w-100">
                 <div class="fv-row mb-10">
                   <label class="d-flex align-items-center fs-5 fw-bold mb-2">
                     <span class="required">Name</span>
                   </label>
-                  <Field
+                  <input
+                    v-model="formData.name"
                     type="text"
                     class="form-control form-control-lg form-control-solid"
                     name="name"
                     placeholder="Name..."
-                  />
-                  <ErrorMessage
-                    class="fv-plugins-message-container invalid-feedback"
-                    name="name"
                   />
                 </div>
                 <div class="fv-row mb-10">
                   <label class="d-flex align-items-center fs-5 fw-bold mb-2">
                     <span class="">Description</span>
                   </label>
-                  <Field
+                  <input
+                    v-model="formData.description"
                     type="text"
                     class="form-control form-control-lg form-control-solid"
                     name="description"
                     placeholder="Description..."
                   />
-                  <ErrorMessage
-                    class="fv-plugins-message-container invalid-feedback"
-                    name="description"
-                  />
                 </div>
                 <addressInput
-                  v-model:street="formData.address.street"
-                  v-model:streetNumber="formData.address.streetNumber"
-                  v-model:postcode="formData.address.postcode"
-                  v-model:administrativeAreaLevel2="
-                    formData.address.administrativeAreaLevel2
-                  "
-                  v-model:locality="formData.address.locality"
+                  v-model:street="formData.street"
+                  v-model:streetNumber="formData.streetNumber"
+                  v-model:postcode="formData.postcode"
+                  v-model:province="formData.province"
+                  v-model:locality="formData.locality"
                 />
+                <div id="map"></div>
               </div>
             </div>
             <div data-kt-stepper-element="content">
               <div class="w-100">
                 <div class="fv-row">
-                  <label class="d-flex align-items-center fs-5 fw-bold mb-4">
-                    <span class="required">Select Framework</span>
-                    <i
-                      class="fas fa-exclamation-circle ms-2 fs-7"
-                      data-bs-toggle="tooltip"
-                      title="Specify your apps framework"
-                    ></i>
-                  </label>
-                  <label class="d-flex flex-stack cursor-pointer mb-5">
-                    <span class="d-flex align-items-center me-2">
-                      <span class="symbol symbol-50px me-6">
-                        <span class="symbol-label bg-light-warning">
-                          <i class="fab fa-html5 text-warning fs-2x"></i>
-                        </span>
-                      </span>
-                      <span class="d-flex flex-column">
-                        <span class="fw-bolder fs-6">HTML5</span>
-                        <span class="fs-7 text-muted">Base Web Projec</span>
-                      </span>
-                    </span>
-                    <span class="form-check form-check-custom form-check-solid">
-                      <Field
-                        class="form-check-input"
-                        type="radio"
-                        checked
-                        name="framework"
-                        value="1"
-                      />
-                    </span>
-                  </label>
-                  <label class="d-flex flex-stack cursor-pointer mb-5">
-                    <span class="d-flex align-items-center me-2">
-                      <span class="symbol symbol-50px me-6">
-                        <span class="symbol-label bg-light-success">
-                          <i class="fab fa-react text-success fs-2x"></i>
-                        </span>
-                      </span>
-                      <span class="d-flex flex-column">
-                        <span class="fw-bolder fs-6">ReactJS</span>
-                        <span class="fs-7 text-muted">
-                          Robust and flexible app framework
-                        </span>
-                      </span>
-                    </span>
-                    <span class="form-check form-check-custom form-check-solid">
+                  <div class="row mb-2">
+                    <div class="col-2">
+                      <label
+                        class="d-flex align-items-center fs-5 fw-bold mb-2"
+                      >
+                        <span class="me-2">Water</span>
+                      </label>
+                    </div>
+                    <div class="col-2">
                       <input
+                        v-model="formData.water"
                         class="form-check-input"
-                        type="radio"
-                        name="framework"
-                        value="2"
+                        type="checkbox"
+                        name="water"
+                        :value="true"
                       />
-                    </span>
-                  </label>
-                  <label class="d-flex flex-stack cursor-pointer mb-5">
-                    <span class="d-flex align-items-center me-2">
-                      <span class="symbol symbol-50px me-6">
-                        <span class="symbol-label bg-light-danger">
-                          <i class="fab fa-angular text-danger fs-2x"></i>
-                        </span>
-                      </span>
-                      <span class="d-flex flex-column">
-                        <span class="fw-bolder fs-6">Angular</span>
-                        <span class="fs-7 text-muted">
-                          Powerful data mangement
-                        </span>
-                      </span>
-                    </span>
-                    <span class="form-check form-check-custom form-check-solid">
-                      <Field
+                    </div>
+                    <div class="col-2">
+                      <label
+                        class="d-flex align-items-center fs-5 fw-bold mb-2"
+                      >
+                        <span class="me-2">Electricity</span>
+                      </label>
+                    </div>
+                    <div class="col-2">
+                      <input
+                        v-model="formData.electricity"
                         class="form-check-input"
-                        type="radio"
-                        name="framework"
-                        value="3"
+                        type="checkbox"
+                        name="electricity"
+                        :value="true"
                       />
-                    </span>
-                  </label>
-                  <label class="d-flex flex-stack cursor-pointer">
-                    <span class="d-flex align-items-center me-2">
-                      <span class="symbol symbol-50px me-6">
-                        <span class="symbol-label bg-light-primary">
-                          <i class="fab fa-vuejs text-primary fs-2x"></i>
-                        </span>
-                      </span>
-                      <span class="d-flex flex-column">
-                        <span class="fw-bolder fs-6">Vue</span>
-                        <span class="fs-7 text-muted">
-                          Lightweight and responsive framework
-                        </span>
-                      </span>
-                    </span>
-                    <span class="form-check form-check-custom form-check-solid">
-                      <Field
+                    </div>
+                    <div class="col-2">
+                      <label
+                        class="d-flex align-items-center fs-5 fw-bold mb-2"
+                      >
+                        <span class="me-2">3-phase Electricity</span>
+                      </label>
+                    </div>
+                    <div class="col-2">
+                      <input
+                        v-model="formData.threePhaseElectricity"
                         class="form-check-input"
-                        type="radio"
-                        name="framework"
-                        value="4"
+                        type="checkbox"
+                        name="threePhaseElectricity"
+                        :value="true"
                       />
-                    </span>
-                  </label>
-                  <ErrorMessage
-                    class="fv-plugins-message-container invalid-feedback"
-                    name="framework"
-                  />
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+                    <div class="col-2">
+                      <label
+                        class="d-flex align-items-center fs-5 fw-bold mb-2"
+                      >
+                        <span class="me-2">sanitary block</span>
+                      </label>
+                    </div>
+                    <div class="col-2">
+                      <input
+                        v-model="formData.sanitaryBlock"
+                        class="form-check-input"
+                        type="checkbox"
+                        name="sanitaryBlock"
+                        :value="true"
+                        @click="checkSanitaryBlock($event)"
+                      />
+                    </div>
+                    <div
+                      v-if="!hiddenSanitaryOptions"
+                      class="row mb-2 border border-2 rounded p-4 align-middle"
+                    >
+                      <div class="col-2">
+                        <label
+                          class="d-flex align-items-center fs-5 fw-bold mb-2"
+                        >
+                          <span class="me-2">Showers</span>
+                        </label>
+                      </div>
+                      <div class="col-2">
+                        <input
+                          v-model="formData.showers"
+                          class="form-check-input"
+                          type="checkbox"
+                          name="showers"
+                          :value="true"
+                        />
+                      </div>
+                      <div class="col-2">
+                        <label
+                          class="d-flex align-items-center fs-5 fw-bold mb-2"
+                        >
+                          <span class="me-2">Toilets</span>
+                        </label>
+                      </div>
+                      <div class="col-2">
+                        <input
+                          v-model="formData.toilets"
+                          class="form-check-input"
+                          type="checkbox"
+                          name="toilets"
+                          :value="true"
+                        />
+                      </div>
+
+                      <div class="col-2">
+                        <label
+                          class="d-flex align-items-center fs-5 fw-bold mb-2"
+                        >
+                          <span class="me-2">Sinks</span>
+                        </label>
+                      </div>
+                      <div class="col-2">
+                        <input
+                          v-model="formData.sinks"
+                          class="form-check-input"
+                          type="checkbox"
+                          name="sinks"
+                          :value="true"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-10">
+                  <div class="col-2">
+                    <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                      <span class="me-2">Max allowed people</span>
+                    </label>
+                  </div>
+                  <div class="col-2">
+                    <input
+                      v-model="formData.max_people"
+                      class="form-control form-control-solid el-input-number"
+                      type="number"
+                      name="max_people"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mt-2">
+                  <div class="col-2">
+                    <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                      <span class="me-2">Hectare</span>
+                    </label>
+                  </div>
+                  <div class="col-2">
+                    <input
+                      v-model="formData.hectare"
+                      class="form-control form-control-solid el-input-number"
+                      type="number"
+                      name="hectare"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div data-kt-stepper-element="content">
+              <div class="w-100">
+                <div class="fv-row">
+                  <DropzoneFiles v-model:images="images" />
+                </div>
+              </div>
+            </div>
+            <div data-kt-stepper-element="content">
+              <div class="w-100">
+                <div class="row">
+                  <div class="col-12">
+                    <h1 class="d-flex align-items-center fw-bold mb-2">
+                      Rate the terrain on how far things are
+                    </h1>
+                    <p>Rate your terrain!</p>
+                  </div>
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-4 jumbotron d-flex align-items-center">
+                        <label class="fs-5 fw-bold mb-2">
+                          Supermarket
+                          <p class="text-muted fs-7">
+                            How far away is the closes supermarket
+                          </p>
+                        </label>
+                      </div>
+                      <div class="col-4 my-2">
+                        <select
+                          v-model="formData.supermarket_rating"
+                          class="form-select"
+                          data-control="select2"
+                          data-placeholder="Select an option"
+                          name="supermarket_rating"
+                        >
+                          <option value="1">Further then 45KM</option>
+                          <option value="2">Between 45-35KM</option>
+                          <option selected value="3">Between 35-25KM</option>
+                          <option value="4">Between 25-15KM</option>
+                          <option value="5">Closer then 15KM</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-4 jumbotron d-flex align-items-center">
+                        <label class="fs-5 fw-bold mb-2">
+                          Activities
+                          <p class="text-muted fs-7">
+                            Zoo's, Theme Parks, Paintball, ...
+                          </p>
+                        </label>
+                      </div>
+                      <div
+                        class="col-4 my-2 jumbotron d-flex align-items-center"
+                      >
+                        <select
+                          v-model="formData.activities_rating"
+                          class="form-select"
+                          data-control="select2"
+                          data-placeholder="Select an option"
+                          name="activities_rating"
+                        >
+                          <option value="1">0 Close-By</option>
+                          <option value="2">1 or 2 semi Close-By</option>
+                          <option selected value="3">1 - 2 Close-By</option>
+                          <option value="4">3 Close-By</option>
+                          <option value="5">4 or more Close-By</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-4 jumbotron d-flex align-items-center">
+                        <label class="fs-5 fw-bold mb-2">
+                          Remote
+                          <p class="text-muted fs-7">How remote is it?</p>
+                        </label>
+                      </div>
+                      <div
+                        class="col-4 my-2 jumbotron d-flex align-items-center"
+                      >
+                        <select
+                          v-model="formData.remote_rating"
+                          class="form-select"
+                          data-control="select2"
+                          data-placeholder="Select an option"
+                          name="remote_rating"
+                        >
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option selected value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-4 jumbotron d-flex align-items-center">
+                        <label class="fs-5 fw-bold mb-2">
+                          Wood Access
+                          <p class="text-muted fs-7">
+                            How easy is it to get wood
+                          </p>
+                        </label>
+                      </div>
+                      <div class="col-4 my-2">
+                        <select
+                          v-model="formData.wood_rating"
+                          class="form-select"
+                          data-control="select2"
+                          data-placeholder="Select an option"
+                          name="wood_rating"
+                        >
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option selected value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-4 jumbotron d-flex align-items-center">
+                        <label class="fs-5 fw-bold mb-2">
+                          Playground
+                          <p class="text-muted fs-7">
+                            How easy is it to play on a terrain or forrest
+                          </p>
+                        </label>
+                      </div>
+                      <div class="col-4 my-2">
+                        <select
+                          v-model="formData.playground_rating"
+                          class="form-select"
+                          data-control="select2"
+                          data-placeholder="Select an option"
+                          name="playground_rating"
+                        >
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option selected value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -212,7 +443,7 @@
                   @click="formSubmit()"
                 >
                   <span class="indicator-label">
-                    Submit
+                    Create
                     <i class="fas fa-arrow-right"></i>
                   </span>
                   <span class="indicator-progress">
@@ -229,102 +460,99 @@
                 </button>
               </div>
             </div>
-          </Form>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref, computed } from 'vue';
+import { defineComponent, onMounted, ref, computed, watch } from 'vue';
 import { StepperComponent } from '@/assets/ts/components/_StepperComponent';
 import { useForm } from 'vee-validate';
-import { Field, ErrorMessage } from 'vee-validate';
-import * as Yup from 'yup';
 import { getIllustrationsPath } from '@/core/helpers/assets';
-import addressInput from '@/custom_components/landlord/forms/addressInput.vue';
+import addressInput from '@/custom_components/landlord/forms/AddressInput.vue';
+import DropzoneFiles from '@/custom_components/Dropzone.vue';
+import ApiService from '@/core/services/ApiService';
+import { Actions } from '@/store/enums/StoreEnums';
+import { AxiosRequestConfig } from 'axios';
 
 interface Step1 {
-  appName: string;
-  category: string;
+  name: string;
+  description: string;
+  street: string;
+  streetNumber: string;
+  province: string;
+  state: string;
+  postal_code: string;
 }
-
 interface Step2 {
-  framework: string;
+  water: boolean;
+  electricity: boolean;
+  threePhaseElectricity: boolean;
+  sanitaryBlock: boolean;
+  showers: boolean;
+  toilets: boolean;
+  sinks: boolean;
+  max_people: number;
+  hectare: number;
 }
-
 interface Step3 {
-  dbName: string;
-  dbType: string;
+  images: [];
 }
-
 interface Step4 {
-  nameOnCard: string;
-  cardNumber: string;
-  cardExpiryMonth: string;
-  cardExpiryYear: string;
-  cardCvv: string;
-  saveCard: string;
+  supermarket_rating: number;
+  activities_rating: number;
+  remote_rating: number;
+  wood_rating: number;
+  playground_rating: number;
 }
 
-interface KTCreateApp extends Step1, Step2, Step3, Step4 {}
+interface IAddNEwTerrain extends Step1, Step2, Step3, Step4 {}
 
 declare let google: any;
 export default defineComponent({
   name: 'AddNewTerrain',
   components: {
-    Field,
-    ErrorMessage,
     addressInput,
+    DropzoneFiles,
   },
   setup(props, context) {
     const _stepperObj = ref<StepperComponent | null>(null);
     const createAppRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
+    const addTerrainSubmit = ref();
+    const images = ref();
 
+    const hiddenSanitaryOptions = ref<boolean>(true);
     const formData = ref({
-      address: {
-        street: '',
-        streetNumber: '',
-        postcode: '',
-        administrativeAreaLevel2: '',
-        locality: '',
-      },
+      name: '',
+      description: '',
+      street: '',
+      streetNumber: '',
+      postcode: '',
+      province: '',
+      locality: '',
+      water: false,
+      electricity: false,
+      threePhaseElectricity: false,
+      sanitaryBlock: false,
+      showers: false,
+      toilets: false,
+      sinks: false,
+      max_people: 0,
+      hectare: 0,
+      supermarket_rating: 1,
+      activities_rating: 1,
+      remote_rating: 1,
+      wood_rating: 1,
+      playground_rating: 1,
     });
 
     onMounted(() => {
       _stepperObj.value = StepperComponent.createInsance(
         createAppRef.value as HTMLElement
       );
-    });
-
-    const createAppSchema = [
-      Yup.object({
-        name: Yup.string().required().label('Name'),
-        street: Yup.string().required().label('Street'),
-        city: Yup.string().required().label('City'),
-        state: Yup.string().required().label('State'),
-        postal_code: Yup.string().required().label('Postal Code'),
-      }),
-      Yup.object({
-        framework: Yup.string().required().label('Framework'),
-      }),
-      Yup.object({
-        dbName: Yup.string().required().label('Database name'),
-        dbType: Yup.string().required().label('Database engine'),
-      }),
-      Yup.object({
-        nameOnCard: Yup.string().required().label('Name'),
-        cardNumber: Yup.string().required().label('Card Number'),
-        cardExpiryMonth: Yup.string().required().label('Expiration Month'),
-        cardExpiryYear: Yup.string().required().label('Expiration Year'),
-        cardCvv: Yup.string().required().label('CVV'),
-      }),
-    ];
-
-    // extracts the individual step schema
-    const currentSchema = computed(() => {
-      return createAppSchema[currentStepIndex.value];
     });
 
     const totalSteps = computed(() => {
@@ -335,9 +563,9 @@ export default defineComponent({
       return _stepperObj.value.totatStepsNumber;
     });
 
-    const { resetForm, handleSubmit } = useForm<Step1 | Step2 | Step3 | Step4>({
-      validationSchema: currentSchema,
-    });
+    const { resetForm, handleSubmit } = useForm<
+      Step1 | Step2 | Step3 | Step4
+    >();
 
     const previousStep = () => {
       if (!_stepperObj.value) {
@@ -347,6 +575,26 @@ export default defineComponent({
       currentStepIndex.value--;
 
       _stepperObj.value.goPrev();
+    };
+
+    const formSubmit = async () => {
+      await ApiService.post('/landlord/terrain', { data: formData.value })
+        .then(async (data) => {
+          console.log(data);
+        })
+        .catch(function () {
+          console.log('FAILURE!!');
+        });
+    };
+
+    const checkSanitaryBlock = (event) => {
+      console.log(event);
+      if (event.target.checked) {
+        hiddenSanitaryOptions.value = false;
+      }
+      if (!event.target.checked) {
+        hiddenSanitaryOptions.value = true;
+      }
     };
 
     const handleStep = handleSubmit((values) => {
@@ -365,6 +613,8 @@ export default defineComponent({
     });
 
     return {
+      hiddenSanitaryOptions,
+      checkSanitaryBlock,
       formData,
       handleStep,
       previousStep,
@@ -372,6 +622,9 @@ export default defineComponent({
       currentStepIndex,
       totalSteps,
       getIllustrationsPath,
+      formSubmit,
+      addTerrainSubmit,
+      images,
     };
   },
   head: {},
