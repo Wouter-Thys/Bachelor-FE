@@ -435,7 +435,7 @@
                   v-if="currentStepIndex === totalSteps - 1"
                   type="submit"
                   class="btn btn-lg btn-primary"
-                  @click="formSubmit()"
+                  @click="formSubmit(formData)"
                 >
                   <span class="indicator-label">
                     Create
@@ -564,8 +564,8 @@ export default defineComponent({
       _stepperObj.value.goPrev();
     };
 
-    const formSubmit = async () => {
-      await ApiService.post('/landlord/terrain', { data: formData.value })
+    const formSubmit = async (params) => {
+      await ApiService.post('/landlord/terrain', params)
         .then(async (data) => {
           console.log(data);
         })
