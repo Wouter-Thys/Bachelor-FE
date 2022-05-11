@@ -270,7 +270,7 @@
             <div data-kt-stepper-element="content">
               <div class="w-100">
                 <div class="fv-row">
-                  <DropzoneFiles v-model:images="images" />
+                  <DropzoneFiles />
                 </div>
               </div>
             </div>
@@ -498,9 +498,6 @@ interface Step2 {
   hectare: number;
 }
 interface Step3 {
-  images: [];
-}
-interface Step4 {
   supermarket_rating: number;
   activities_rating: number;
   remote_rating: number;
@@ -508,7 +505,7 @@ interface Step4 {
   playground_rating: number;
 }
 
-interface IAddNEwTerrain extends Step1, Step2, Step3, Step4 {}
+interface IAddNEwTerrain extends Step1, Step2, Step3 {}
 
 declare let google: any;
 export default defineComponent({
@@ -522,7 +519,6 @@ export default defineComponent({
     const createAppRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
     const addTerrainSubmit = ref();
-    const images = ref();
 
     const hiddenSanitaryOptions = ref<boolean>(true);
     const formData = ref({
@@ -563,9 +559,7 @@ export default defineComponent({
       return _stepperObj.value.totatStepsNumber;
     });
 
-    const { resetForm, handleSubmit } = useForm<
-      Step1 | Step2 | Step3 | Step4
-    >();
+    const { resetForm, handleSubmit } = useForm<Step1 | Step2 | Step3>();
 
     const previousStep = () => {
       if (!_stepperObj.value) {
@@ -624,7 +618,6 @@ export default defineComponent({
       getIllustrationsPath,
       formSubmit,
       addTerrainSubmit,
-      images,
     };
   },
   head: {},

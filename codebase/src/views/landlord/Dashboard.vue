@@ -203,28 +203,18 @@
     </div>
     <!--end::Pagination-->
   </div>
-  <AddNewTerrainModal />
-  <input
-    ref="streetRef"
-    type="text"
-    :value="street"
-    placeholder="street..."
-    @input="$emit('update:street', $event.target.value)"
-  />
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
 import KTCard from '@/components/cards/Card1.vue';
 import { setCurrentPageBreadcrumbs } from '@/core/helpers/breadcrumb';
 import LandlordApexChart1 from '@/custom_components/landlord/LandlordApexChart1.vue';
-import AddNewTerrainModal from '@/views/landlord/AddNewTerrain.vue';
 declare let google: any;
 export default defineComponent({
   name: 'ProfileProjects',
   components: {
     KTCard,
     LandlordApexChart1,
-    AddNewTerrainModal,
   },
   props: {
     street: {
@@ -286,19 +276,7 @@ export default defineComponent({
       { name: 'Meloday Macy', src: 'media/avatars/300-2.jpg' },
       { name: 'Rabbin Watterman', initials: 'S', state: 'danger' },
     ];
-    const streetRef = ref();
-    onMounted(() => {
-      const autocomplete = new google.maps.places.Autocomplete(
-        streetRef.value,
-        {
-          componentRestrictions: { country: 'be' },
-          types: ['address'],
-          fields: ['address_components'],
-        }
-      );
-    });
     return {
-      streetRef,
       users1,
       users2,
       users3,
