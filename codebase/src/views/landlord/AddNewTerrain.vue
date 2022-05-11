@@ -65,12 +65,7 @@
           </div>
         </div>
         <div class="flex-row-fluid py-lg-5 px-lg-15">
-          <form
-            ref="addTerrainSubmit"
-            class="form"
-            novalidate="novalidate"
-            @submit="handleStep"
-          >
+          <form class="form" novalidate="novalidate" @submit="handleStep">
             <div class="current" data-kt-stepper-element="content">
               <div class="w-100">
                 <div class="fv-row mb-10">
@@ -270,7 +265,7 @@
             <div data-kt-stepper-element="content">
               <div class="w-100">
                 <div class="fv-row">
-                  <DropzoneFiles />
+                  <DropzoneFiles @update-images="updateImages" />
                 </div>
               </div>
             </div>
@@ -467,15 +462,13 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref, computed, watch } from 'vue';
+import { defineComponent, onMounted, ref, computed } from 'vue';
 import { StepperComponent } from '@/assets/ts/components/_StepperComponent';
 import { useForm } from 'vee-validate';
 import { getIllustrationsPath } from '@/core/helpers/assets';
 import addressInput from '@/custom_components/landlord/forms/AddressInput.vue';
 import DropzoneFiles from '@/custom_components/Dropzone.vue';
 import ApiService from '@/core/services/ApiService';
-import { Actions } from '@/store/enums/StoreEnums';
-import { AxiosRequestConfig } from 'axios';
 
 interface Step1 {
   name: string;
@@ -514,11 +507,10 @@ export default defineComponent({
     addressInput,
     DropzoneFiles,
   },
-  setup(props, context) {
+  setup() {
     const _stepperObj = ref<StepperComponent | null>(null);
     const createAppRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
-    const addTerrainSubmit = ref();
 
     const hiddenSanitaryOptions = ref<boolean>(true);
     const formData = ref({
@@ -543,6 +535,7 @@ export default defineComponent({
       remote_rating: 1,
       wood_rating: 1,
       playground_rating: 1,
+      images: [],
     });
 
     onMounted(() => {
@@ -559,7 +552,7 @@ export default defineComponent({
       return _stepperObj.value.totatStepsNumber;
     });
 
-    const { resetForm, handleSubmit } = useForm<Step1 | Step2 | Step3>();
+    const { handleSubmit } = useForm<Step1 | Step2 | Step3>();
 
     const previousStep = () => {
       if (!_stepperObj.value) {
@@ -590,6 +583,9 @@ export default defineComponent({
         hiddenSanitaryOptions.value = true;
       }
     };
+    const updateImages = (value) => {
+      formData.value.images = value.value;
+    };
 
     const handleStep = handleSubmit((values) => {
       formData.value = {
@@ -617,7 +613,7 @@ export default defineComponent({
       totalSteps,
       getIllustrationsPath,
       formSubmit,
-      addTerrainSubmit,
+      updateImages,
     };
   },
   head: {},

@@ -40,7 +40,8 @@ import apiService from '@/core/services/ApiService';
 export default defineComponent({
   name: 'UseDropzoneDemo',
   components: {},
-  setup() {
+  emits: ['update-images'],
+  setup(props, context) {
     const previewImages = ref<String[]>([]);
     const saveFiles = async (files) => {
       const formData = new FormData();
@@ -51,6 +52,7 @@ export default defineComponent({
         .post('landlord/terrain/temp-images', formData)
         .then((response) => {
           previewImages.value = response.data;
+          context.emit('update-images', previewImages);
         })
         .catch((err) => {
           console.error(err);
@@ -62,6 +64,7 @@ export default defineComponent({
         .delete('landlord/terrain/temp-images', value)
         .then((response) => {
           previewImages.value = response.data;
+          context.emit('update-images', previewImages);
         })
         .catch((err) => {
           console.error(err);
