@@ -469,6 +469,7 @@ import { getIllustrationsPath } from '@/core/helpers/assets';
 import addressInput from '@/custom_components/landlord/forms/AddressInput.vue';
 import DropzoneFiles from '@/custom_components/Dropzone.vue';
 import ApiService from '@/core/services/ApiService';
+import router from '@/router/router';
 
 interface Step1 {
   name: string;
@@ -566,8 +567,8 @@ export default defineComponent({
 
     const formSubmit = async (params) => {
       await ApiService.post('/landlord/terrain', params)
-        .then(async (data) => {
-          console.log(data);
+        .then((data) => {
+          router.push({ name: 'landlordDashboard' });
         })
         .catch(function () {
           console.log('FAILURE!!');

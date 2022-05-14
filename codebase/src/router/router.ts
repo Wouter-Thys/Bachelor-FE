@@ -37,6 +37,11 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      {
+        path: 'terrain/:id',
+        name: 'terrain',
+        component: () => import('@/views/Terrain/Terrain.vue'),
+      },
     ],
   },
   {
