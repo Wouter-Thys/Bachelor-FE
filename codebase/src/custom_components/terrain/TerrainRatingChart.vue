@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div class="w-100 mt-4">
+      <span class="badge badge-danger text-danger rounded-circle">.</span>
+      <span class="mx-2">Owners Rating</span>
+    </div>
     <apexchart type="radar" :options="options" :series="series"></apexchart>
   </div>
 </template>
@@ -7,7 +11,6 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
 import { getCSSVariableValue } from '@/assets/ts/_utils';
-import { TTerrain } from '@/core/helpers/types';
 
 export default defineComponent({
   name: 'TerrainRatingChart',
@@ -24,6 +27,9 @@ export default defineComponent({
     const borderColor = getCSSVariableValue('--bs-gray-200');
     const baseColor = getCSSVariableValue('--bs-info');
     const lightColor = getCSSVariableValue('--bs-light-info');
+
+    console.log(props);
+
     const options = {
       chart: {
         toolbar: {

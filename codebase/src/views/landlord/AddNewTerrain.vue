@@ -379,11 +379,11 @@
                           data-placeholder="Select an option"
                           name="wood_rating"
                         >
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option selected value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
+                          <option value="1">Very hard</option>
+                          <option value="2">Hard</option>
+                          <option selected value="3">Oke</option>
+                          <option value="4">Easy</option>
+                          <option value="5">Very easy</option>
                         </select>
                       </div>
                     </div>

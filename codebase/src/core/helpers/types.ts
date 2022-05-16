@@ -1,5 +1,3 @@
-import { array } from 'yup';
-
 export type TUser = {
   id: number;
   name: string;
@@ -42,6 +40,7 @@ export type TTerrain = {
   wood_rating: number;
   playground_rating: number;
   images: TImages[];
+  owner: TUser;
 };
 
 export type TApiResponse = {
