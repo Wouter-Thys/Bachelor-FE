@@ -50,9 +50,21 @@
 
             <div class="col-8 border-end">
               <div class="row mt-8 ms-8">
-                <div class="col-12">
+                <div class="col-12 d-flex justify-content-between">
                   <span class="fs-1 text-gray-800 fw-bolder">
                     {{ terrain.name }}
+                  </span>
+                  <span class="fs-6 fw-bolder text-gray-600">
+                    <i class="fa-solid fa-location-dot"></i>
+                    {{
+                      AddressService.addressToString(
+                        terrain.street,
+                        terrain.streetNumber,
+                        terrain.postcode,
+                        terrain.locality,
+                        terrain.province
+                      )
+                    }}
                   </span>
                 </div>
                 <div class="col-12">
@@ -68,7 +80,7 @@
                   </span>
                 </div>
                 <div class="col-12 separator my-8"></div>
-                <div class="col-8">
+                <div class="col-8" style="min-height: 200px">
                   <span class="fs-4 text-gray-600 me-1">
                     {{ terrain.description }}
                   </span>
@@ -295,7 +307,9 @@
                   </div>
                 </div>
                 <div class="col-12 separator mt-8"></div>
-                <div class="col-12"></div>
+                <div class="col-12 my-4 pe-6">
+                  <GoogleMap :markers="markers" :center="center" />
+                </div>
               </div>
             </div>
           </div>
@@ -309,46 +323,59 @@ import { defineComponent, onMounted, ref } from 'vue';
 import useTerrains from '@/core/composables/terrain';
 import TerrainRatingChart from '@/custom_components/terrain/TerrainRatingChart.vue';
 import { useRoute } from 'vue-router';
+import GoogleMap from '@/custom_components/GoogleMap.vue';
+import AddressService from '@/core/services/AddressService';
 
 export default defineComponent({
   name: 'Terrain',
   components: {
     TerrainRatingChart,
+    GoogleMap,
   },
   setup() {
     const { terrain, getTerrain } = useTerrains();
     const route = useRoute();
     const selectedImage = ref<String>();
     const index = ref(0);
-
+    const center = ref({ lat: 51.093048, lng: 6.84212 });
+    const markers = ref([
+      {
+        position: {
+          lat: 51.093048,
+          lng: 6.84212,
+        },
+      }, // Along list of clusters
+    ]);
     const selectImage = (url) => {
       selectedImage.value = url;
     };
 
-    const nextImage = (value) => {
+    const nextImage = () => {
       index.value++;
       index.value =
         index.value === terrain.value.images.length ? 0 : index.value;
       selectedImage.value = terrain.value.images[index.value].url;
     };
 
-    const prevImage = (value) => {
+    const prevImage = () => {
       index.value--;
       index.value =
         index.value === -1 ? terrain.value.images.length - 1 : index.value;
       selectedImage.value = terrain.value.images[index.value].url;
     };
-
     onMounted(async () => {
       await getTerrain(route.params.id);
       selectedImage.value = terrain.value.images[0].url;
     });
     return {
+      center,
+      markers,
       terrain,
       selectedImage,
       selectImage,
       nextImage,
       prevImage,
+      AddressService,
     };
   },
 });

@@ -499,9 +499,6 @@ interface Step3 {
   playground_rating: number;
 }
 
-interface IAddNEwTerrain extends Step1, Step2, Step3 {}
-
-declare let google: any;
 export default defineComponent({
   name: 'AddNewTerrain',
   components: {
@@ -539,7 +536,7 @@ export default defineComponent({
       images: [],
     });
 
-    onMounted(() => {
+    onMounted(async () => {
       _stepperObj.value = StepperComponent.createInsance(
         createAppRef.value as HTMLElement
       );
@@ -567,7 +564,7 @@ export default defineComponent({
 
     const formSubmit = async (params) => {
       await ApiService.post('/landlord/terrain', params)
-        .then((data) => {
+        .then(() => {
           router.push({ name: 'landlordDashboard' });
         })
         .catch(function () {

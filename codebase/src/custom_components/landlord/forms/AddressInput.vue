@@ -113,7 +113,8 @@ export default defineComponent({
   setup(props, context) {
     const streetRef = ref();
     let autocomplete;
-    onMounted(() => {
+
+    onMounted(async () => {
       autocomplete = new google.maps.places.Autocomplete(streetRef.value, {
         componentRestrictions: { country: 'be' },
         types: ['address'],

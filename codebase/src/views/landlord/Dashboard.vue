@@ -35,14 +35,12 @@
   <!--end::Col-->
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
-import KTCard from '@/components/cards/Card1.vue';
+import { defineComponent, onMounted } from 'vue';
 import { setCurrentPageBreadcrumbs } from '@/core/helpers/breadcrumb';
 import LandlordApexChart1 from '@/custom_components/landlord/LandlordApexChart1.vue';
 import useTerrains from '@/core/composables/terrain';
 import TerrainCards from '@/custom_components/terrain/TerrainCards.vue';
 
-declare let google: any;
 export default defineComponent({
   name: 'ProfileProjects',
   components: {
