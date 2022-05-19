@@ -45,7 +45,7 @@
   <div class="row">
     <div class="col-6">
       <label class="d-flex align-items-center fs-5 fw-bold mb-2">
-        <span class="required">State</span>
+        <span class="required">locality</span>
       </label>
       <input
         required
@@ -53,7 +53,7 @@
         class="form-control form-control-lg form-control-solid"
         :value="locality"
         name="locality"
-        placeholder="State..."
+        placeholder="locality..."
         @input="$emit('update:locality', $event.target.value)"
       />
     </div>
@@ -74,13 +74,7 @@
   </div>
 </template>
 <script lang="ts">
-import {
-  defineComponent,
-  onBeforeMount,
-  onMounted,
-  onUnmounted,
-  ref,
-} from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 
 declare let google: any;
 export default defineComponent({
@@ -117,7 +111,6 @@ export default defineComponent({
   ],
   setup(props, context) {
     const streetRef = ref();
-    let autocomplete;
     const options = ref({ componentRestrictions: { country: ['be'] } });
     const mapping = {
       street_number: 'update:streetNumber',

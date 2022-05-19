@@ -36,13 +36,14 @@
 import { ref, defineComponent } from 'vue';
 import { useDropzone } from 'vue3-dropzone';
 import apiService from '@/core/services/ApiService';
+import { TImages } from '@/core/helpers/types';
 
 export default defineComponent({
   name: 'UseDropzoneDemo',
   components: {},
   emits: ['update-images'],
   setup(props, context) {
-    const previewImages = ref<String[]>([]);
+    const previewImages = ref<TImages[]>([]);
     const saveFiles = async (files) => {
       const formData = new FormData();
       for await (const file of files) {

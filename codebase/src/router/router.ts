@@ -81,6 +81,12 @@ const routes: Array<RouteRecordRaw> = [
         name: 'landlordAddTerrain',
         component: () => import('@/views/landlord/AddNewTerrain.vue'),
       },
+      {
+        beforeEnter: [isAuth, user, landlord],
+        path: 'edit-terrain/:id',
+        name: 'landlordEditTerrain',
+        component: () => import('@/views/landlord/EditTerrain.vue'),
+      },
     ],
   },
   {

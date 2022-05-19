@@ -78,61 +78,17 @@
         <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
           <inline-svg src="media/icons/duotune/general/gen044.svg" />
         </span>
-        <div class="d-flex flex-stack flex-grow-1">
-          <div class="fw-bold">
-            <h4 class="text-gray-800 fw-bolder">We need your attention!</h4>
-
-            <div class="fs-6 text-gray-600">
-              Your payment was declined. To start using tools, please
-              <a class="fw-bolder" href="#">Add Payment Method</a>
-              .
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-  </div>
-  <div class="row gy-10 gx-xl-10">
-    <div class="col-xl-6">
-      <KTChartWidget1
-        widget-classes="card-xxl-stretch mb-5 mb-xl-10"
-      ></KTChartWidget1>
-    </div>
-    <div class="col-xl-6">
-      <KTListWidget1
-        widget-classes="card-xxl-stretch mb-5 mb-xl-10'"
-      ></KTListWidget1>
-    </div>
-  </div>
-  <div class="row gy-10 gx-xl-10">
-    <div class="col-xl-6">
-      <KTListWidget5
-        widget-classes="card-xxl-stretch mb-5 mb-xl-10"
-      ></KTListWidget5>
-    </div>
-    <div class="col-xl-6">
-      <KTTableWidget5
-        widget-classes="card-xxl-stretch mb-5 mb-xl-10"
-      ></KTTableWidget5>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import KTChartWidget1 from '@/components/widgets/charts/Widget1.vue';
-import KTListWidget5 from '@/components/widgets/lists/Widget5.vue';
-import KTTableWidget5 from '@/components/widgets/tables/Widget5.vue';
-import KTListWidget1 from '@/components/widgets/lists/Widget1.vue';
 
 export default defineComponent({
   name: 'AccountOverview',
-  components: {
-    KTChartWidget1,
-    KTListWidget5,
-    KTTableWidget5,
-    KTListWidget1,
-  },
+  components: {},
   setup() {
     return {};
   },
