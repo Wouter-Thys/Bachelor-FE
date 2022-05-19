@@ -437,11 +437,11 @@
                   class="btn btn-lg btn-primary"
                   @click="formSubmit(formData)"
                 >
-                  <span class="indicator-label">
+                  <span v-if="!loading" class="indicator-label">
                     Create
                     <i class="fas fa-arrow-right"></i>
                   </span>
-                  <span class="indicator-progress">
+                  <span v-else class="indicator-progress">
                     Please wait...
                     <span
                       class="spinner-border spinner-border-sm align-middle ms-2"
@@ -509,6 +509,7 @@ export default defineComponent({
     const _stepperObj = ref<StepperComponent | null>(null);
     const createAppRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
+    const loading = ref(false);
 
     const hiddenSanitaryOptions = ref<boolean>(true);
     const formData = ref({
@@ -556,15 +557,16 @@ export default defineComponent({
       if (!_stepperObj.value) {
         return;
       }
-
       currentStepIndex.value--;
 
       _stepperObj.value.goPrev();
     };
 
     const formSubmit = async (params) => {
+      loading.value = true;
       await ApiService.post('/landlord/terrain', params)
         .then(() => {
+          loading.value = false;
           router.push({ name: 'landlordDashboard' });
         })
         .catch(function () {
@@ -601,6 +603,7 @@ export default defineComponent({
     });
 
     return {
+      loading,
       hiddenSanitaryOptions,
       checkSanitaryBlock,
       formData,

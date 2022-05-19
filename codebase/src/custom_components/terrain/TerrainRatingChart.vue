@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="w-100 mt-4">
-      <span class="badge badge-danger text-danger rounded-circle">.</span>
-      <span class="mx-2">Owners Rating</span>
+    <div class="w-100 mt-4 d-flex align-items-center">
+      <span class="bullet bullet-dot bg-danger h-15px w-15px me-2"></span>
+      <span class="">Owners Rating</span>
     </div>
     <apexchart type="radar" :options="options" :series="series"></apexchart>
   </div>

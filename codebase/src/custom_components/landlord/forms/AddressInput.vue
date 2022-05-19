@@ -4,15 +4,14 @@
       <label class="d-flex align-items-center fs-5 fw-bold mb-2">
         <span class="required">Street</span>
       </label>
-      <input
-        ref="streetRef"
-        class="form-control form-control-lg form-control-solid"
-        type="text"
-        :value="street"
-        name="street"
+      <GMapAutocomplete
         placeholder="street..."
+        class="form-control form-control-lg form-control-solid"
+        :value="street"
+        :options="options"
+        @place_changed="setPlace"
         @input="$emit('update:street', $event.target.value)"
-      />
+      ></GMapAutocomplete>
     </div>
     <div class="col-2">
       <label class="d-flex align-items-center fs-5 fw-bold mb-2">
@@ -75,7 +74,13 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref } from 'vue';
+import {
+  defineComponent,
+  onBeforeMount,
+  onMounted,
+  onUnmounted,
+  ref,
+} from 'vue';
 
 declare let google: any;
 export default defineComponent({
@@ -113,45 +118,33 @@ export default defineComponent({
   setup(props, context) {
     const streetRef = ref();
     let autocomplete;
+    const options = ref({ componentRestrictions: { country: ['be'] } });
+    const mapping = {
+      street_number: 'update:streetNumber',
+      route: 'update:street',
+      locality: 'update:locality',
+      administrative_area_level_2: 'update:province',
+      postal_code: 'update:postcode',
+    };
 
-    onMounted(async () => {
-      autocomplete = new google.maps.places.Autocomplete(streetRef.value, {
-        componentRestrictions: { country: 'be' },
-        types: ['address'],
-        fields: ['address_components'],
-      });
-      google.maps.event.addListener(autocomplete, 'place_changed', () => {
-        const mapping = {
-          street_number: 'update:streetNumber',
-          route: 'update:street',
-          locality: 'update:locality',
-          administrative_area_level_2: 'update:province',
-          postal_code: 'update:postcode',
-        };
-        for (const type in mapping) {
-          context.emit(mapping[type], '');
-        }
-
-        let place = {
-          address_components: [],
-          ...autocomplete.getPlace(),
-        };
-        autocomplete.getPlace().address_components.forEach((component) => {
-          component.types.forEach((type) => {
-            if (mapping.hasOwnProperty(type)) {
-              context.emit(mapping[type], component.long_name);
-            }
-          });
+    const setPlace = ({ address_components }) => {
+      address_components.forEach((component) => {
+        component.types.forEach((type) => {
+          if (mapping.hasOwnProperty(type)) {
+            context.emit(mapping[type], component.long_name);
+          }
         });
       });
-    });
-    onUnmounted(() => {
-      if (autocomplete) {
-        google.maps.event.clearInstanceListeners(autocomplete);
+    };
+    onMounted(async () => {
+      for (const type in mapping) {
+        context.emit(mapping[type], '');
       }
     });
     return {
       streetRef,
+      setPlace,
+      options,
     };
   },
 });

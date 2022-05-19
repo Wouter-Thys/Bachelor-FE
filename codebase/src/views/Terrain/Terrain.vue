@@ -20,7 +20,8 @@
               <img
                 :src="selectedImage"
                 alt=""
-                style="height: 500px; width: 750px"
+                class=""
+                style="object-fit: cover; height: 500px; width: 750px"
               />
             </div>
             <div
@@ -37,17 +38,71 @@
 
         <div class="col-12 px-0 bg-white">
           <div class="row d-flex justify-content-between">
-            <div class="col-12 d-flex justify-content-center">
-              <img
-                v-for="(img, index) in terrain.images"
-                :key="index"
-                class="m-2 cursor-pointer img-fluid"
-                :src="img.croppedUrl"
-                alt=""
-                @click="selectImage(img.url)"
-              />
+            <div
+              v-if="imagesChunks"
+              :data-bs-target="'#kt_carousel_1_carousel'"
+              class="col-1 d-flex align-items-center justify-content-end btn-light pulse pulse-white bg-transparent shadow-none cursor-pointer"
+              data-bs-slide="prev"
+            >
+              <span
+                v-if="imagesChunks.length > 1"
+                class="carousel-control-prev-icon btn btn-icon btn-dark rounded-circle"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Previous</span>
+              <span class="pulse-ring"></span>
+            </div>
+            <div
+              v-if="imagesChunks"
+              class="col-10 d-flex justify-content-center"
+            >
+              <div
+                id="kt_carousel_1_carousel"
+                class="carousel carousel-custom slide"
+                data-bs-ride="carousel"
+              >
+                <div class="carousel-inner" role="listbox">
+                  <div
+                    v-for="(chunk, indexChunks) in imagesChunks"
+                    :key="indexChunks"
+                    class="carousel-item"
+                    :class="indexChunks === 0 ? 'active' : ''"
+                  >
+                    <div class="d-flex justify-content-center">
+                      <div
+                        v-for="(img, index) in chunk"
+                        :key="indexChunks + index"
+                        class=""
+                      >
+                        <img
+                          class="m-2 cursor-pointer"
+                          :src="img.croppedUrl"
+                          alt=""
+                          @click="selectImage(img.url)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
+            <div
+              v-if="imagesChunks"
+              class="col-1 d-flex align-items-center justify-content-start btn-light pulse pulse-white bg-transparent shadow-none cursor-pointer"
+              :data-bs-target="'#kt_carousel_1_carousel'"
+              data-bs-slide="next"
+            >
+              <span
+                v-if="imagesChunks.length > 1"
+                class="carousel-control-next-icon btn btn-icon btn-dark rounded-circle"
+                aria-hidden="true"
+              ></span>
+              <span class="pulse-ring"></span>
+              <span class="sr-only">Next</span>
+            </div>
+
+            <div class="col-12 separator my-2"></div>
             <div class="col-8 border-end">
               <div class="row mt-8 ms-8">
                 <div class="col-12 d-flex justify-content-between">
@@ -319,12 +374,14 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { computed, defineComponent, onMounted, ref } from 'vue';
 import useTerrains from '@/core/composables/terrain';
 import TerrainRatingChart from '@/custom_components/terrain/TerrainRatingChart.vue';
 import { useRoute } from 'vue-router';
 import GoogleMap from '@/custom_components/GoogleMap.vue';
 import AddressService from '@/core/services/AddressService';
+import { TCenterGMap, TImages, TMarkersGMap } from '@/core/helpers/types';
+import _ from 'lodash';
 
 export default defineComponent({
   name: 'Terrain',
@@ -336,16 +393,13 @@ export default defineComponent({
     const { terrain, getTerrain } = useTerrains();
     const route = useRoute();
     const selectedImage = ref<String>();
+    const imagesChunks = ref<TImages[][]>();
     const index = ref(0);
-    const center = ref({ lat: 51.093048, lng: 6.84212 });
-    const markers = ref([
-      {
-        position: {
-          lat: 51.093048,
-          lng: 6.84212,
-        },
-      }, // Along list of clusters
+    const center = ref<TCenterGMap>({ lat: 50.5039, lng: 4.4699 });
+    const markers = ref<TMarkersGMap | null>([
+      { position: { lat: 0, lng: 0 } },
     ]);
+
     const selectImage = (url) => {
       selectedImage.value = url;
     };
@@ -366,7 +420,20 @@ export default defineComponent({
     onMounted(async () => {
       await getTerrain(route.params.id);
       selectedImage.value = terrain.value.images[0].url;
+      if (terrain.value.latitude && terrain.value.longitude) {
+        center.value.lat = terrain.value.latitude;
+        center.value.lng = terrain.value.longitude;
+        if (markers.value) {
+          markers.value[0].position.lat = terrain.value.latitude;
+          markers.value[0].position.lng = terrain.value.longitude;
+        }
+      } else {
+        markers.value = null;
+        markers.value = null;
+      }
+      imagesChunks.value = _.chunk(Object.values(terrain.value.images), 5);
     });
+
     return {
       center,
       markers,
@@ -376,6 +443,7 @@ export default defineComponent({
       nextImage,
       prevImage,
       AddressService,
+      imagesChunks,
     };
   },
 });

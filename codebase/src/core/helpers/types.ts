@@ -1,3 +1,5 @@
+import { ref } from 'vue';
+
 export type TUser = {
   id: number;
   name: string;
@@ -13,7 +15,6 @@ export type TUser = {
 export type TImages = {
   id: string;
   url: string;
-  thumbUrl: string;
   croppedUrl: string;
 };
 export type TTerrain = {
@@ -25,6 +26,8 @@ export type TTerrain = {
   postcode: string;
   province: string;
   locality: string;
+  latitude: Number;
+  longitude: Number;
   water: boolean;
   electricity: boolean;
   threePhaseElectricity: boolean;
@@ -47,3 +50,17 @@ export type TApiResponse = {
   message: string | null;
   data: null | TUser | TUser[] | {};
 };
+
+export type TCenterGMap = {
+  lat: Number;
+  lng: Number;
+};
+
+export type TMarkersGMap = [
+  {
+    position: {
+      lat: Number;
+      lng: Number;
+    };
+  }
+];
