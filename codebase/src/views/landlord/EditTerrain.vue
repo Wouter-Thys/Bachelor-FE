@@ -374,13 +374,12 @@ export default defineComponent({
         editTerrain.value.images.findIndex((item) => item.id === value),
         1
       );
-      console.log(editTerrain.value);
     };
 
     const deleteTerrain = () => {
       ApiService.delete('landlord/terrain', terrain.value.id)
         .then((r) => {
-          console.log(r);
+          router.push({ name: 'landlordDashboard' });
         })
         .catch((e) => {
           console.log(e);
