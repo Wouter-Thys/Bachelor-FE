@@ -45,6 +45,10 @@ export type TTerrain = {
   images: TImages[];
   owner: TUser;
 };
+export type TEditTerrain = TTerrain & {
+  newImages: TImages[];
+  deleteImages: String[];
+};
 
 export type TApiResponse = {
   message: string | null;

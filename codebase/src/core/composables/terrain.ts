@@ -1,7 +1,14 @@
 import { ref } from 'vue';
 import apiService from '@/core/services/ApiService';
-import { TApiResponse, TImages, TTerrain, TUser } from '@/core/helpers/types';
+import {
+  TApiResponse,
+  TEditTerrain,
+  TImages,
+  TTerrain,
+  TUser,
+} from '@/core/helpers/types';
 import ApiService from '@/core/services/ApiService';
+import router from '@/router/router';
 
 export default function useTerrains() {
   const terrains = ref(<TTerrain[]>[]);
@@ -36,6 +43,7 @@ export default function useTerrains() {
       })
       .catch((e) => {
         console.log(e.response.data.message);
+        router.push({ name: 'landlordDashboard' });
       });
   };
   const getLandlordTerrains = async () => {
@@ -46,6 +54,7 @@ export default function useTerrains() {
       })
       .catch((e) => {
         console.log(e.response.data.message);
+        router.push({ name: 'landlordDashboard' });
       });
   };
 
