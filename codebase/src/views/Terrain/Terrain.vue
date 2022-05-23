@@ -254,7 +254,12 @@
                 </div>
                 <div class="col-12 separator mt-8"></div>
                 <div class="col-12 my-4 pe-6">
-                  <GoogleMap :markers="markers" :center="center" />
+                  <GoogleMap
+                    :markers="markers"
+                    :center="center"
+                    :zoom="14"
+                    :style="{ height: '300px' }"
+                  />
                 </div>
               </div>
             </div>
@@ -366,7 +371,7 @@ export default defineComponent({
     const index = ref(0);
     const center = ref<TCenterGMap>({ lat: 50.5039, lng: 4.4699 });
     const markers = ref<TMarkersGMap | null>([
-      { position: { lat: 0, lng: 0 } },
+      { position: { lat: 0, lng: 0 }, terrain: null },
     ]);
     const user: User = store.getters.currentUser;
     const isAuthenticated = store.getters.isUserAuthenticated;

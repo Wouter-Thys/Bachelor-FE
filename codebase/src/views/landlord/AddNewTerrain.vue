@@ -449,9 +449,21 @@
                   </span>
                 </button>
 
-                <button v-else type="submit" class="btn btn-lg btn-primary">
+                <button
+                  v-else-if="!loading"
+                  type="submit"
+                  class="btn btn-lg btn-primary"
+                >
                   Continue
                   <i class="fas fa-arrow-right"></i>
+                </button>
+                <button
+                  v-else
+                  type="submit"
+                  class="btn btn-primary d-flex align-items-center"
+                >
+                  <span class="">Please wait...</span>
+                  <i class="fa-solid fa-circle-notch fa-spin"></i>
                 </button>
               </div>
             </div>

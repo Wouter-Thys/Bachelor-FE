@@ -168,7 +168,7 @@ export default defineComponent({
   components: {},
   props: {
     terrains: {
-      type: Object as () => TTerrain[],
+      type: Object as () => TTerrain[] | TTerrain,
       required: true,
     },
     col: {

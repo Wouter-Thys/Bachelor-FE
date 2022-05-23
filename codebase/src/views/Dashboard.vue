@@ -1,107 +1,103 @@
 <template>
   <!--begin::Dashboard-->
-  <div class="row gy-5 g-xl-8">
-    <div class="col-xxl-4">
-      <MixedWidget2
-        widget-classes="card-xl-stretch mb-xl-8"
-        widget-color="danger"
-        chart-height="200"
-        stroke-color="#cb1e46"
-      ></MixedWidget2>
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 d-flex justify-content-center">
+      <div
+        class="form-check btn btn-outline btn-outline-primary rounded-pill bg-white mx-4 p-0 border-primary border-2"
+      >
+        <label class="form-check-label p-5" for="exampleRadios1">
+          <input
+            id="exampleRadios1"
+            class="form-check-input border-primary border-2"
+            type="radio"
+            name="exampleRadios"
+            value="option1"
+            checked
+            @click="searchByMap(false)"
+          />
+          <i class="fa-solid fa-list"></i>
+          Search by List
+        </label>
+      </div>
+      <div
+        class="form-check btn btn-outline btn-outline-primary rounded-pill bg-white mx-4 p-0 border-primary border-2"
+      >
+        <label class="form-check-label p-5" for="exampleRadios2">
+          <input
+            id="exampleRadios2"
+            class="form-check-input border-primary border-2"
+            type="radio"
+            name="exampleRadios"
+            value="option2"
+            @click="searchByMap(true)"
+          />
+          <i class="fa-solid fa-map-location-dot"></i>
+          Search by Map
+        </label>
+      </div>
     </div>
-    <div class="col-xxl-4">
-      <ListWidget5
-        widget-classes="card-xxl-stretch mb-5 mb-xl-10"
-      ></ListWidget5>
-    </div>
-    <div class="col-xxl-4">
-      <MixedWidget7
-        widget-classes="card-xxl-stretch-50 mb-5 mb-xl-8"
-        chart-color="primary"
-        chart-height="150"
-      ></MixedWidget7>
-      <MixedWidget10
-        widget-classes="card-xxl-stretch-50 mb-5 mb-xl-8"
-        chart-color="primary"
-        chart-height="168"
-      ></MixedWidget10>
-    </div>
-  </div>
-
-  <div class="row gy-5 gx-xl-8">
-    <div class="col-xxl-4">
-      <ListWidget3 widget-classes="card-xxl-stretch mb-xl-3"></ListWidget3>
-    </div>
-    <div class="col-xxl-8">
-      <TableWidget9
-        widget-classes="card-xxl-stretch mb-5 mb-xl-8"
-      ></TableWidget9>
-    </div>
-  </div>
-
-  <div class="row gy-5 g-xl-8">
-    <div class="col-xxl-4">
-      <ListWidget2 widget-classes="card-xl-stretch mb-xl-8"></ListWidget2>
-    </div>
-    <div class="col-xxl-4">
-      <ListWidget6 widget-classes="card-xl-stretch mb-xl-8"></ListWidget6>
-    </div>
-    <div class="col-xxl-4">
-      <ListWidget1 widget-classes="card-xxl-stretch mb-xl-3"></ListWidget1>
+    <div v-if="!mapSearch" class="col-6 mt-4">
+      <SearchTerrain />
     </div>
   </div>
-
-  <div class="row g-5 gx-xxl-8">
-    <div class="col-xxl-4">
-      <MixedWidget5
-        widget-classes="card-xl-stretch mb-xl-8"
-        chart-color="success"
-        chart-height="150"
-      ></MixedWidget5>
-    </div>
-    <div class="col-xxl-8">
-      <TableWidget5
-        widget-classes="card-xxl-stretch mb-5 mb-xxl-8"
-      ></TableWidget5>
-    </div>
+  <div v-if="!mapSearch" class="row">
+    <TerrainCards :terrains="terrains" col="col-3" />
+  </div>
+  <div v-if="mapSearch" class="row mt-4">
+    <GoogleMap
+      :center="center"
+      :markers="markers"
+      :zoom="8.5"
+      :style="{
+        height: '800px',
+        'border-radius': '25px',
+        'box-shadow':
+          '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+      }"
+    />
   </div>
   <!--end::Dashboard-->
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue';
-import TableWidget9 from '@/components/widgets/tables/Widget9.vue';
-import TableWidget5 from '@/components/widgets/tables/Widget5.vue';
-import ListWidget1 from '@/components/widgets/lists/Widget1.vue';
-import ListWidget2 from '@/components/widgets/lists/Widget2.vue';
-import ListWidget3 from '@/components/widgets/lists/Widget3.vue';
-import ListWidget5 from '@/components/widgets/lists/Widget5.vue';
-import ListWidget6 from '@/components/widgets/lists/Widget6.vue';
-import MixedWidget2 from '@/components/widgets/mixed/Widget2.vue';
-import MixedWidget5 from '@/components/widgets/mixed/Widget5.vue';
-import MixedWidget7 from '@/components/widgets/mixed/Widget7.vue';
-import MixedWidget10 from '@/components/widgets/mixed/Widget10.vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
+import SearchTerrain from '@/custom_components/dashboard/SearchTerrain.vue';
+import TerrainCards from '@/custom_components/terrain/TerrainCards.vue';
+import useTerrains from '@/core/composables/terrain';
+import GoogleMap from '@/custom_components/GoogleMap.vue';
+import { TCenterGMap, TMarkersGMap } from '@/core/helpers/types';
 
 export default defineComponent({
   name: 'MainDashboard',
   components: {
-    TableWidget9,
-    TableWidget5,
-    ListWidget1,
-    ListWidget2,
-    ListWidget3,
-    ListWidget5,
-    ListWidget6,
-    MixedWidget2,
-    MixedWidget5,
-    MixedWidget7,
-    MixedWidget10,
+    GoogleMap,
+    SearchTerrain,
+    TerrainCards,
   },
   setup() {
-    onMounted(() => {
+    const { terrains, getTerrains } = useTerrains();
+    const center = ref<TCenterGMap>({ lat: 50.5039, lng: 4.4699 });
+    const markers = ref<TMarkersGMap | null>([
+      { position: { lat: 0, lng: 0 }, terrain: null },
+    ]);
+    const mapSearch = ref(false);
+    onMounted(async () => {
+      await getTerrains();
       setCurrentPageTitle('Dashboard');
+      terrains.value.forEach((value, index, array) => {
+        if (markers.value) {
+          markers.value.push({
+            position: { lat: value.latitude, lng: value.longitude },
+            terrain: value,
+          });
+        }
+      });
     });
+    const searchByMap = (value) => {
+      mapSearch.value = value;
+    };
+    return { searchByMap, mapSearch, center, terrains, markers };
   },
 });
 </script>

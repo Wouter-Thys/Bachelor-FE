@@ -66,5 +66,6 @@ export type TMarkersGMap = [
       lat: Number;
       lng: Number;
     };
+    terrain: TTerrain | null;
   }
 ];
