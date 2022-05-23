@@ -6,7 +6,16 @@
           <div
             class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative"
           >
-            <img src="media/avatars/300-1.jpg" alt="image" />
+            <div class="d-flex justify-content-center">
+              <div
+                class="rounded-circle bg-info text-white d-flex justify-content-center"
+                style="width: 150px; height: 150px"
+              >
+                <span style="font-size: 100px">
+                  {{ user.name.substring(0, 1) }}
+                </span>
+              </div>
+            </div>
             <div
               class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"
             ></div>

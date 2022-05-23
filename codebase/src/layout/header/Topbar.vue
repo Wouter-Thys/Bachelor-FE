@@ -2,12 +2,6 @@
   <!--begin::Toolbar wrapper-->
   <div class="d-flex align-items-stretch flex-shrink-0">
     <div class="topbar d-flex align-items-stretch flex-shrink-0">
-      <!--begin::Search-->
-      <div class="d-flex align-items-stretch ms-1 ms-lg-3">
-        <KTSearch></KTSearch>
-      </div>
-      <!--end::Search-->
-
       <div
         id="#kt_header_menu"
         class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-white menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch"
@@ -49,7 +43,16 @@
           data-kt-menu-placement="bottom-end"
           data-kt-menu-flip="bottom"
         >
-          <i class="fa-solid fa-user fa-2xl"></i>
+          <div class="d-flex justify-content-center">
+            <div
+              class="rounded-circle bg-info text-white d-flex justify-content-center"
+              style="width: 30px; height: 30px"
+            >
+              <span style="font-size: 20px">
+                {{ user.name.substring(0, 1) }}
+              </span>
+            </div>
+          </div>
         </div>
         <KTUserMenu></KTUserMenu>
         <!--end::Menu-->
@@ -67,16 +70,18 @@ import KTUserMenu from '@/layout/header/partials/UserMenu.vue';
 import MainMenuConfig from '@/core/config/TopbarMenu';
 import { useI18n } from 'vue-i18n/index';
 import { useStore } from 'vuex';
+import { User } from '@/store/modules/AuthModule';
+import store from '@/store';
 
 export default defineComponent({
   name: 'LayoutTopbar',
   components: {
     KTUserMenu,
-    KTSearch,
   },
   setup() {
     const store = useStore();
     const isAuthenticated = store.getters.isUserAuthenticated;
+    const user: User = store.getters.currentUser;
 
     const { t, te } = useI18n();
     const translate = (text) => {
@@ -90,6 +95,7 @@ export default defineComponent({
       isAuthenticated,
       MainMenuConfig,
       translate,
+      user,
     };
   },
 });

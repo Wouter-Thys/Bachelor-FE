@@ -6,7 +6,16 @@
     <div class="menu-item px-3">
       <div class="menu-content d-flex align-items-center px-3">
         <div class="symbol symbol-50px me-5">
-          <i class="fa-solid fa-user fa-2xl"></i>
+          <div class="d-flex justify-content-center">
+            <div
+              class="rounded-circle bg-info text-white d-flex justify-content-center"
+              style="width: 50px; height: 50px"
+            >
+              <span style="font-size: 30px">
+                {{ user.name.substring(0, 1) }}
+              </span>
+            </div>
+          </div>
         </div>
         <div class="d-flex flex-column">
           <div class="fw-bolder d-flex align-items-center fs-5">
