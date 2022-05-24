@@ -365,19 +365,19 @@
                     <div class="row">
                       <div class="col-4 jumbotron d-flex align-items-center">
                         <label class="fs-5 fw-bold mb-2">
-                          Wood Access
+                          Bakery Access
                           <p class="text-muted fs-7">
-                            How easy is it to get wood
+                            How easy is it to get bakery
                           </p>
                         </label>
                       </div>
                       <div class="col-4 my-2">
                         <select
-                          v-model="formData.wood_rating"
+                          v-model="formData.bakery_rating"
                           class="form-select"
                           data-control="select2"
                           data-placeholder="Select an option"
-                          name="wood_rating"
+                          name="bakery_rating"
                         >
                           <option value="1">Very hard</option>
                           <option value="2">Hard</option>
@@ -507,7 +507,7 @@ interface Step3 {
   supermarket_rating: number;
   activities_rating: number;
   remote_rating: number;
-  wood_rating: number;
+  bakery_rating: number;
   playground_rating: number;
 }
 
@@ -544,7 +544,7 @@ export default defineComponent({
       supermarket_rating: 1,
       activities_rating: 1,
       remote_rating: 1,
-      wood_rating: 1,
+      bakery_rating: 1,
       playground_rating: 1,
       images: [],
     });

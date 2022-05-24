@@ -259,15 +259,15 @@
       </div>
       <div class="row mb-6">
         <label class="col-4 col-form-label required fw-bold fs-6">
-          Wood Access
+          Bakery Access
         </label>
         <div class="col-8 fv-row">
           <select
-            v-model="editTerrain.wood_rating"
+            v-model="editTerrain.bakery_rating"
             class="form-select"
             data-control="select2"
             data-placeholder="Select an option"
-            name="woodRating"
+            name="bakeryRating"
           >
             <option value="1">Very hard</option>
             <option value="2">Hard</option>

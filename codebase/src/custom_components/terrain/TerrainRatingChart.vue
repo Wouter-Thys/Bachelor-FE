@@ -50,7 +50,7 @@
                 <p class="fs-6 text-muted p-0 m-0">5</p>
               </div>
               <div class="col-4">
-                <p class="fs-6p-0 m-0">Wood access:</p>
+                <p class="fs-6p-0 m-0">Bakery access:</p>
                 <p class="fs-6 text-muted p-0 m-0">1 = Very hard</p>
                 <p class="fs-6 text-muted p-0 m-0">2 = Hard</p>
                 <p class="fs-6 text-muted p-0 m-0">3 = Oke</p>
@@ -84,7 +84,7 @@ export default defineComponent({
     supermarketRating: { type: Number, required: true },
     activitiesRating: { type: Number, required: true },
     remoteRating: { type: Number, required: true },
-    woodRating: { type: Number, required: true },
+    bakeryRating: { type: Number, required: true },
     playgroundRating: { type: Number, required: true },
   },
   setup(props, context) {
@@ -118,7 +118,7 @@ export default defineComponent({
           'Supermarket',
           'Activities',
           'Remote',
-          'Wood',
+          'Bakery',
           'Playground',
         ],
       },
@@ -180,7 +180,7 @@ export default defineComponent({
           props.supermarketRating,
           props.activitiesRating,
           props.remoteRating,
-          props.woodRating,
+          props.bakeryRating,
           props.playgroundRating,
         ],
       },

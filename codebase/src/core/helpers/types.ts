@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 export type TUser = {
   id: number;
   name: string;
@@ -40,7 +38,7 @@ export type TTerrain = {
   supermarket_rating: number;
   activities_rating: number;
   remote_rating: number;
-  wood_rating: number;
+  bakery_rating: number;
   playground_rating: number;
   images: TImages[];
   owner: TUser;

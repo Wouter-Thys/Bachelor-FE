@@ -1,12 +1,5 @@
 import { ref } from 'vue';
-import apiService from '@/core/services/ApiService';
-import {
-  TApiResponse,
-  TEditTerrain,
-  TImages,
-  TTerrain,
-  TUser,
-} from '@/core/helpers/types';
+import { TApiResponse, TTerrain } from '@/core/helpers/types';
 import ApiService from '@/core/services/ApiService';
 import router from '@/router/router';
 
@@ -60,7 +53,7 @@ export default function useTerrains() {
 
   const getTerrainBySearch = async (value) => {
     errors.value = { data: null, message: null };
-    await ApiService.query('/terrain/search', value)
+    await ApiService.post('/terrain/search', value)
       .then((r) => {
         return (terrains.value = r.data.data);
       })
