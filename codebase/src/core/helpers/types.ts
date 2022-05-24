@@ -69,3 +69,15 @@ export type TMarkersGMap = [
     terrain: TTerrain | null;
   }
 ];
+export type extraSettingsSearch = {
+  water: boolean;
+  electricity: boolean;
+  threePhaseElectricity: boolean;
+  sanitaryBlock: boolean;
+  showers: boolean;
+  toilets: boolean;
+  sinks: boolean;
+  max_people: number | null;
+  hectare: number | null;
+  search: string;
+};

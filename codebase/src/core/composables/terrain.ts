@@ -58,6 +58,18 @@ export default function useTerrains() {
       });
   };
 
+  const getTerrainBySearch = async (value) => {
+    errors.value = { data: null, message: null };
+    await ApiService.query('/terrain/search', value)
+      .then((r) => {
+        return (terrains.value = r.data.data);
+      })
+      .catch((e) => {
+        console.log(e.response.data.message);
+        router.push({ name: 'landlordDashboard' });
+      });
+  };
+
   return {
     terrain,
     errors,
@@ -66,5 +78,6 @@ export default function useTerrains() {
     getTerrains,
     getLandlordTerrain,
     getLandlordTerrains,
+    getTerrainBySearch,
   };
 }

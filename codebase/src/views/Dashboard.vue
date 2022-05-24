@@ -36,8 +36,8 @@
         </label>
       </div>
     </div>
-    <div v-if="!mapSearch" class="col-6 mt-4">
-      <SearchTerrain />
+    <div class="col-6 mt-4">
+      <SearchTerrain @search-terrain="callback" />
     </div>
   </div>
   <div v-if="!mapSearch" class="row">
@@ -60,13 +60,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { defineComponent, onMounted, ref, watch } from 'vue';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 import SearchTerrain from '@/custom_components/dashboard/SearchTerrain.vue';
 import TerrainCards from '@/custom_components/terrain/TerrainCards.vue';
 import useTerrains from '@/core/composables/terrain';
 import GoogleMap from '@/custom_components/GoogleMap.vue';
-import { TCenterGMap, TMarkersGMap } from '@/core/helpers/types';
+import {
+  extraSettingsSearch,
+  TCenterGMap,
+  TMarkersGMap,
+} from '@/core/helpers/types';
 
 export default defineComponent({
   name: 'MainDashboard',
@@ -76,12 +80,13 @@ export default defineComponent({
     TerrainCards,
   },
   setup() {
-    const { terrains, getTerrains } = useTerrains();
+    const { terrains, getTerrains, getTerrainBySearch } = useTerrains();
     const center = ref<TCenterGMap>({ lat: 50.5039, lng: 4.4699 });
     const markers = ref<TMarkersGMap | null>([
       { position: { lat: 0, lng: 0 }, terrain: null },
     ]);
     const mapSearch = ref(false);
+
     onMounted(async () => {
       await getTerrains();
       setCurrentPageTitle('Dashboard');
@@ -97,7 +102,12 @@ export default defineComponent({
     const searchByMap = (value) => {
       mapSearch.value = value;
     };
-    return { searchByMap, mapSearch, center, terrains, markers };
+    const callback = (value) => {
+      console.log(value);
+      getTerrainBySearch(value);
+    };
+
+    return { searchByMap, mapSearch, center, terrains, markers, callback };
   },
 });
 </script>
