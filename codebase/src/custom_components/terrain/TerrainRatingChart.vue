@@ -7,15 +7,15 @@
       </div>
 
       <button
-        type="button"
         class="btn btn-primary"
-        data-bs-toggle="modal"
         data-bs-target="#kt_modal_1"
+        data-bs-toggle="modal"
+        type="button"
       >
         More Info
       </button>
     </div>
-    <apexchart type="radar" :options="options" :series="series"></apexchart>
+    <apexchart :options="options" :series="series" type="radar"></apexchart>
 
     <div id="kt_modal_1" class="modal fade" tabindex="-1">
       <div class="modal-dialog modal-lg">
