@@ -296,11 +296,11 @@
                           data-placeholder="Select an option"
                           name="supermarket_rating"
                         >
-                          <option value="1">Further then 25KM</option>
-                          <option value="2">Between 25-20KM</option>
-                          <option selected value="3">Between 20-15KM</option>
-                          <option value="4">Between 15-10KM</option>
-                          <option value="5">Closer then 10KM</option>
+                          <option value="1">Further then 20KM</option>
+                          <option value="2">Between 20-15KM</option>
+                          <option selected value="3">Between 15-10KM</option>
+                          <option value="4">Between 10-5KM</option>
+                          <option value="5">Closer then 5KM</option>
                         </select>
                       </div>
                     </div>
@@ -325,15 +325,11 @@
                           data-placeholder="Select an option"
                           name="activities_rating"
                         >
-                          <option value="1">Further then 5KM</option>
-                          <option value="2">1 Closer then 5KM</option>
-                          <option selected value="3">
-                            More then 1 Closer then 5KM
-                          </option>
-                          <option value="4">1 Closer then 3KM</option>
-                          <option value="5">
-                            5 = More then 1 Closer then 3KM
-                          </option>
+                          <option value="1">Further then 2KM</option>
+                          <option value="2">Between 2-1.5KM</option>
+                          <option selected value="3">Between 1.5-1KM</option>
+                          <option value="4">Between 1-0.5KM</option>
+                          <option value="5">Closer then 0.5KM</option>
                         </select>
                       </div>
                     </div>
@@ -356,11 +352,11 @@
                           data-placeholder="Select an option"
                           name="remote_rating"
                         >
-                          <option value="1">Further then 25KM</option>
-                          <option value="2">Between 25-20KM</option>
-                          <option selected value="3">Between 20-15KM</option>
-                          <option value="4">Between 15-10KM</option>
-                          <option value="5">Closer then 10KM</option>
+                          <option value="1">Closer then 5KM</option>
+                          <option value="2">Between 10-5KM</option>
+                          <option selected value="3">Between 15-10KM</option>
+                          <option value="4">Between 20-15KM</option>
+                          <option value="5">Further then 20KM</option>
                         </select>
                       </div>
                     </div>

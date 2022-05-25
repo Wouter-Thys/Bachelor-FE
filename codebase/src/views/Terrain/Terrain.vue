@@ -240,7 +240,12 @@
                     terrain.bakery_rating &&
                     terrain.firstAid_rating &&
                     terrain.supermarket_rating &&
-                    terrain.activities_rating
+                    terrain.activities_rating &&
+                    terrain.google_activities_rating &&
+                    terrain.google_supermarket_rating &&
+                    terrain.google_firstAid_rating &&
+                    terrain.google_bakery_rating &&
+                    terrain.google_remote_rating
                   "
                   class="col-12"
                 >
@@ -250,6 +255,13 @@
                     :first-aid-rating="terrain.firstAid_rating"
                     :supermarket-rating="terrain.supermarket_rating"
                     :activities-rating="terrain.activities_rating"
+                    :google-remote-rating="terrain.google_remote_rating"
+                    :google-bakery-rating="terrain.google_bakery_rating"
+                    :google-first-aid-rating="terrain.google_firstAid_rating"
+                    :google-supermarket-rating="
+                      terrain.google_supermarket_rating
+                    "
+                    :google-activities-rating="terrain.google_activities_rating"
                   />
                 </div>
                 <div class="col-12 separator mt-8"></div>

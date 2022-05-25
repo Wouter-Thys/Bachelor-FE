@@ -47,7 +47,7 @@
     <GoogleMap
       :center="center"
       :markers="markers"
-      :zoom="8.5"
+      :zoom="8"
       :style="{
         height: '800px',
         'border-radius': '25px',
@@ -60,17 +60,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, watch } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 import SearchTerrain from '@/custom_components/dashboard/SearchTerrain.vue';
 import TerrainCards from '@/custom_components/terrain/TerrainCards.vue';
 import useTerrains from '@/core/composables/terrain';
 import GoogleMap from '@/custom_components/GoogleMap.vue';
-import {
-  extraSettingsSearch,
-  TCenterGMap,
-  TMarkersGMap,
-} from '@/core/helpers/types';
+import { TCenterGMap, TMarkersGMap } from '@/core/helpers/types';
 
 export default defineComponent({
   name: 'MainDashboard',
@@ -90,7 +86,7 @@ export default defineComponent({
     onMounted(async () => {
       await getTerrains();
       setCurrentPageTitle('Dashboard');
-      terrains.value.forEach((value, index, array) => {
+      terrains.value.forEach((value) => {
         if (markers.value) {
           markers.value.push({
             position: { lat: value.latitude, lng: value.longitude },
@@ -103,8 +99,17 @@ export default defineComponent({
       mapSearch.value = value;
     };
     const callback = (value) => {
-      console.log(value);
-      getTerrainBySearch(value);
+      markers.value = [{ position: { lat: 0, lng: 0 }, terrain: null }];
+      getTerrainBySearch(value).then(() => {
+        terrains.value.forEach((value) => {
+          if (markers.value) {
+            markers.value.push({
+              position: { lat: value.latitude, lng: value.longitude },
+              terrain: value,
+            });
+          }
+        });
+      });
     };
 
     return { searchByMap, mapSearch, center, terrains, markers, callback };

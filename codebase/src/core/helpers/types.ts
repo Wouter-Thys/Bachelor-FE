@@ -40,6 +40,11 @@ export type TTerrain = {
   remote_rating: number;
   bakery_rating: number;
   firstAid_rating: number;
+  google_supermarket_rating: number;
+  google_activities_rating: number;
+  google_remote_rating: number;
+  google_bakery_rating: number;
+  google_firstAid_rating: number;
   images: TImages[];
   owner: TUser;
 };
@@ -68,14 +73,14 @@ export type TMarkersGMap = [
   }
 ];
 export type extraSettingsSearch = {
-  water: boolean;
-  electricity: boolean;
-  threePhaseElectricity: boolean;
-  sanitaryBlock: boolean;
-  showers: boolean;
-  toilets: boolean;
-  sinks: boolean;
-  max_people: number | null;
-  hectare: number | null;
+  water: number;
+  electricity: number;
+  threePhaseElectricity: number;
+  sanitaryBlock: number;
+  showers: number;
+  toilets: number;
+  sinks: number;
+  max_people: number;
+  hectare: number;
   search: string;
 };

@@ -3,7 +3,9 @@
     <div class="w-100 mt-4 d-flex justify-content-between">
       <div class="d-flex align-items-center">
         <span class="bullet bullet-dot bg-danger h-15px w-15px me-2"></span>
-        <span class="">Owners Rating</span>
+        <span class="me-2">Owners Rating</span>
+        <span class="bullet bullet-dot bg-warning h-15px w-15px me-2"></span>
+        <span class="me-2">Google Rating</span>
       </div>
 
       <button
@@ -28,30 +30,6 @@
               <div class="col-4">
                 <p class="fs-6 p-0 m-0">supermarket:</p>
                 <p class="fs-6 text-muted p-0 m-0">Closest supermarket</p>
-                <p class="fs-6 text-muted p-0 m-0">1 = Further then 25KM</p>
-                <p class="fs-6 text-muted p-0 m-0">2 = Between 25-20KM</p>
-                <p class="fs-6 text-muted p-0 m-0">3 = Between 20-15KM</p>
-                <p class="fs-6 text-muted p-0 m-0">4 = Between 15-10KM</p>
-                <p class="fs-6 text-muted p-0 m-0">5 = Closer then 10KM</p>
-              </div>
-              <div class="col-4">
-                <p class="fs-6 p-0 m-0">Activities:</p>
-                <p class="fs-6 text-muted p-0 m-0">
-                  activities like paintball, carting, swimming, walking...
-                </p>
-                <p class="fs-6 text-muted p-0 m-0">1 = Further then 5KM</p>
-                <p class="fs-6 text-muted p-0 m-0">2 = 1 Closer then 5KM</p>
-                <p class="fs-6 text-muted p-0 m-0">
-                  3 = More then 1 Closer then 5KM
-                </p>
-                <p class="fs-6 text-muted p-0 m-0">4 = 1 Closer then 3KM</p>
-                <p class="fs-6 text-muted p-0 m-0">
-                  5 = More then 1 Closer then 3KM
-                </p>
-              </div>
-              <div class="col-4">
-                <p class="fs-6 p-0 m-0">Remote:</p>
-                <p class="fs-6 text-muted p-0 m-0">closest town/city</p>
                 <p class="fs-6 text-muted p-0 m-0">1 = Further then 20KM</p>
                 <p class="fs-6 text-muted p-0 m-0">2 = Between 20-15KM</p>
                 <p class="fs-6 text-muted p-0 m-0">3 = Between 15-10KM</p>
@@ -59,13 +37,30 @@
                 <p class="fs-6 text-muted p-0 m-0">5 = Closer then 5KM</p>
               </div>
               <div class="col-4">
+                <p class="fs-6 p-0 m-0">Activities:</p>
+                <p class="fs-6 text-muted p-0 m-0">1 = Further then 2KM</p>
+                <p class="fs-6 text-muted p-0 m-0">2 = Between 2-1.5KM</p>
+                <p class="fs-6 text-muted p-0 m-0">3 = Between 1.5-1KM</p>
+                <p class="fs-6 text-muted p-0 m-0">4 = Between 1-0.5KM</p>
+                <p class="fs-6 text-muted p-0 m-0">5 = Closer then 0.5KM</p>
+              </div>
+              <div class="col-4">
+                <p class="fs-6 p-0 m-0">Remote:</p>
+                <p class="fs-6 text-muted p-0 m-0">closest town/city</p>
+                <p class="fs-6 text-muted p-0 m-0">1 = Closer then 1KM</p>
+                <p class="fs-6 text-muted p-0 m-0">2 = Between 2-1KM</p>
+                <p class="fs-6 text-muted p-0 m-0">3 = Between 3-2KM</p>
+                <p class="fs-6 text-muted p-0 m-0">4 = Between 4-3KM</p>
+                <p class="fs-6 text-muted p-0 m-0">5 = Further then 4KM</p>
+              </div>
+              <div class="col-4">
                 <p class="fs-6p-0 m-0">Bakery access:</p>
                 <p class="fs-6 text-muted p-0 m-0">closest bakery</p>
-                <p class="fs-6 text-muted p-0 m-0">1 = Further then 25KM</p>
-                <p class="fs-6 text-muted p-0 m-0">2 = Between 25-20KM</p>
-                <p class="fs-6 text-muted p-0 m-0">3 = Between 20-15KM</p>
-                <p class="fs-6 text-muted p-0 m-0">4 = Between 15-10KM</p>
-                <p class="fs-6 text-muted p-0 m-0">5 = Closer then 10KM</p>
+                <p class="fs-6 text-muted p-0 m-0">1 = Further then 20KM</p>
+                <p class="fs-6 text-muted p-0 m-0">2 = Between 20-15KM</p>
+                <p class="fs-6 text-muted p-0 m-0">3 = Between 15-10KM</p>
+                <p class="fs-6 text-muted p-0 m-0">4 = Between 10-5KM</p>
+                <p class="fs-6 text-muted p-0 m-0">5 = Closer then 5KM</p>
               </div>
               <div class="col-4 mt-3">
                 <p class="fs-6 p-0 m-0">First-aid access:</p>
@@ -105,14 +100,17 @@ export default defineComponent({
     remoteRating: { type: Number, required: true },
     bakeryRating: { type: Number, required: true },
     firstAidRating: { type: Number, required: true },
+    googleSupermarketRating: { type: Number, required: true },
+    googleActivitiesRating: { type: Number, required: true },
+    googleRemoteRating: { type: Number, required: true },
+    googleBakeryRating: { type: Number, required: true },
+    googleFirstAidRating: { type: Number, required: true },
   },
   setup(props, context) {
     const labelColor = getCSSVariableValue('--bs-gray-500');
     const borderColor = getCSSVariableValue('--bs-gray-200');
     const baseColor = getCSSVariableValue('--bs-info');
     const lightColor = getCSSVariableValue('--bs-light-info');
-
-    console.log(props);
 
     const options = {
       chart: {
@@ -130,7 +128,7 @@ export default defineComponent({
         curve: 'smooth',
         show: true,
         width: 2,
-        colors: ['#FF0000', 'blue', 'purple'],
+        colors: ['#FF0000', '#FFC700'],
       },
       xaxis: {
         categories: [
@@ -153,7 +151,7 @@ export default defineComponent({
         max: 5,
         min: 0,
       },
-      colors: [lightColor],
+      colors: ['#FF0000', '#FFC700'],
       grid: {
         borderColor: borderColor,
         strokeDashArray: 4,
@@ -165,26 +163,17 @@ export default defineComponent({
       },
       markers: {
         size: 4,
-        colors: ['#fff'],
-        strokeColor: '#FF0000',
+        colors: ['#FF0000', '#FFC700'],
+        strokeColor: ['#FF0000', '#FFC700'],
         strokeWidth: 2,
       },
       fill: {
-        colors: '#FF0000',
+        colors: ['#FF0000', '#FFC700'],
         opacity: 0.2,
-      },
-      tooltip: {
-        y: {
-          formatter: function (val) {
-            return val;
-          },
-        },
       },
       plotOptions: {
         radar: {
-          size: 150,
           polygons: {
-            strokeColors: '#e9e9e9',
             fill: {
               colors: ['#f8f8f8', '#fff'],
             },
@@ -201,6 +190,16 @@ export default defineComponent({
           props.remoteRating,
           props.bakeryRating,
           props.firstAidRating,
+        ],
+      },
+      {
+        name: 'Google Rating',
+        data: [
+          props.googleSupermarketRating,
+          props.googleActivitiesRating,
+          props.googleRemoteRating,
+          props.googleBakeryRating,
+          props.googleFirstAidRating,
         ],
       },
     ];

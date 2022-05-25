@@ -197,15 +197,15 @@ export default defineComponent({
   setup(props, context) {
     const dropdown = ref(false);
     const extraSettings = ref<extraSettingsSearch>({
-      water: false,
-      electricity: false,
-      threePhaseElectricity: false,
-      sanitaryBlock: false,
-      showers: false,
-      toilets: false,
-      sinks: false,
-      max_people: null,
-      hectare: null,
+      water: 0,
+      electricity: 0,
+      threePhaseElectricity: 0,
+      sanitaryBlock: 0,
+      showers: 0,
+      toilets: 0,
+      sinks: 0,
+      max_people: 0,
+      hectare: 0,
       search: '',
     });
     const extraSettingsDropFN = () => {
