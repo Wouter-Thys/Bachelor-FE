@@ -296,11 +296,11 @@
                           data-placeholder="Select an option"
                           name="supermarket_rating"
                         >
-                          <option value="1">Further then 45KM</option>
-                          <option value="2">Between 45-35KM</option>
-                          <option selected value="3">Between 35-25KM</option>
-                          <option value="4">Between 25-15KM</option>
-                          <option value="5">Closer then 15KM</option>
+                          <option value="1">Further then 25KM</option>
+                          <option value="2">Between 25-20KM</option>
+                          <option selected value="3">Between 20-15KM</option>
+                          <option value="4">Between 15-10KM</option>
+                          <option value="5">Closer then 10KM</option>
                         </select>
                       </div>
                     </div>
@@ -311,7 +311,7 @@
                         <label class="fs-5 fw-bold mb-2">
                           Activities
                           <p class="text-muted fs-7">
-                            Zoo's, Theme Parks, Paintball, ...
+                            Zoo's, Theme Parks, Paintball, Forest walks...
                           </p>
                         </label>
                       </div>
@@ -325,11 +325,15 @@
                           data-placeholder="Select an option"
                           name="activities_rating"
                         >
-                          <option value="1">0 Close-By</option>
-                          <option value="2">1 or 2 semi Close-By</option>
-                          <option selected value="3">1 - 2 Close-By</option>
-                          <option value="4">3 Close-By</option>
-                          <option value="5">4 or more Close-By</option>
+                          <option value="1">Further then 5KM</option>
+                          <option value="2">1 Closer then 5KM</option>
+                          <option selected value="3">
+                            More then 1 Closer then 5KM
+                          </option>
+                          <option value="4">1 Closer then 3KM</option>
+                          <option value="5">
+                            5 = More then 1 Closer then 3KM
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -339,7 +343,7 @@
                       <div class="col-4 jumbotron d-flex align-items-center">
                         <label class="fs-5 fw-bold mb-2">
                           Remote
-                          <p class="text-muted fs-7">How remote is it?</p>
+                          <p class="text-muted fs-7">Closest town hall</p>
                         </label>
                       </div>
                       <div
@@ -352,11 +356,11 @@
                           data-placeholder="Select an option"
                           name="remote_rating"
                         >
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option selected value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
+                          <option value="1">Further then 25KM</option>
+                          <option value="2">Between 25-20KM</option>
+                          <option selected value="3">Between 20-15KM</option>
+                          <option value="4">Between 15-10KM</option>
+                          <option value="5">Closer then 10KM</option>
                         </select>
                       </div>
                     </div>
@@ -366,9 +370,7 @@
                       <div class="col-4 jumbotron d-flex align-items-center">
                         <label class="fs-5 fw-bold mb-2">
                           Bakery Access
-                          <p class="text-muted fs-7">
-                            How easy is it to get bakery
-                          </p>
+                          <p class="text-muted fs-7">closest bakery</p>
                         </label>
                       </div>
                       <div class="col-4 my-2">
@@ -379,11 +381,11 @@
                           data-placeholder="Select an option"
                           name="bakery_rating"
                         >
-                          <option value="1">Very hard</option>
-                          <option value="2">Hard</option>
-                          <option selected value="3">Oke</option>
-                          <option value="4">Easy</option>
-                          <option value="5">Very easy</option>
+                          <option value="1">Further then 25KM</option>
+                          <option value="2">Between 25-20KM</option>
+                          <option selected value="3">Between 20-15KM</option>
+                          <option value="4">Between 15-10KM</option>
+                          <option value="5">Closer then 10KM</option>
                         </select>
                       </div>
                     </div>
@@ -406,11 +408,11 @@
                           data-placeholder="Select an option"
                           name="firstAid_rating"
                         >
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option selected value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
+                          <option value="1">Further then 20KM</option>
+                          <option value="2">Between 20-15KM</option>
+                          <option selected value="3">Between 15-10KM</option>
+                          <option value="4">Between 10-5KM</option>
+                          <option value="5">Closer then 5KM</option>
                         </select>
                       </div>
                     </div>

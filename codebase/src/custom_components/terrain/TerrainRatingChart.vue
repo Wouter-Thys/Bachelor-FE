@@ -27,43 +27,62 @@
             <div class="row">
               <div class="col-4">
                 <p class="fs-6 p-0 m-0">supermarket:</p>
-                <p class="fs-6 text-muted p-0 m-0">1 = Further then 45KM</p>
-                <p class="fs-6 text-muted p-0 m-0">2 = Between 45-35KM</p>
-                <p class="fs-6 text-muted p-0 m-0">3 = Between 35-25KM</p>
-                <p class="fs-6 text-muted p-0 m-0">4 = Between 25-15KM</p>
-                <p class="fs-6 text-muted p-0 m-0">5 = Closer then 15KM</p>
+                <p class="fs-6 text-muted p-0 m-0">Closest supermarket</p>
+                <p class="fs-6 text-muted p-0 m-0">1 = Further then 25KM</p>
+                <p class="fs-6 text-muted p-0 m-0">2 = Between 25-20KM</p>
+                <p class="fs-6 text-muted p-0 m-0">3 = Between 20-15KM</p>
+                <p class="fs-6 text-muted p-0 m-0">4 = Between 15-10KM</p>
+                <p class="fs-6 text-muted p-0 m-0">5 = Closer then 10KM</p>
               </div>
               <div class="col-4">
                 <p class="fs-6 p-0 m-0">Activities:</p>
-                <p class="fs-6 text-muted p-0 m-0">1 = 0 Close-By</p>
-                <p class="fs-6 text-muted p-0 m-0">2 = 1 or 2 semi Close-By</p>
-                <p class="fs-6 text-muted p-0 m-0">3 = 1 - 2 Close-By</p>
-                <p class="fs-6 text-muted p-0 m-0">4 = 3 Close-By</p>
-                <p class="fs-6 text-muted p-0 m-0">5 = 4 or more Close-By</p>
+                <p class="fs-6 text-muted p-0 m-0">
+                  activities like paintball, carting, swimming, walking...
+                </p>
+                <p class="fs-6 text-muted p-0 m-0">1 = Further then 5KM</p>
+                <p class="fs-6 text-muted p-0 m-0">2 = 1 Closer then 5KM</p>
+                <p class="fs-6 text-muted p-0 m-0">
+                  3 = More then 1 Closer then 5KM
+                </p>
+                <p class="fs-6 text-muted p-0 m-0">4 = 1 Closer then 3KM</p>
+                <p class="fs-6 text-muted p-0 m-0">
+                  5 = More then 1 Closer then 3KM
+                </p>
               </div>
               <div class="col-4">
                 <p class="fs-6 p-0 m-0">Remote:</p>
-                <p class="fs-6 text-muted p-0 m-0">1</p>
-                <p class="fs-6 text-muted p-0 m-0">2</p>
-                <p class="fs-6 text-muted p-0 m-0">3</p>
-                <p class="fs-6 text-muted p-0 m-0">4</p>
-                <p class="fs-6 text-muted p-0 m-0">5</p>
+                <p class="fs-6 text-muted p-0 m-0">closest town/city</p>
+                <p class="fs-6 text-muted p-0 m-0">1 = Further then 20KM</p>
+                <p class="fs-6 text-muted p-0 m-0">2 = Between 20-15KM</p>
+                <p class="fs-6 text-muted p-0 m-0">3 = Between 15-10KM</p>
+                <p class="fs-6 text-muted p-0 m-0">4 = Between 10-5KM</p>
+                <p class="fs-6 text-muted p-0 m-0">5 = Closer then 5KM</p>
               </div>
               <div class="col-4">
                 <p class="fs-6p-0 m-0">Bakery access:</p>
-                <p class="fs-6 text-muted p-0 m-0">1 = Very hard</p>
-                <p class="fs-6 text-muted p-0 m-0">2 = Hard</p>
-                <p class="fs-6 text-muted p-0 m-0">3 = Oke</p>
-                <p class="fs-6 text-muted p-0 m-0">4 = Easy</p>
-                <p class="fs-6 text-muted p-0 m-0">5 = Very easy</p>
+                <p class="fs-6 text-muted p-0 m-0">closest bakery</p>
+                <p class="fs-6 text-muted p-0 m-0">1 = Further then 25KM</p>
+                <p class="fs-6 text-muted p-0 m-0">2 = Between 25-20KM</p>
+                <p class="fs-6 text-muted p-0 m-0">3 = Between 20-15KM</p>
+                <p class="fs-6 text-muted p-0 m-0">4 = Between 15-10KM</p>
+                <p class="fs-6 text-muted p-0 m-0">5 = Closer then 10KM</p>
               </div>
               <div class="col-4 mt-3">
                 <p class="fs-6 p-0 m-0">First-aid access:</p>
-                <p class="fs-6 text-muted p-0 m-0">1 = Very hard</p>
-                <p class="fs-6 text-muted p-0 m-0">2 = Hard</p>
-                <p class="fs-6 text-muted p-0 m-0">3 = Oke</p>
-                <p class="fs-6 text-muted p-0 m-0">4 = Easy</p>
-                <p class="fs-6 text-muted p-0 m-0">5 = Very easy</p>
+                <p class="fs-6 text-muted p-0 m-0">
+                  closest hospital, doctor, first responder...
+                </p>
+                <p class="fs-6 text-muted p-0 m-0">1 = Further then 20KM</p>
+                <p class="fs-6 text-muted p-0 m-0">2 = Between 20-15KM</p>
+                <p class="fs-6 text-muted p-0 m-0">3 = Between 15-10KM</p>
+                <p class="fs-6 text-muted p-0 m-0">4 = Between 10-5KM</p>
+                <p class="fs-6 text-muted p-0 m-0">5 = Closer then 5KM</p>
+              </div>
+              <div class="col-12 mt-3">
+                <p class="fs-6 p-0 m-0 text-info">
+                  Be aware Google is not always correct because not everything
+                  is indexed by google maps!
+                </p>
               </div>
             </div>
           </div>
