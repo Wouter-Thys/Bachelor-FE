@@ -392,7 +392,7 @@
                     <div class="row">
                       <div class="col-4 jumbotron d-flex align-items-center">
                         <label class="fs-5 fw-bold mb-2">
-                          Playground
+                          First-aid
                           <p class="text-muted fs-7">
                             How easy is it to play on a terrain or forrest
                           </p>
@@ -400,11 +400,11 @@
                       </div>
                       <div class="col-4 my-2">
                         <select
-                          v-model="formData.playground_rating"
+                          v-model="formData.firstAid_rating"
                           class="form-select"
                           data-control="select2"
                           data-placeholder="Select an option"
-                          name="playground_rating"
+                          name="firstAid_rating"
                         >
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -508,7 +508,7 @@ interface Step3 {
   activities_rating: number;
   remote_rating: number;
   bakery_rating: number;
-  playground_rating: number;
+  firstAid_rating: number;
 }
 
 export default defineComponent({
@@ -545,7 +545,7 @@ export default defineComponent({
       activities_rating: 1,
       remote_rating: 1,
       bakery_rating: 1,
-      playground_rating: 1,
+      firstAid_rating: 1,
       images: [],
     });
 

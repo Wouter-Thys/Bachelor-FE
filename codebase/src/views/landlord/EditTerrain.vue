@@ -279,15 +279,15 @@
       </div>
       <div class="row mb-6">
         <label class="col-4 col-form-label required fw-bold fs-6">
-          Playground
+          First-aid
         </label>
         <div class="col-8 fv-row">
           <select
-            v-model="editTerrain.playground_rating"
+            v-model="editTerrain.firstAid_rating"
             class="form-select"
             data-control="select2"
             data-placeholder="Select an option"
-            name="playgroundRating"
+            name="firstAidRating"
           >
             <option value="1">1</option>
             <option value="2">2</option>

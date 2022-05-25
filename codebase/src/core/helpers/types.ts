@@ -39,7 +39,7 @@ export type TTerrain = {
   activities_rating: number;
   remote_rating: number;
   bakery_rating: number;
-  playground_rating: number;
+  firstAid_rating: number;
   images: TImages[];
   owner: TUser;
 };

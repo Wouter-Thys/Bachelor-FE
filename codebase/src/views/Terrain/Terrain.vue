@@ -238,7 +238,7 @@
                   v-if="
                     terrain.remote_rating &&
                     terrain.bakery_rating &&
-                    terrain.playground_rating &&
+                    terrain.firstAid_rating &&
                     terrain.supermarket_rating &&
                     terrain.activities_rating
                   "
@@ -247,7 +247,7 @@
                   <TerrainRatingChart
                     :remote-rating="terrain.remote_rating"
                     :bakery-rating="terrain.bakery_rating"
-                    :playground-rating="terrain.playground_rating"
+                    :first-aid-rating="terrain.firstAid_rating"
                     :supermarket-rating="terrain.supermarket_rating"
                     :activities-rating="terrain.activities_rating"
                   />

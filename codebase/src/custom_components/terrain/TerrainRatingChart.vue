@@ -58,7 +58,7 @@
                 <p class="fs-6 text-muted p-0 m-0">5 = Very easy</p>
               </div>
               <div class="col-4 mt-3">
-                <p class="fs-6 p-0 m-0">Playground access:</p>
+                <p class="fs-6 p-0 m-0">First-aid access:</p>
                 <p class="fs-6 text-muted p-0 m-0">1 = Very hard</p>
                 <p class="fs-6 text-muted p-0 m-0">2 = Hard</p>
                 <p class="fs-6 text-muted p-0 m-0">3 = Oke</p>
@@ -85,7 +85,7 @@ export default defineComponent({
     activitiesRating: { type: Number, required: true },
     remoteRating: { type: Number, required: true },
     bakeryRating: { type: Number, required: true },
-    playgroundRating: { type: Number, required: true },
+    firstAidRating: { type: Number, required: true },
   },
   setup(props, context) {
     const labelColor = getCSSVariableValue('--bs-gray-500');
@@ -119,7 +119,7 @@ export default defineComponent({
           'Activities',
           'Remote',
           'Bakery',
-          'Playground',
+          'First-aid',
         ],
       },
       yaxis: {
@@ -181,7 +181,7 @@ export default defineComponent({
           props.activitiesRating,
           props.remoteRating,
           props.bakeryRating,
-          props.playgroundRating,
+          props.firstAidRating,
         ],
       },
     ];
