@@ -93,11 +93,21 @@ export default defineComponent({
       selectedRentInfo.value = rentTerrains.value[0];
       const calendarApi = fullCalendar.value.getApi();
       calendarApi.gotoDate(selectedRentInfo.value.startDate);
-      options.value.events.push({
-        title: 'titme',
-        start: '2022-5-6',
-        end: '2022-5-30',
-        color: 'orange',
+
+      options.value.events = [];
+      terrain.value.rented_dates.forEach((value) => {
+        let color = '';
+        if (value.approvalStatus === 'pending') color = 'orange';
+        if (value.approvalStatus === 'approved') color = 'green';
+        if (value.approvalStatus !== 'rejected') {
+          options.value.events.push({
+            // this object will be "parsed" into an Event Object
+            title: value.user.name, // a property!
+            start: value.startDate, // a property!
+            end: value.endDate, // a property! ** see important note below about 'end' **
+            color: color,
+          });
+        }
       });
       setCurrentPageTitle('Landlord Dashboard');
     });
@@ -106,29 +116,19 @@ export default defineComponent({
       getLandlordTerrain(newValue);
       const calendarApi = fullCalendar.value.getApi();
       calendarApi.gotoDate(selectedRentInfo.value.startDate);
+
       options.value.events = [];
       terrain.value.rented_dates.forEach((value) => {
-        const startDate =
-          new Date(value.startDate).getFullYear() +
-          '-' +
-          new Date(value.startDate).getMonth() +
-          '-' +
-          new Date(value.startDate).getDate();
-        const endDate =
-          new Date(value.endDate).getFullYear() +
-          '-' +
-          new Date(value.endDate).getMonth() +
-          '-' +
-          new Date(value.endDate).getDate();
         let color = '';
-        if (value.ApprovedStatus === 'pending') color = 'orange';
-        if (value.ApprovedStatus === 'approved') color = 'green';
-        if (value.ApprovedStatus !== 'rejected') {
+        if (value.approvalStatus === 'pending') color = 'orange';
+        if (value.approvalStatus === 'approved') color = 'green';
+        if (value.approvalStatus !== 'rejected') {
           options.value.events.push({
-            title: selectedRentInfo.value.user.name,
-            start: startDate,
-            end: endDate,
-            color: 'orange',
+            // this object will be "parsed" into an Event Object
+            title: selectedRentInfo.value.user.name, // a property!
+            start: value.startDate, // a property!
+            end: value.endDate, // a property! ** see important note below about 'end' **
+            color: color,
           });
         }
       });

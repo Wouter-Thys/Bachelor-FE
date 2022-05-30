@@ -21,7 +21,7 @@ export type TImages = {
 export type TTerrainRent = {
   startDate: Date;
   endDate: Date;
-  ApprovedStatus: string;
+  approvalStatus: string;
   user: TUser;
   terrain: TTerrain;
 };
