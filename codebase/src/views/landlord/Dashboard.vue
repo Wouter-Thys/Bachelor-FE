@@ -1,51 +1,62 @@
 <template>
-  <div class="row">
-    <div class="col-12">
-      <LandlordApexChart1 widget-classes=" mb-xl-8"></LandlordApexChart1>
-    </div>
+  <div class="w-100 d-flex justify-content-center">
+    <router-link to="/landlord/dashboard">
+      <h1 class="btn btn-white mx-2">Dashboard</h1>
+    </router-link>
+    <router-link to="/landlord/my-terrains">
+      <h1 class="btn btn-primary mx-2">My terrains</h1>
+    </router-link>
   </div>
-  <!--begin::Toolbar-->
-  <div class="d-flex flex-wrap flex-stack my-5">
-    <!--begin::Heading-->
-    <h2 class="fs-2 fw-bold my-2">My Terrains</h2>
-    <!--end::Heading-->
-
-    <!--begin::Controls-->
-    <div class="d-flex flex-wrap my-1">
-      <!--begin::Select wrapper-->
-      <div class="m-0">
-        <!--begin::Select-->
-        <router-link
-          id="kt_toolbar_primary_button"
-          to="/landlord/add-terrain"
-          class="btn btn-sm btn-primary"
-        >
-          Add A New Terrain
-        </router-link>
-        <!--end::Select-->
+  <Suspense>
+    <div class="row pb-5">
+      <div v-if="terrain" class="col-4">
+        <TerrainCards :terrains="[terrain]" col="col-12" />
       </div>
-      <!--end::Select wrapper-->
+      <div
+        v-if="selectedRentInfo"
+        class="col-4 d-flex align-items-center justify-content-center p-0"
+      >
+        <PendingTerrainRentRequest :selected-rent-info="selectedRentInfo" />
+      </div>
+      <div v-if="selectedRentInfo && options" class="col-4">
+        <div class="card p-5">
+          <FullCalendar ref="fullCalendar" :options="options" />
+        </div>
+      </div>
+      <div class="col-12">
+        <PendingTerrainsRentRequest
+          v-model:rent-terrains="rentTerrains"
+          v-model:is-loading="isLoading"
+          v-model:selected-terrain="selectedTerrain"
+          v-model:selected-rent-info="selectedRentInfo"
+          widget-classes="card-xxl-stretch mb-5 mb-xl-8"
+          @get-terrains="getTerrainRR"
+        ></PendingTerrainsRentRequest>
+      </div>
     </div>
-    <!--end::Controls-->
-  </div>
-  <!--end::Toolbar-->
-
-  <!--begin::Row-->
-  <TerrainCards v-model:terrains="terrains" v-model:col="col" />
-  <!--end::Col-->
+  </Suspense>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue';
-import { setCurrentPageBreadcrumbs } from '@/core/helpers/breadcrumb';
-import LandlordApexChart1 from '@/custom_components/landlord/LandlordApexChart1.vue';
+import { defineComponent, onMounted, PropType, ref, watch } from 'vue';
+import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 import useTerrains from '@/core/composables/terrain';
+
+import PendingTerrainsRentRequest from '@/custom_components/landlord/PendingTerrainsRentRequest.vue';
+import PendingTerrainRentRequest from '@/custom_components/landlord/PendingTerrainRentRequest.vue';
 import TerrainCards from '@/custom_components/terrain/TerrainCards.vue';
+import { TTerrainRent } from '@/core/helpers/types';
+import '@fullcalendar/core/vdom';
+import FullCalendar from '@fullcalendar/vue3';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 
 export default defineComponent({
   name: 'ProfileProjects',
   components: {
-    LandlordApexChart1,
+    PendingTerrainsRentRequest,
+    PendingTerrainRentRequest,
     TerrainCards,
+    FullCalendar,
   },
   props: {
     street: {
@@ -54,16 +65,85 @@ export default defineComponent({
     },
   },
   setup() {
-    const col = 'col-4';
-    const { terrains, getLandlordTerrains } = useTerrains();
-    onMounted(() => {
-      getLandlordTerrains();
-      setCurrentPageBreadcrumbs('Projects', ['Pages', 'Profile']);
+    const {
+      getTerrainsRentRequest,
+      getLandlordTerrain,
+      rentTerrains,
+      isLoading,
+      terrain,
+    } = useTerrains();
+    const selectedTerrain = ref<Number>(0);
+    const selectedRentInfo = ref(<TTerrainRent>{});
+    const fullCalendar = ref();
+
+    const getTerrainRR = async () => {
+      await getTerrainsRentRequest();
+    };
+
+    const options = ref({
+      plugins: [dayGridPlugin, interactionPlugin],
+      initialView: 'dayGridMonth',
+      aspectRatio: 1,
+      events: [{}],
+    });
+
+    onMounted(async () => {
+      await getTerrainRR();
+      await getLandlordTerrain(rentTerrains.value[0].terrain.id);
+      selectedRentInfo.value = rentTerrains.value[0];
+      const calendarApi = fullCalendar.value.getApi();
+      calendarApi.gotoDate(selectedRentInfo.value.startDate);
+      options.value.events.push({
+        title: 'titme',
+        start: '2022-5-6',
+        end: '2022-5-30',
+        color: 'orange',
+      });
+      setCurrentPageTitle('Landlord Dashboard');
+    });
+
+    watch(selectedTerrain, (newValue) => {
+      getLandlordTerrain(newValue);
+      const calendarApi = fullCalendar.value.getApi();
+      calendarApi.gotoDate(selectedRentInfo.value.startDate);
+      options.value.events = [];
+      terrain.value.rented_dates.forEach((value) => {
+        const startDate =
+          new Date(value.startDate).getFullYear() +
+          '-' +
+          new Date(value.startDate).getMonth() +
+          '-' +
+          new Date(value.startDate).getDate();
+        const endDate =
+          new Date(value.endDate).getFullYear() +
+          '-' +
+          new Date(value.endDate).getMonth() +
+          '-' +
+          new Date(value.endDate).getDate();
+        let color = '';
+        if (value.ApprovedStatus === 'pending') color = 'orange';
+        if (value.ApprovedStatus === 'approved') color = 'green';
+        if (value.ApprovedStatus !== 'rejected') {
+          options.value.events.push({
+            title: selectedRentInfo.value.user.name,
+            start: startDate,
+            end: endDate,
+            color: 'orange',
+          });
+        }
+      });
+      console.log(options.value);
     });
 
     return {
-      terrains,
-      col,
+      fullCalendar,
+      options,
+      terrain,
+      isLoading,
+      rentTerrains,
+      selectedTerrain,
+      selectedRentInfo,
+      getTerrainRR,
     };
   },
 });

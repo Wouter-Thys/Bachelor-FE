@@ -77,6 +77,12 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         beforeEnter: [isAuth, user, landlord],
+        path: 'my-terrains',
+        name: 'myTerrains',
+        component: () => import('@/views/landlord/MyTerrains.vue'),
+      },
+      {
+        beforeEnter: [isAuth, user, landlord],
         path: 'add-terrain',
         name: 'landlordAddTerrain',
         component: () => import('@/views/landlord/AddNewTerrain.vue'),

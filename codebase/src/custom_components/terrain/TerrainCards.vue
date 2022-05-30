@@ -58,7 +58,7 @@
               <!--end::Avatar-->
               <!--begin::Name-->
               <div class="row d-flex justify-content-between mt-3">
-                <div class="col-4">
+                <div class="col-6">
                   <span class="fs-3 text-gray-800 fw-bolder">
                     {{ terrain.name }}
                   </span>

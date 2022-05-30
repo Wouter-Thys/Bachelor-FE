@@ -1,3 +1,5 @@
+import { date } from 'yup';
+
 export type TUser = {
   id: number;
   name: string;
@@ -15,6 +17,15 @@ export type TImages = {
   url: string;
   croppedUrl: string;
 };
+
+export type TTerrainRent = {
+  startDate: Date;
+  endDate: Date;
+  ApprovedStatus: string;
+  user: TUser;
+  terrain: TTerrain;
+};
+
 export type TTerrain = {
   id: number;
   name: string;
@@ -47,6 +58,7 @@ export type TTerrain = {
   google_firstAid_rating: number;
   images: TImages[];
   owner: TUser;
+  rented_dates: TTerrainRent[];
 };
 export type TEditTerrain = TTerrain & {
   newImages: TImages[];
@@ -56,6 +68,12 @@ export type TEditTerrain = TTerrain & {
 export type TApiResponse = {
   message: string | null;
   data: null | TUser | TUser[] | {};
+};
+
+export type TSubmitDate = {
+  startDate: Number;
+  endDate: Number;
+  terrain_id: Number;
 };
 
 export type TCenterGMap = {
