@@ -101,10 +101,9 @@ export default defineComponent({
         if (value.approvalStatus === 'approved') color = 'green';
         if (value.approvalStatus !== 'rejected') {
           options.value.events.push({
-            // this object will be "parsed" into an Event Object
-            title: value.user.name, // a property!
-            start: value.startDate, // a property!
-            end: value.endDate, // a property! ** see important note below about 'end' **
+            title: value.user.name + ' - ' + value.approvalStatus,
+            start: value.startDate,
+            end: value.endDate,
             color: color,
           });
         }
@@ -112,11 +111,10 @@ export default defineComponent({
       setCurrentPageTitle('Landlord Dashboard');
     });
 
-    watch(selectedTerrain, (newValue) => {
-      getLandlordTerrain(newValue);
+    watch(selectedTerrain, async (newValue) => {
+      await getLandlordTerrain(newValue);
       const calendarApi = fullCalendar.value.getApi();
       calendarApi.gotoDate(selectedRentInfo.value.startDate);
-
       options.value.events = [];
       terrain.value.rented_dates.forEach((value) => {
         let color = '';
@@ -124,15 +122,13 @@ export default defineComponent({
         if (value.approvalStatus === 'approved') color = 'green';
         if (value.approvalStatus !== 'rejected') {
           options.value.events.push({
-            // this object will be "parsed" into an Event Object
-            title: selectedRentInfo.value.user.name, // a property!
-            start: value.startDate, // a property!
-            end: value.endDate, // a property! ** see important note below about 'end' **
+            title: value.user.name + ' - ' + value.approvalStatus,
+            start: value.startDate,
+            end: value.endDate,
             color: color,
           });
         }
       });
-      console.log(options.value);
     });
 
     return {
