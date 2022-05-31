@@ -1,9 +1,28 @@
 <template>
   <div v-if="selectedRentInfo" class="card mb-5">
     <div class="card-body pt-3">
-      <div class="row mb-4">
-        <div class="d-flex justify-content-end"></div>
+      <div v-if="selectedRentInfo.user" class="row mb-4">
+        <div class="d-flex justify-content-center">
+          <div>
+            <div class="d-flex justify-content-center">
+              <h1 class="">
+                {{ selectedRentInfo.user.name }}
+              </h1>
+            </div>
+            <div class="d-flex justify-content-center">
+              <p class="p-0 m-0">
+                {{ selectedRentInfo.user.email }}
+              </p>
+            </div>
+            <div class="d-flex justify-content-center">
+              <p class="p-0 m-0">
+                {{ selectedRentInfo.user.organization }}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="separator mb-7"></div>
       <div class="row">
         <h1 class="d-flex justify-content-center w-100">Start Date</h1>
         <p class="d-flex justify-content-center w-100 mb-6 fs-4">
@@ -52,7 +71,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, watch } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { TTerrainRent } from '@/core/helpers/types';
 
 export default defineComponent({

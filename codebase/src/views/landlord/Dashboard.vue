@@ -19,7 +19,7 @@
         <PendingTerrainRentRequest :selected-rent-info="selectedRentInfo" />
       </div>
       <div v-if="selectedRentInfo && options" class="col-4">
-        <div class="card p-5">
+        <div class="card p-5 mb-5">
           <FullCalendar ref="fullCalendar" :options="options" />
         </div>
       </div>
@@ -37,7 +37,7 @@
   </Suspense>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, PropType, ref, watch } from 'vue';
+import { defineComponent, onMounted, ref, watch } from 'vue';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 import useTerrains from '@/core/composables/terrain';
 
