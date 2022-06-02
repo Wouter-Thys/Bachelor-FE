@@ -9,14 +9,17 @@
   </div>
   <Suspense>
     <div class="row pb-5">
-      <div v-if="terrain" class="col-4">
+      <div v-if="terrain" class="col-4" style="height: 520px">
         <TerrainCards :terrains="[terrain]" col="col-12" />
       </div>
       <div
         v-if="selectedRentInfo"
         class="col-4 d-flex align-items-center justify-content-center p-0"
       >
-        <PendingTerrainRentRequest :selected-rent-info="selectedRentInfo" />
+        <PendingTerrainRentRequest
+          :selected-rent-info="selectedRentInfo"
+          @get-terrains="getTerrainRR"
+        />
       </div>
       <div v-if="selectedRentInfo && options" class="col-4">
         <div class="card p-5 mb-5">
@@ -24,14 +27,14 @@
         </div>
       </div>
       <div class="col-12">
-        <PendingTerrainsRentRequest
+        <TerrainsRentRequestTable
           v-model:rent-terrains="rentTerrains"
           v-model:is-loading="isLoading"
           v-model:selected-terrain="selectedTerrain"
           v-model:selected-rent-info="selectedRentInfo"
           widget-classes="card-xxl-stretch mb-5 mb-xl-8"
           @get-terrains="getTerrainRR"
-        ></PendingTerrainsRentRequest>
+        ></TerrainsRentRequestTable>
       </div>
     </div>
   </Suspense>
@@ -41,7 +44,7 @@ import { defineComponent, onMounted, ref, watch } from 'vue';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 import useTerrains from '@/core/composables/terrain';
 
-import PendingTerrainsRentRequest from '@/custom_components/landlord/PendingTerrainsRentRequest.vue';
+import TerrainsRentRequestTable from '@/custom_components/landlord/TerrainsRentRequestTable.vue';
 import PendingTerrainRentRequest from '@/custom_components/landlord/PendingTerrainRentRequest.vue';
 import TerrainCards from '@/custom_components/terrain/TerrainCards.vue';
 import { TTerrainRent } from '@/core/helpers/types';
@@ -53,7 +56,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 export default defineComponent({
   name: 'ProfileProjects',
   components: {
-    PendingTerrainsRentRequest,
+    TerrainsRentRequestTable,
     PendingTerrainRentRequest,
     TerrainCards,
     FullCalendar,
@@ -66,7 +69,7 @@ export default defineComponent({
   },
   setup() {
     const {
-      getTerrainsRentRequest,
+      getLandlordTerrainsRentRequest,
       getLandlordTerrain,
       rentTerrains,
       isLoading,
@@ -77,7 +80,8 @@ export default defineComponent({
     const fullCalendar = ref();
 
     const getTerrainRR = async () => {
-      await getTerrainsRentRequest();
+      await getLandlordTerrainsRentRequest();
+      selectedRentInfo.value = rentTerrains.value[0];
     };
 
     const options = ref({

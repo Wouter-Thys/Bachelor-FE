@@ -1,5 +1,3 @@
-import { date } from 'yup';
-
 export type TUser = {
   id: number;
   name: string;
@@ -19,6 +17,7 @@ export type TImages = {
 };
 
 export type TTerrainRent = {
+  id: number;
   startDate: Date;
   endDate: Date;
   approvalStatus: string;

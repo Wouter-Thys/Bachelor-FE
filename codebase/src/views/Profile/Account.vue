@@ -22,63 +22,74 @@
           </div>
         </div>
         <div class="flex-grow-1">
-          <div
-            class="d-flex justify-content-between align-items-start flex-wrap mb-2"
-          >
-            <div class="d-flex flex-column">
-              <div class="d-flex align-items-center mb-2">
-                <h1 class="text-gray-800 text-hover-primary me-2">
-                  {{ user.name }}
-                </h1>
-                <span
-                  v-for="(role, index) in user.roles"
-                  :key="index"
-                  class="btn btn-sm btn-light-primary fw-bolder me-1 fs-8 py-1 px-3"
-                >
-                  {{ role }}
-                </span>
+          <div class="d-flex justify-content-between">
+            <div
+              class="d-flex justify-content-between align-items-start flex-wrap mb-2"
+            >
+              <div class="d-flex flex-column">
+                <div class="d-flex align-items-center mb-2">
+                  <h1 class="text-gray-800 text-hover-primary me-2">
+                    {{ user.name }}
+                  </h1>
+                  <span
+                    v-for="(role, index) in user.roles"
+                    :key="index"
+                    class="btn btn-sm btn-light-primary fw-bolder me-1 fs-8 py-1 px-3"
+                  >
+                    {{ role }}
+                  </span>
+                </div>
+                <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
+                  <span
+                    v-if="user.phone_number"
+                    class="text-black-50 me-1 py-1 px-3"
+                  >
+                    <i class="fa-solid fa-phone"></i>
+                    {{ user.phone_number }}
+                    <span
+                      v-if="user.phone_number_verified_at"
+                      class="btn btn-sm btn-light-success fw-bolder me-1 fs-8 py-1 px-3"
+                    >
+                      Verified
+                    </span>
+                    <span
+                      v-if="!user.phone_number_verified_at"
+                      class="btn btn-sm btn-light-danger fw-bolder me-1 fs-8 py-1 px-3"
+                    >
+                      Not Verified
+                    </span>
+                  </span>
+                  <span class="text-black-50 me-1 py-1 px-3">
+                    <i class="fa-solid fa-envelope"></i>
+                    {{ user.email }}
+                    <span
+                      v-if="user.email_verified_at"
+                      class="btn btn-sm btn-light-success fw-bolder me-1 fs-8 py-1 px-3"
+                    >
+                      Verified
+                    </span>
+                    <span
+                      v-if="!user.email_verified_at"
+                      class="btn btn-sm btn-light-danger fw-bolder me-1 fs-8 py-1 px-3"
+                    >
+                      Not Verified
+                    </span>
+                  </span>
+                  <span class="text-black-50 me-1 py-1 px-3">
+                    <i class="fa-solid fa-sitemap"></i>
+                    {{ user.organization }}
+                  </span>
+                </div>
               </div>
-              <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
-                <span
-                  v-if="user.phone_number"
-                  class="text-black-50 me-1 py-1 px-3"
-                >
-                  <i class="fa-solid fa-phone"></i>
-                  {{ user.phone_number }}
-                  <span
-                    v-if="user.phone_number_verified_at"
-                    class="btn btn-sm btn-light-success fw-bolder me-1 fs-8 py-1 px-3"
-                  >
-                    Verified
-                  </span>
-                  <span
-                    v-if="!user.phone_number_verified_at"
-                    class="btn btn-sm btn-light-danger fw-bolder me-1 fs-8 py-1 px-3"
-                  >
-                    Not Verified
-                  </span>
-                </span>
-                <span class="text-black-50 me-1 py-1 px-3">
-                  <i class="fa-solid fa-envelope"></i>
-                  {{ user.email }}
-                  <span
-                    v-if="user.email_verified_at"
-                    class="btn btn-sm btn-light-success fw-bolder me-1 fs-8 py-1 px-3"
-                  >
-                    Verified
-                  </span>
-                  <span
-                    v-if="!user.email_verified_at"
-                    class="btn btn-sm btn-light-danger fw-bolder me-1 fs-8 py-1 px-3"
-                  >
-                    Not Verified
-                  </span>
-                </span>
-                <span class="text-black-50 me-1 py-1 px-3">
-                  <i class="fa-solid fa-sitemap"></i>
-                  {{ user.organization }}
-                </span>
-              </div>
+            </div>
+
+            <div>
+              <router-link
+                to="/profile/settings"
+                class="btn btn-primary align-self-center"
+              >
+                Edit Profile
+              </router-link>
             </div>
           </div>
           <div class="d-flex flex-wrap flex-stack">

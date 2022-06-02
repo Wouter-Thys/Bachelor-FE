@@ -75,10 +75,35 @@ export default function useTerrains() {
       });
   };
 
-  const getTerrainsRentRequest = async () => {
+  const getLandlordTerrainsRentRequest = async () => {
     isLoading.value = true;
     errors.value = { data: null, message: null };
     await ApiService.get('/landlord/rent-request')
+      .then((r) => {
+        isLoading.value = false;
+        return (rentTerrains.value = r.data.data);
+      })
+      .catch((e) => {
+        console.log(e.response.data.message);
+      });
+  };
+
+  const getUserTerrainsRentRequest = async () => {
+    isLoading.value = true;
+    errors.value = { data: null, message: null };
+    await ApiService.get('/user/rent-request')
+      .then((r) => {
+        isLoading.value = false;
+        return (rentTerrains.value = r.data.data);
+      })
+      .catch((e) => {
+        console.log(e.response.data.message);
+      });
+  };
+  const deleteUserTerrainsRentRequest = async (value) => {
+    isLoading.value = true;
+    errors.value = { data: null, message: null };
+    await ApiService.delete('/user/rent-request', value)
       .then((r) => {
         isLoading.value = false;
         return (rentTerrains.value = r.data.data);
@@ -99,6 +124,8 @@ export default function useTerrains() {
     getLandlordTerrain,
     getLandlordTerrains,
     getTerrainBySearch,
-    getTerrainsRentRequest,
+    getLandlordTerrainsRentRequest,
+    getUserTerrainsRentRequest,
+    deleteUserTerrainsRentRequest,
   };
 }

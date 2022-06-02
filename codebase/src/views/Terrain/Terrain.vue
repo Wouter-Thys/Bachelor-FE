@@ -365,6 +365,12 @@
                   </div>
 
                   <div class="col-12 separator mt-8"></div>
+
+                  <div v-if="calOptions" class="col-12">
+                    <div class="card p-5 mb-5">
+                      <FullCalendar ref="fullCalendar" :options="calOptions" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -423,7 +429,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref, watch } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import useTerrains from '@/core/composables/terrain';
 import TerrainRatingChart from '@/custom_components/terrain/TerrainRatingChart.vue';
 import { useRoute } from 'vue-router';
@@ -441,6 +447,11 @@ import store from '@/store';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import apiService from '@/core/services/ApiService';
+import '@fullcalendar/core/vdom';
+import FullCalendar from '@fullcalendar/vue3';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import router from '@/router/router';
 
 export default defineComponent({
   name: 'Terrain',
@@ -448,6 +459,7 @@ export default defineComponent({
     TerrainRatingChart,
     GoogleMap,
     Datepicker,
+    FullCalendar,
   },
   setup() {
     const { terrain, getTerrain } = useTerrains();
@@ -499,7 +511,7 @@ export default defineComponent({
       apiService
         .post('user/rent-terrain', value)
         .then((r) => {
-          console.log(r);
+          router.push({ name: 'profile' });
         })
         .catch((err) => {
           console.error(err);
@@ -519,6 +531,14 @@ export default defineComponent({
         index.value === -1 ? terrain.value.images.length - 1 : index.value;
       selectedImage.value = terrain.value.images[index.value].url;
     };
+
+    const calOptions = ref({
+      plugins: [dayGridPlugin, interactionPlugin],
+      initialView: 'dayGridMonth',
+      aspectRatio: 1,
+      events: [{}],
+    });
+
     onMounted(async () => {
       await getTerrain(route.params.id);
       selectedImage.value = terrain.value.images[0].url;
@@ -534,9 +554,25 @@ export default defineComponent({
         markers.value = null;
       }
       imagesChunks.value = _.chunk(Object.values(terrain.value.images), 5);
+
+      calOptions.value.events = [];
+      terrain.value.rented_dates.forEach((value) => {
+        let color = '';
+        if (value.approvalStatus === 'pending') color = 'orange';
+        if (value.approvalStatus === 'approved') color = 'green';
+        if (value.approvalStatus !== 'rejected') {
+          calOptions.value.events.push({
+            title: value.user.name + ' - ' + value.approvalStatus,
+            start: value.startDate,
+            end: value.endDate,
+            color: color,
+          });
+        }
+      });
     });
 
     return {
+      calOptions,
       user,
       submitRent,
       convertDate,

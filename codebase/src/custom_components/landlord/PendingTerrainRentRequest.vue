@@ -56,11 +56,17 @@
       </div>
       <div class="row">
         <div class="btn">
-          <button class="btn btn-success vgt-center-align me-2">
+          <button
+            class="btn btn-success vgt-center-align me-2"
+            @click="approveTerrainRentFn(selectedRentInfo.id, true)"
+          >
             <i class="fa-solid fa-check"></i>
             Approve
           </button>
-          <button class="btn btn-danger vgt-center-align ms-2">
+          <button
+            class="btn btn-danger vgt-center-align ms-2"
+            @click="approveTerrainRentFn(selectedRentInfo.id, false)"
+          >
             <i class="fa-solid fa-xmark"></i>
             Decline
           </button>
@@ -73,6 +79,8 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { TTerrainRent } from '@/core/helpers/types';
+import ApiService from '@/core/services/ApiService';
+import router from '@/router/router';
 
 export default defineComponent({
   name: 'RentTerrainRequest',
@@ -83,9 +91,23 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ['get-users'],
+  emits: ['get-users', 'get-terrains'],
   setup(props, context) {
-    return {};
+    const approveTerrainRentFn = (id, value) => {
+      const approveTerrainRent = { approveTerrainRent: value };
+      console.log(id);
+      console.log(value);
+      console.log(approveTerrainRent);
+      ApiService.update('landlord/rent-request', id, approveTerrainRent as any)
+        .then((r) => {
+          context.emit('get-terrains');
+        })
+        .catch((e) => {
+          console.log(e);
+          router.go(0);
+        });
+    };
+    return { approveTerrainRentFn };
   },
 });
 </script>
