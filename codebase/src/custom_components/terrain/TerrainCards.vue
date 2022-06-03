@@ -105,7 +105,7 @@
                     <div class="d-flex justify-content-end">
                       <span class="fs-6 fw-bolder me-1">
                         <i class="fa-solid fa-users"></i>
-                        {{ terrain.max_people }}
+                        {{ terrain.capacity }}
                       </span>
                     </div>
                   </div>

@@ -53,7 +53,7 @@
         </label>
         <div class="col-8 fv-row">
           <input
-            v-model="editTerrain.max_people"
+            v-model="editTerrain.capacity"
             type="text"
             name="maxPeople"
             class="form-control form-control-lg form-control-solid"

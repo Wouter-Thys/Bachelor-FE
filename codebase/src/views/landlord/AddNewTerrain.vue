@@ -237,10 +237,10 @@
                   </div>
                   <div class="col-2">
                     <input
-                      v-model="formData.max_people"
+                      v-model="formData.capacity"
                       class="form-control form-control-solid el-input-number"
                       type="number"
-                      name="max_people"
+                      name="capacity"
                     />
                   </div>
                 </div>
@@ -499,7 +499,7 @@ interface Step2 {
   showers: boolean;
   toilets: boolean;
   sinks: boolean;
-  max_people: number;
+  capacity: number;
   hectare: number;
 }
 interface Step3 {
@@ -538,7 +538,7 @@ export default defineComponent({
       showers: false,
       toilets: false,
       sinks: false,
-      max_people: 0,
+      capacity: 0,
       hectare: 0,
       supermarket_rating: 1,
       activities_rating: 1,

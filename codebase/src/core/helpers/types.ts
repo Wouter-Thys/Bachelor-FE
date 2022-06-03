@@ -43,7 +43,7 @@ export type TTerrain = {
   showers: boolean;
   toilets: boolean;
   sinks: boolean;
-  max_people: number;
+  capacity: number;
   hectare: number;
   supermarket_rating: number;
   activities_rating: number;
@@ -97,7 +97,11 @@ export type extraSettingsSearch = {
   showers: number;
   toilets: number;
   sinks: number;
-  max_people: number;
+  capacity: number;
   hectare: number;
   search: string;
+  orderBy: {
+    table: string;
+    order: string;
+  };
 };

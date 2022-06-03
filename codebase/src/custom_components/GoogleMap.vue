@@ -35,7 +35,7 @@
                 <div class="col-6 d-flex justify-content-end p-0">
                   <span class="fs-6 fw-bolder me-1 d-flex align-items-center">
                     <i class="fa-solid fa-users"></i>
-                    {{ m.terrain.max_people }}
+                    {{ m.terrain.capacity }}
                   </span>
                   <span class="fs-6 fw-bolder d-flex align-items-center">
                     <i class="fa-solid fa-mountain"></i>

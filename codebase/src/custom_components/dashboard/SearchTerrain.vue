@@ -154,11 +154,11 @@
                 class="d-flex align-items-center fs-5 fw-bold mx-2 w-100"
                 for="ESSinks"
               >
-                Group size
+                Capacity
               </label>
               <input
                 id="ESShowers"
-                v-model="extraSettings.max_people"
+                v-model="extraSettings.capacity"
                 class="form-control"
                 type="number"
                 name="maxPeople"
@@ -205,9 +205,13 @@ export default defineComponent({
       showers: 0,
       toilets: 0,
       sinks: 0,
-      max_people: 0,
+      capacity: 0,
       hectare: 0,
       search: '',
+      orderBy: {
+        table: 'capacity',
+        order: 'asc',
+      },
     });
     const extraSettingsDropFN = () => {
       dropdown.value = !dropdown.value;
