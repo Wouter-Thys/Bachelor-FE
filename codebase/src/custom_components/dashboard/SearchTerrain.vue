@@ -15,11 +15,15 @@
         </div>
       </div>
       <div class="col-4">
-        <button class="btn btn-primary" @click="extraSettingsDropFN">
-          <i class="fa-solid fa-filter"></i>
+        <button
+          class="btn btn-outline btn-outline-primary bg-dark border-primary border-2 text-hover-white text-primary"
+          @click="extraSettingsDropFN"
+        >
+          <i class="fa-solid fa-filter text-primary"></i>
           Filter
           <span class="ms-2">
             <i
+              class="text-primary"
               :class="
                 dropdown ? 'fa-solid fa-angle-up' : 'fa-solid fa-chevron-down'
               "

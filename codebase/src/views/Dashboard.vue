@@ -3,7 +3,7 @@
   <div class="row d-flex justify-content-center">
     <div class="col-12 d-flex justify-content-center">
       <div
-        class="form-check btn btn-outline btn-outline-primary rounded-pill bg-white mx-4 p-0 border-primary border-2"
+        class="form-check btn btn-outline btn-outline-primary rounded-pill bg-dark mx-4 p-0 border-primary border-2 text-hover-white text-primary"
       >
         <label class="form-check-label p-5" for="exampleRadios1">
           <input
@@ -15,12 +15,12 @@
             checked
             @click="searchByMap(false)"
           />
-          <i class="fa-solid fa-list"></i>
+          <i class="fa-solid fa-list text-primary"></i>
           Search by List
         </label>
       </div>
       <div
-        class="form-check btn btn-outline btn-outline-primary rounded-pill bg-white mx-4 p-0 border-primary border-2"
+        class="form-check btn btn-outline btn-outline-primary rounded-pill bg-dark mx-4 p-0 border-primary border-2 text-hover-white text-primary"
       >
         <label class="form-check-label p-5" for="exampleRadios2">
           <input
@@ -31,7 +31,7 @@
             value="option2"
             @click="searchByMap(true)"
           />
-          <i class="fa-solid fa-map-location-dot"></i>
+          <i class="fa-solid fa-map-location-dot text-primary"></i>
           Search by Map
         </label>
       </div>
