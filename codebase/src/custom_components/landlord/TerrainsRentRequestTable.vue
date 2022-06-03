@@ -4,9 +4,7 @@
     <!--begin::Header-->
     <div class="card-header border-0 pt-6">
       <h3 class="card-title align-items-start flex-column">
-        <span class="card-label fw-bolder fs-3 mb-1">
-          Users that want to rent a terrain
-        </span>
+        <span class="card-label fw-bolder fs-3 mb-1">All applications</span>
 
         <span class="text-muted mt-1 fw-bold fs-7">
           Over {{ rentTerrains.length }} members

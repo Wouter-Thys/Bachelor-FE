@@ -58,92 +58,146 @@
               <!--end::Avatar-->
               <!--begin::Name-->
               <div class="row d-flex justify-content-between mt-3">
-                <div class="col-6">
+                <div class="col-8">
                   <span class="fs-3 text-gray-800 fw-bolder">
                     {{ terrain.name }}
                   </span>
+                  <div class="mx-2">
+                    <span
+                      v-if="
+                        AddressService.addressToString(
+                          terrain.street,
+                          terrain.streetNumber,
+                          terrain.postcode,
+                          terrain.locality,
+                          terrain.province
+                        ).length > 28
+                      "
+                      class="fs-6 fw-bolder text-gray-600"
+                    >
+                      <i class="fa-solid fa-location-dot"></i>
+                      {{
+                        AddressService.addressToString(
+                          terrain.street,
+                          terrain.streetNumber,
+                          terrain.postcode,
+                          terrain.locality,
+                          terrain.province
+                        ).substring(0, 28) + '...'
+                      }}
+                    </span>
+                    <span v-else class="fs-6 fw-bolder text-gray-600">
+                      <i class="fa-solid fa-location-dot"></i>
+                      {{
+                        AddressService.addressToString(
+                          terrain.street,
+                          terrain.streetNumber,
+                          terrain.postcode,
+                          terrain.locality,
+                          terrain.province
+                        )
+                      }}
+                    </span>
+                  </div>
                 </div>
-                <div class="col-6 d-flex justify-content-end">
-                  <span class="fs-6 fw-bolder me-1">
-                    <i class="fa-solid fa-users"></i>
-                    {{ terrain.max_people }}
-                  </span>
-                  <span class="fs-6 fw-bolder">
-                    <i class="fa-solid fa-mountain"></i>
-                    {{ terrain.hectare }}
+                <div class="col-4">
+                  <div class="row">
+                    <div class="d-flex justify-content-end">
+                      <span class="fs-6 fw-bolder me-1">
+                        <i class="fa-solid fa-users"></i>
+                        {{ terrain.max_people }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="d-flex justify-content-end">
+                      <span class="fs-6 fw-bolder">
+                        <i class="fa-solid fa-mountain"></i>
+                        {{ terrain.hectare }}
 
-                    <span class="fs-8">ha.</span>
-                  </span>
+                        <span class="fs-8">ha.</span>
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="mx-2">
-                <span
-                  v-if="
-                    AddressService.addressToString(
-                      terrain.street,
-                      terrain.streetNumber,
-                      terrain.postcode,
-                      terrain.locality,
-                      terrain.province
-                    ).length > 32
-                  "
-                  class="fs-6 fw-bolder text-gray-600"
-                >
-                  <i class="fa-solid fa-location-dot"></i>
-                  {{
-                    AddressService.addressToString(
-                      terrain.street,
-                      terrain.streetNumber,
-                      terrain.postcode,
-                      terrain.locality,
-                      terrain.province
-                    ).substring(0, 32) + '...'
-                  }}
-                </span>
-                <span v-else class="fs-6 fw-bolder text-gray-600">
-                  <i class="fa-solid fa-location-dot"></i>
-                  {{
-                    AddressService.addressToString(
-                      terrain.street,
-                      terrain.streetNumber,
-                      terrain.postcode,
-                      terrain.locality,
-                      terrain.province
-                    )
-                  }}
-                </span>
               </div>
             </div>
             <div class="mx-2 mt-2 row">
-              <span v-if="terrain.water" class="fs-6 fw-bolder col-12">
-                <i class="fa-solid fa-circle-check text-success fa-lg"></i>
+              <span class="fs-6 fw-bolder col-12">
+                <i
+                  :class="
+                    terrain.water
+                      ? 'fa-solid fa-circle-check text-success'
+                      : 'fa-solid fa-circle-xmark text-danger'
+                  "
+                  class="fa-lg"
+                ></i>
                 Water
               </span>
-              <span v-if="terrain.electricity" class="fs-6 fw-bolder col-12">
-                <i class="fa-solid fa-circle-check text-success fa-lg"></i>
+              <span class="fs-6 fw-bolder col-12">
+                <i
+                  :class="
+                    terrain.electricity
+                      ? 'fa-solid fa-circle-check text-success'
+                      : 'fa-solid fa-circle-xmark text-danger'
+                  "
+                  class="fa-lg"
+                ></i>
                 Electricity
               </span>
-              <span
-                v-if="terrain.threePhaseElectricity"
-                class="fs-6 fw-bolder col-12"
-              >
-                <i class="fa-solid fa-circle-check text-success fa-lg"></i>
+              <span class="fs-6 fw-bolder col-12">
+                <i
+                  :class="
+                    terrain.threePhaseElectricity
+                      ? 'fa-solid fa-circle-check text-success'
+                      : 'fa-solid fa-circle-xmark text-danger'
+                  "
+                  class="fa-lg"
+                ></i>
                 3 Phase Electricity
               </span>
-              <span v-if="terrain.sanitaryBlock" class="fs-6 fw-bolder col-12">
-                <i class="fa-solid fa-circle-check text-success fa-lg"></i>
+              <span class="fs-6 fw-bolder col-12">
+                <i
+                  :class="
+                    terrain.sanitaryBlock
+                      ? 'fa-solid fa-circle-check text-success'
+                      : 'fa-solid fa-circle-xmark text-danger'
+                  "
+                  class="fa-lg"
+                ></i>
                 Sanitary Block
               </span>
-              <span v-if="terrain.showers" class="fs-6 fw-bolder col-12">
-                <i class="fa-solid fa-circle-check text-success fa-lg"></i>
+              <span class="fs-6 fw-bolder col-12">
+                <i
+                  :class="
+                    terrain.showers
+                      ? 'fa-solid fa-circle-check text-success'
+                      : 'fa-solid fa-circle-xmark text-danger'
+                  "
+                  class="fa-lg"
+                ></i>
                 Showers
               </span>
-              <span v-if="terrain.toilets" class="fs-6 fw-bolder col-12">
-                <i class="fa-solid fa-circle-check text-success fa-lg"></i>
+              <span class="fs-6 fw-bolder col-12">
+                <i
+                  :class="
+                    terrain.toilets
+                      ? 'fa-solid fa-circle-check text-success'
+                      : 'fa-solid fa-circle-xmark text-danger'
+                  "
+                  class="fa-lg"
+                ></i>
                 Toilets
               </span>
-              <span v-if="terrain.sinks" class="fs-6 fw-bolder col-12">
-                <i class="fa-solid fa-circle-check text-success fa-lg"></i>
+              <span class="fs-6 fw-bolder col-12">
+                <i
+                  :class="
+                    terrain.sinks
+                      ? 'fa-solid fa-circle-check text-success'
+                      : 'fa-solid fa-circle-xmark text-danger'
+                  "
+                  class="fa-lg"
+                ></i>
                 Sinks
               </span>
             </div>
@@ -159,7 +213,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch } from 'vue';
+import { defineComponent } from 'vue';
 import { TTerrain } from '@/core/helpers/types';
 import AddressService from '@/core/services/AddressService';
 
@@ -176,7 +230,7 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props, context) {
+  setup() {
     return {
       AddressService,
     };

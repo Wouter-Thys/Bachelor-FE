@@ -16,11 +16,12 @@
       </div>
       <div class="col-4">
         <button class="btn btn-primary" @click="extraSettingsDropFN">
-          Extra settings
+          <i class="fa-solid fa-filter"></i>
+          Filter
           <span class="ms-2">
             <i
               :class="
-                dropdown ? 'fa-solid fa-chevron-down' : 'fa-solid fa-angle-up'
+                dropdown ? 'fa-solid fa-angle-up' : 'fa-solid fa-chevron-down'
               "
             ></i>
           </span>

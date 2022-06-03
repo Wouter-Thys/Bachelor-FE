@@ -480,6 +480,7 @@ import addressInput from '@/custom_components/landlord/forms/AddressInput.vue';
 import DropzoneFiles from '@/custom_components/Dropzone.vue';
 import ApiService from '@/core/services/ApiService';
 import router from '@/router/router';
+import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 
 interface Step1 {
   name: string;
@@ -548,6 +549,7 @@ export default defineComponent({
     });
 
     onMounted(async () => {
+      setCurrentPageTitle('Add New Terrain');
       _stepperObj.value = StepperComponent.createInsance(
         createAppRef.value as HTMLElement
       );

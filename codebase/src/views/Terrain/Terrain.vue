@@ -452,6 +452,7 @@ import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import router from '@/router/router';
+import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 
 export default defineComponent({
   name: 'Terrain',
@@ -540,6 +541,7 @@ export default defineComponent({
     });
 
     onMounted(async () => {
+      setCurrentPageTitle('');
       await getTerrain(route.params.id);
       selectedImage.value = terrain.value.images[0].url;
       if (terrain.value.latitude && terrain.value.longitude) {

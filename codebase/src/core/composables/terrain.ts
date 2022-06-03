@@ -100,6 +100,18 @@ export default function useTerrains() {
         console.log(e.response.data.message);
       });
   };
+  const getLandlordRentTerrains = async () => {
+    isLoading.value = true;
+    errors.value = { data: null, message: null };
+    await ApiService.get('/landlord/my-calendar')
+      .then((r) => {
+        isLoading.value = false;
+        return (rentTerrains.value = r.data.data);
+      })
+      .catch((e) => {
+        console.log(e.response.data.message);
+      });
+  };
   const deleteUserTerrainsRentRequest = async (value) => {
     isLoading.value = true;
     errors.value = { data: null, message: null };
@@ -127,5 +139,6 @@ export default function useTerrains() {
     getLandlordTerrainsRentRequest,
     getUserTerrainsRentRequest,
     deleteUserTerrainsRentRequest,
+    getLandlordRentTerrains,
   };
 }

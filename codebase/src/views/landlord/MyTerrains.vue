@@ -1,12 +1,4 @@
 <template>
-  <div class="w-100 d-flex justify-content-center">
-    <router-link to="/landlord/dashboard">
-      <h1 class="btn btn-primary mx-2">Dashboard</h1>
-    </router-link>
-    <router-link to="/landlord/my-terrains">
-      <h1 class="btn btn-white mx-2">My terrains</h1>
-    </router-link>
-  </div>
   <div class="row">
     <div class="col-12">
       <LandlordApexChart1 widget-classes=" mb-xl-8"></LandlordApexChart1>
@@ -44,7 +36,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
-import { setCurrentPageBreadcrumbs } from '@/core/helpers/breadcrumb';
+import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 import LandlordApexChart1 from '@/custom_components/landlord/LandlordApexChart1.vue';
 import useTerrains from '@/core/composables/terrain';
 import TerrainCards from '@/custom_components/terrain/TerrainCards.vue';
@@ -65,8 +57,8 @@ export default defineComponent({
     const col = 'col-4';
     const { terrains, getLandlordTerrains } = useTerrains();
     onMounted(() => {
+      setCurrentPageTitle('');
       getLandlordTerrains();
-      setCurrentPageBreadcrumbs('', ['Pages', 'Profile']);
     });
 
     return {

@@ -9,7 +9,7 @@ const MainMenu = [
       },
       {
         heading: 'Landlord',
-        route: '/landlord',
+        route: '/landlord/dashboard',
         svgIcon: 'media/icons/duotune/art/art002.svg',
         fontIcon: 'bi-app-indicator',
       },

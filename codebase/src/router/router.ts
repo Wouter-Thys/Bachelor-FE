@@ -62,6 +62,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/landlord',
     redirect: '/landlord/dashboard',
     component: () => import('@/layout/Layout.vue'),
+    beforeEnter: [isAuth, user],
     children: [
       {
         beforeEnter: [isAuth, user],
@@ -70,25 +71,31 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/landlord/SignUp.vue'),
       },
       {
-        beforeEnter: [isAuth, user, landlord],
+        beforeEnter: [landlord],
         path: 'dashboard',
         name: 'landlordDashboard',
         component: () => import('@/views/landlord/Dashboard.vue'),
       },
       {
-        beforeEnter: [isAuth, user, landlord],
+        beforeEnter: [landlord],
         path: 'my-terrains',
         name: 'myTerrains',
         component: () => import('@/views/landlord/MyTerrains.vue'),
       },
       {
-        beforeEnter: [isAuth, user, landlord],
+        beforeEnter: [landlord],
+        path: 'my-calendar',
+        name: 'myCalendar',
+        component: () => import('@/views/landlord/MyCalendar.vue'),
+      },
+      {
+        beforeEnter: [landlord],
         path: 'add-terrain',
         name: 'landlordAddTerrain',
         component: () => import('@/views/landlord/AddNewTerrain.vue'),
       },
       {
-        beforeEnter: [isAuth, user, landlord],
+        beforeEnter: [landlord],
         path: 'edit-terrain/:id',
         name: 'landlordEditTerrain',
         component: () => import('@/views/landlord/EditTerrain.vue'),

@@ -1,14 +1,6 @@
 <template>
-  <div class="w-100 d-flex justify-content-center">
-    <router-link to="/landlord/dashboard">
-      <h1 class="btn btn-white mx-2">Dashboard</h1>
-    </router-link>
-    <router-link to="/landlord/my-terrains">
-      <h1 class="btn btn-primary mx-2">My terrains</h1>
-    </router-link>
-  </div>
   <Suspense>
-    <div class="row pb-5">
+    <div v-if="selectedRentInfo" class="row pb-5">
       <div v-if="terrain" class="col-4" style="height: 520px">
         <TerrainCards :terrains="[terrain]" col="col-12" />
       </div>
@@ -112,7 +104,7 @@ export default defineComponent({
           });
         }
       });
-      setCurrentPageTitle('Landlord Dashboard');
+      setCurrentPageTitle('Latest Application');
     });
 
     watch(selectedTerrain, async (newValue) => {

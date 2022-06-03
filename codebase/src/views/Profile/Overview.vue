@@ -19,11 +19,11 @@
   <div class="card mb-5 mb-xl-10">
     <div class="card-header cursor-pointer">
       <div class="card-title m-0">
-        <h3 class="fw-bolder m-0">Your Calendar</h3>
+        <h3 class="fw-bolder m-0">Your Rented Terrains Calendar</h3>
       </div>
     </div>
     <div class="card-body p-0">
-      <div v-if="options" class="col-4">
+      <div v-if="options">
         <div class="card p-5 mb-5">
           <FullCalendar ref="fullCalendar" :options="options" />
         </div>
@@ -40,6 +40,7 @@ import '@fullcalendar/core/vdom';
 import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 
 export default defineComponent({
   name: 'AccountOverview',
@@ -52,14 +53,30 @@ export default defineComponent({
       plugins: [dayGridPlugin, interactionPlugin],
       initialView: 'dayGridMonth',
       aspectRatio: 1,
+      height: 450,
       events: [{}],
     });
 
     const getTerrainRR = async () => {
       await getUserTerrainsRentRequest();
+      options.value.events = [];
+      rentTerrains.value.forEach((value) => {
+        let color = '';
+        if (value.approvalStatus === 'pending') color = 'orange';
+        if (value.approvalStatus === 'approved') color = 'green';
+        if (value.approvalStatus !== 'rejected') {
+          options.value.events.push({
+            title: value.terrain.name + ' - ' + value.approvalStatus,
+            start: value.startDate,
+            end: value.endDate,
+            color: color,
+          });
+        }
+      });
     };
 
     onMounted(async () => {
+      setCurrentPageTitle('');
       await getTerrainRR();
       options.value.events = [];
       rentTerrains.value.forEach((value) => {

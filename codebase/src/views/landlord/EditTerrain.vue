@@ -342,6 +342,7 @@ import { TEditTerrain } from '@/core/helpers/types';
 import AddressInput from '@/custom_components/landlord/forms/AddressInput.vue';
 import ApiService from '@/core/services/ApiService';
 import router from '@/router/router';
+import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 
 export default defineComponent({
   name: 'EditTerrain',
@@ -387,6 +388,7 @@ export default defineComponent({
     };
 
     onMounted(async () => {
+      setCurrentPageTitle('Edit Terrain');
       await getLandlordTerrain(route.params.id);
       editTerrain.value = { ...terrain.value, newImages: [], deleteImages: [] };
     });

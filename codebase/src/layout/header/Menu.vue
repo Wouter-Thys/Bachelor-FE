@@ -37,6 +37,26 @@
           </template>
         </template>
       </template>
+      <div v-if="isAuthenticated" class="menu-item me-lg-1">
+        <router-link
+          v-if="user.roles.includes('landlord')"
+          to="/landlord/my-terrains"
+          class="menu-link"
+          active-class="active"
+        >
+          <span class="menu-title">My Terrains</span>
+        </router-link>
+      </div>
+      <div v-if="isAuthenticated" class="menu-item me-lg-1">
+        <router-link
+          v-if="user.roles.includes('landlord')"
+          to="/landlord/my-calendar"
+          class="menu-link"
+          active-class="active"
+        >
+          <span class="menu-title">My Calendar</span>
+        </router-link>
+      </div>
       <!--end::Menu-->
     </div>
   </div>
@@ -50,13 +70,18 @@ import { useI18n } from 'vue-i18n/index';
 import MainMenuConfig from '@/core/config/MainMenu';
 import { headerMenuIcons } from '@/core/helpers/config';
 import { version } from '@/core/helpers/documentation';
+import { User } from '@/store/modules/AuthModule';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'KTMenu',
   components: {},
   setup() {
+    const store = useStore();
     const { t, te } = useI18n();
     const route = useRoute();
+    const user: User = store.getters.currentUser;
+    const isAuthenticated = store.getters.isUserAuthenticated;
 
     const hasActiveChildren = (match) => {
       return route.path.indexOf(match) !== -1;
@@ -71,6 +96,8 @@ export default defineComponent({
     };
 
     return {
+      isAuthenticated,
+      user,
       hasActiveChildren,
       headerMenuIcons,
       MainMenuConfig,

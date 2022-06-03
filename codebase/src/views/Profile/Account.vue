@@ -92,65 +92,6 @@
               </router-link>
             </div>
           </div>
-          <div class="d-flex flex-wrap flex-stack">
-            <div class="d-flex flex-column flex-grow-1 pe-8">
-              <div class="d-flex flex-wrap">
-                <div
-                  class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3"
-                >
-                  <div class="d-flex align-items-center">
-                    <span class="me-2"><i class="fa-solid fa-tents"></i></span>
-                    <div
-                      class="fs-2 fw-bolder"
-                      data-kt-countup="true"
-                      data-kt-countup-value="4500"
-                      data-kt-countup-prefix="$"
-                    >
-                      45
-                    </div>
-                  </div>
-                  <div class="fw-bold fs-6 text-gray-400">Rented terrains</div>
-                </div>
-                <div
-                  class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3"
-                >
-                  <div class="d-flex align-items-center">
-                    <span class="me-2">
-                      <i class="fa-solid fa-tent"></i>
-                    </span>
-                    <div
-                      class="fs-2 fw-bolder"
-                      data-kt-countup="true"
-                      data-kt-countup-value="75"
-                    >
-                      75
-                    </div>
-                  </div>
-                  <div class="fw-bold fs-6 text-gray-400">
-                    Most recent terrain
-                  </div>
-                </div>
-                <div
-                  class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3"
-                >
-                  <div class="d-flex align-items-center">
-                    <span class="svg-icon svg-icon-3 svg-icon-success me-2">
-                      <inline-svg src="media/icons/duotune/arrows/arr066.svg" />
-                    </span>
-                    <div
-                      class="fs-2 fw-bolder"
-                      data-kt-countup="true"
-                      data-kt-countup-value="60"
-                      data-kt-countup-prefix="%"
-                    >
-                      60%
-                    </div>
-                  </div>
-                  <div class="fw-bold fs-6 text-gray-400">Success Rate</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <div class="d-flex overflow-auto h-55px">
@@ -173,7 +114,7 @@
               class="nav-link text-active-primary me-6"
               active-class="active"
             >
-              Settings
+              Edit profile
             </router-link>
           </li>
         </ul>
@@ -196,7 +137,7 @@ export default defineComponent({
       return store.getters.currentUser;
     });
     onMounted(async () => {
-      setCurrentPageTitle('Profile Overview');
+      setCurrentPageTitle('');
     });
     return {
       user,

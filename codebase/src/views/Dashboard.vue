@@ -84,8 +84,8 @@ export default defineComponent({
     const mapSearch = ref(false);
 
     onMounted(async () => {
+      setCurrentPageTitle('');
       await getTerrains();
-      setCurrentPageTitle('Dashboard');
       terrains.value.forEach((value) => {
         if (markers.value) {
           markers.value.push({

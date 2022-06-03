@@ -113,6 +113,7 @@ import { User } from '@/store/modules/AuthModule';
 import { ErrorMessage, Field, Form } from 'vee-validate';
 import { object, mixed } from 'yup';
 import { Actions } from '@/store/enums/StoreEnums';
+import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 
 export default defineComponent({
   name: 'SignUpLandlord',
@@ -146,6 +147,7 @@ export default defineComponent({
         });
     };
     onMounted(() => {
+      setCurrentPageTitle('');
       nextTick(() => {
         PasswordMeterComponent.bootstrap();
       });

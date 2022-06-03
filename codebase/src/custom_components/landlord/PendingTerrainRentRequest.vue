@@ -29,25 +29,6 @@
           {{ selectedRentInfo.startDate }}
         </p>
       </div>
-      <div class="row my-6">
-        <div class="col-4">
-          <span class="fs-4">
-            <i class="fa-solid fa-arrow-left text-black fa-1"></i>
-            Terrain
-          </span>
-        </div>
-        <div class="col-4">
-          <span class="d-flex justify-content-center mb-6">
-            <i class="fa-solid fa-up-down fa-2xl text-black"></i>
-          </span>
-        </div>
-        <div class="col-4 d-flex justify-content-end align-items-center">
-          <span class="fs-4">Terrain Calendar</span>
-          <span class="ms-2">
-            <i class="fa-solid fa-arrow-right text-black fa-1"></i>
-          </span>
-        </div>
-      </div>
       <div class="row">
         <h1 class="d-flex justify-content-center w-100">End Date</h1>
         <p class="d-flex justify-content-center w-100 mb-6 fs-4">
