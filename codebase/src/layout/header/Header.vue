@@ -2,7 +2,7 @@
   <!--begin::Header-->
   <div
     id="kt_header"
-    class="header align-items-stretch bg-dark"
+    class="header align-items-stretch"
     :data-kt-sticky="isHeaderSticky"
     data-kt-sticky-name="header"
     data-kt-sticky-offset="{default: '200px', lg: '300px'}"
@@ -37,7 +37,7 @@
           <img
             alt="Logo"
             src="media/grasshopper-transparent.png"
-            class="logo-default h-70px"
+            class="logo-default h-50px"
           />
         </router-link>
       </div>

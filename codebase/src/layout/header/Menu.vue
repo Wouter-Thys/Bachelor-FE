@@ -29,7 +29,7 @@
                 :to="menuItem.route"
                 active-class="active"
               >
-                <span class="menu-title text-hover-white text-primary">
+                <span class="menu-title text-primary text-hover-white">
                   {{ translate(menuItem.heading) }}
                 </span>
               </router-link>

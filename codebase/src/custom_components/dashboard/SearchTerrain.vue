@@ -198,6 +198,12 @@ import _ from 'lodash';
 export default defineComponent({
   name: 'UseDropzoneDemo',
   components: {},
+  props: {
+    orderBy: {
+      type: String,
+      default: 'capacity|asc',
+    },
+  },
   emits: ['searchByMap', 'searchTerrain'],
   setup(props, context) {
     const dropdown = ref(false);
@@ -213,8 +219,8 @@ export default defineComponent({
       hectare: 0,
       search: '',
       orderBy: {
-        table: 'capacity',
-        order: 'asc',
+        column: 'capacity',
+        direction: 'asc',
       },
     });
     const extraSettingsDropFN = () => {
@@ -227,6 +233,17 @@ export default defineComponent({
     watch(extraSettings.value, (newValue) => {
       debounceInput(newValue);
     });
+    watch(
+      () => props.orderBy,
+      (newValue) => {
+        const orderBy = newValue?.split('|', 2);
+        console.log(orderBy);
+        if (orderBy[1] === 'asc' || orderBy[1] === 'desc') {
+          extraSettings.value.orderBy.column = orderBy[0];
+          extraSettings.value.orderBy.direction = orderBy[1];
+        }
+      }
+    );
     return { extraSettingsDropFN, dropdown, extraSettings, debounceInput };
   },
 });

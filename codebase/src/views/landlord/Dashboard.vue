@@ -84,6 +84,7 @@ export default defineComponent({
     });
 
     onMounted(async () => {
+      setCurrentPageTitle('');
       await getTerrainRR();
       await getLandlordTerrain(rentTerrains.value[0].terrain.id);
       selectedRentInfo.value = rentTerrains.value[0];

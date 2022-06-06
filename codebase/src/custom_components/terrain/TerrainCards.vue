@@ -1,7 +1,7 @@
 <template>
   <!--begin::Mixed Widget 1-->
 
-  <div v-if="terrains" class="row g-6 g-xl-9">
+  <div v-if="terrains" class="row g-6 g-xl-9 mt-0">
     <!--begin::Col-->
     <div v-for="(terrain, index) in terrains" :key="index" :class="col">
       <!--begin::Header-->
