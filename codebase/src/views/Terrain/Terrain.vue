@@ -492,7 +492,7 @@ export default defineComponent({
         submitDate.value.startDate = date[0].getTime();
         submitDate.value.endDate = date[1].getTime();
         submitDate.value.terrain_id = terrain.value.id;
-        // submitRent(submitDate.value);
+        submitRent(submitDate.value);
       }
     };
 
