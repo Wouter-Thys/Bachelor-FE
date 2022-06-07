@@ -46,6 +46,7 @@ export type TTerrain = {
   openFire: boolean;
   hudo: boolean;
   digging: boolean;
+  views: number;
   capacity: number;
   hectare: number;
   supermarket_rating: number;

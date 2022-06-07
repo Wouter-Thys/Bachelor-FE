@@ -4,33 +4,8 @@
     <!--begin::Header-->
     <div class="card-header border-0 pt-5">
       <h3 class="card-title align-items-start flex-column">
-        <span class="card-label fw-bolder fs-3 mb-1">Recent Terrain Views</span>
+        <span class="card-label fw-bolder fs-3 mb-1">Terrain Views</span>
       </h3>
-
-      <!--begin::Toolbar-->
-      <div class="card-toolbar" data-kt-buttons="true">
-        <a
-          id="kt_charts_widget_3_year_btn"
-          class="btn btn-sm btn-color-muted btn-active btn-active-primary active px-4 me-1"
-        >
-          Year
-        </a>
-
-        <a
-          id="kt_charts_widget_3_month_btn"
-          class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1"
-        >
-          Month
-        </a>
-
-        <a
-          id="kt_charts_widget_3_week_btn"
-          class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4"
-        >
-          Week
-        </a>
-      </div>
-      <!--end::Toolbar-->
     </div>
     <!--end::Header-->
 
@@ -38,7 +13,7 @@
     <div class="card-body">
       <!--begin::Chart-->
       <apexchart
-        type="area"
+        type="bar"
         :height="300"
         :options="options"
         :series="series"
@@ -53,26 +28,36 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { getCSSVariableValue } from '@/assets/ts/_utils';
+import { TTerrain } from '@/core/helpers/types';
 
 export default defineComponent({
   name: 'Widget1',
   components: {},
   props: {
     widgetClasses: String,
+    terrains: {
+      type: Object as () => TTerrain[],
+      required: true,
+    },
   },
-  setup() {
+  setup(props, context) {
     const labelColor = getCSSVariableValue('--bs-gray-500');
     const borderColor = getCSSVariableValue('--bs-gray-200');
     const baseColor = getCSSVariableValue('--bs-info');
     const lightColor = getCSSVariableValue('--bs-light-info');
 
+    console.log(props.terrains.map((a) => a.name));
+
     const options = {
       chart: {
         fontFamily: 'inherit',
-        type: 'area',
+        type: 'bar',
         toolbar: {
           show: false,
         },
+      },
+      fill: {
+        colors: '#5EC43B',
       },
       plotOptions: {},
       legend: {
@@ -85,10 +70,10 @@ export default defineComponent({
         curve: 'smooth',
         show: true,
         width: 3,
-        colors: ['red', 'blue', 'purple'],
+        colors: ['#5EC43B'],
       },
       xaxis: {
-        categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+        categories: props.terrains.map((a) => a.name),
         axisBorder: {
           show: false,
         },
@@ -151,6 +136,11 @@ export default defineComponent({
           formatter: function (val) {
             return '' + val + ' Views';
           },
+          title: {
+            formatter: function (val) {
+              return '';
+            },
+          },
         },
       },
       colors: [lightColor],
@@ -171,16 +161,7 @@ export default defineComponent({
 
     const series = [
       {
-        name: 'Terrain 1',
-        data: [30, 40, 40, 90, 90, 70, 70],
-      },
-      {
-        name: 'Terrain 2',
-        data: [40, 80, 10, 10, 50, 60, 20],
-      },
-      {
-        name: 'Terrain 3',
-        data: [80, 90, 60, 70, 70, 50, 90],
+        data: props.terrains.map((a) => a.views),
       },
     ];
 

@@ -1,7 +1,10 @@
 <template>
   <div class="row">
-    <div class="col-12">
-      <LandlordApexChart1 widget-classes=" mb-xl-8"></LandlordApexChart1>
+    <div v-if="terrains.length" class="col-12">
+      <LandlordApexChart1
+        v-model:terrains="terrains"
+        widget-classes=" mb-xl-8"
+      ></LandlordApexChart1>
     </div>
   </div>
   <!--begin::Toolbar-->
