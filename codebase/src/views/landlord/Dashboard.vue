@@ -29,6 +29,25 @@
         ></TerrainsRentRequestTable>
       </div>
     </div>
+    <div
+      v-else
+      class="border border-dashed border-gray-500 border-2 rounded py-9"
+    >
+      <div class="row">
+        <div class="d-flex justify-content-center">
+          <span class="fs-1 text-white">
+            No one as requested to rent a terrain at this time
+          </span>
+        </div>
+      </div>
+      <div class="row pt-5">
+        <div class="d-flex justify-content-center">
+          <router-link to="/landlord/my-terrains" class="cbtn-dark">
+            My Terrains
+          </router-link>
+        </div>
+      </div>
+    </div>
   </Suspense>
 </template>
 <script lang="ts">
@@ -86,26 +105,28 @@ export default defineComponent({
     onMounted(async () => {
       setCurrentPageTitle('');
       await getTerrainRR();
-      await getLandlordTerrain(rentTerrains.value[0].terrain.id);
-      selectedRentInfo.value = rentTerrains.value[0];
-      const calendarApi = fullCalendar.value.getApi();
-      calendarApi.gotoDate(selectedRentInfo.value.startDate);
+      if (rentTerrains.value.length) {
+        await getLandlordTerrain(rentTerrains.value[0].terrain.id);
+        selectedRentInfo.value = rentTerrains.value[0];
+        const calendarApi = fullCalendar.value.getApi();
+        calendarApi.gotoDate(selectedRentInfo.value.startDate);
 
-      options.value.events = [];
-      terrain.value.rented_dates.forEach((value) => {
-        let color = '';
-        if (value.approvalStatus === 'pending') color = 'orange';
-        if (value.approvalStatus === 'approved') color = 'green';
-        if (value.approvalStatus !== 'rejected') {
-          options.value.events.push({
-            title: value.user.name + ' - ' + value.approvalStatus,
-            start: value.startDate,
-            end: value.endDate,
-            color: color,
-          });
-        }
-      });
-      setCurrentPageTitle('Latest Application');
+        options.value.events = [];
+        terrain.value.rented_dates.forEach((value) => {
+          let color = '';
+          if (value.approvalStatus === 'pending') color = 'orange';
+          if (value.approvalStatus === 'approved') color = 'green';
+          if (value.approvalStatus !== 'rejected') {
+            options.value.events.push({
+              title: value.user.name + ' - ' + value.approvalStatus,
+              start: value.startDate,
+              end: value.endDate,
+              color: color,
+            });
+          }
+        });
+        setCurrentPageTitle('Latest Application');
+      }
     });
 
     watch(selectedTerrain, async (newValue) => {

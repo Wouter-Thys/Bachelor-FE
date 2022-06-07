@@ -10,7 +10,17 @@ import isNotAuth from '@/router/middleware/IsNotAuth';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/dashboard',
+    component: () => import('@/components/page-layouts/LandingPage.vue'),
+    children: [
+      {
+        path: '/',
+        name: 'landingPage',
+        component: () => import('@/views/LandingPage.vue'),
+      },
+    ],
+  },
+  {
+    path: '/',
     component: () => import('@/layout/Layout.vue'),
     children: [
       {
