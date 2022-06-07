@@ -407,6 +407,7 @@
                 :min-date="new Date()"
                 auto-apply
                 :markers="miniCalendarMarkers"
+                :disabled-dates="disabledDates"
               ></Datepicker>
             </div>
           </div>
@@ -428,7 +429,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { computed, defineComponent, onMounted, ref } from 'vue';
 import useTerrains from '@/core/composables/terrain';
 import TerrainRatingChart from '@/custom_components/terrain/TerrainRatingChart.vue';
 import { useRoute } from 'vue-router';
@@ -453,7 +454,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import router from '@/router/router';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
-import DateService from '@/core/services/DateService';
 
 export default defineComponent({
   name: 'Terrain',
@@ -489,7 +489,6 @@ export default defineComponent({
 
     const convertDate = async (date: Date[]) => {
       if (date.length === 2) {
-        console.log(await dateRangeValidation(date));
         submitDate.value.startDate = date[0].getTime();
         submitDate.value.endDate = date[1].getTime();
         submitDate.value.terrain_id = terrain.value.id;
@@ -497,14 +496,6 @@ export default defineComponent({
       }
     };
 
-    const dateRangeValidation = (date: Date[]) => {
-      terrain.value.rented_dates.forEach((value) => {
-        console.log(
-          DateService.DateReset(date[0]) <
-            DateService.DateReset(new Date(value.startDate))
-        );
-      });
-    };
     const submitRent = (value) => {
       apiService
         .post('user/rent-terrain', value)
@@ -535,6 +526,22 @@ export default defineComponent({
       initialView: 'dayGridMonth',
       aspectRatio: 1,
       events: [{}],
+    });
+
+    const disabledDates = computed(() => {
+      const dates: Date[] = [];
+      if (terrain.value.rented_dates) {
+        terrain.value.rented_dates.forEach((item) => {
+          let incDate = new Date(item.startDate);
+          while (incDate <= new Date(item.endDate)) {
+            console.log(incDate);
+            dates.push(new Date(incDate));
+            incDate.setDate(incDate.getDate() + 1);
+          }
+        });
+      }
+      console.log(dates);
+      return dates;
     });
 
     onMounted(async () => {
@@ -596,6 +603,7 @@ export default defineComponent({
       AddressService,
       imagesChunks,
       miniCalendarMarkers,
+      disabledDates,
     };
   },
 });
