@@ -534,13 +534,11 @@ export default defineComponent({
         terrain.value.rented_dates.forEach((item) => {
           let incDate = new Date(item.startDate);
           while (incDate <= new Date(item.endDate)) {
-            console.log(incDate);
             dates.push(new Date(incDate));
             incDate.setDate(incDate.getDate() + 1);
           }
         });
       }
-      console.log(dates);
       return dates;
     });
 
