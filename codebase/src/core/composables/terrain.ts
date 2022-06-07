@@ -71,7 +71,7 @@ export default function useTerrains() {
       })
       .catch((e) => {
         console.log(e.response.data.message);
-        router.push({ name: 'landlordDashboard' });
+        router.push({ name: 'dashboard' });
       });
   };
 

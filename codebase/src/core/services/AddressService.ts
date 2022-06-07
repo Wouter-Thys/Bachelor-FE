@@ -1,8 +1,3 @@
-import { App } from 'vue';
-import axios from 'axios';
-import VueAxios from 'vue-axios';
-import { AxiosResponse, AxiosRequestConfig } from 'axios';
-
 class AddressService {
   public static addressToString(
     string1: string,

@@ -7,27 +7,17 @@
     <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
       <!--begin::Logo-->
       <a href="#" class="mb-12">
-        <img alt="Logo" src="media/logos/logo-1.svg" class="h-45px" />
+        <img
+          alt="Logo"
+          src="media/grasshopper-transparent-text.png"
+          class="h-85px"
+        />
       </a>
       <!--end::Logo-->
 
       <router-view></router-view>
     </div>
     <!--end::Content-->
-
-    <!--begin::Footer-->
-    <div class="d-flex flex-center flex-column-auto p-10">
-      <!--begin::Links-->
-      <div class="d-flex align-items-center fw-bold fs-6">
-        <a href="#" class="text-muted text-hover-primary px-2">About</a>
-
-        <a href="#" class="text-muted text-hover-primary px-2">Contact</a>
-
-        <a href="#" class="text-muted text-hover-primary px-2">Contact Us</a>
-      </div>
-      <!--end::Links-->
-    </div>
-    <!--end::Footer-->
   </div>
 </template>
 
@@ -47,7 +37,8 @@ export default defineComponent({
       store.dispatch(Actions.ADD_BODY_CLASSNAME, 'bg-body');
       store.dispatch(Actions.ADD_BODY_ATTRIBUTE, {
         qulifiedName: 'style',
-        value: 'background-image: url(media/patterns/header-bg.jpg)',
+        value:
+          'background-image: url(media/patterns/header-bg-dark-custom-2.jpg)',
       });
     });
 

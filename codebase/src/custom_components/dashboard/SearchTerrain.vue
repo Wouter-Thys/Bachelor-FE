@@ -15,11 +15,15 @@
         </div>
       </div>
       <div class="col-4">
-        <button class="btn btn-primary" @click="extraSettingsDropFN">
-          <i class="fa-solid fa-filter"></i>
+        <button
+          class="btn btn-outline btn-outline-primary bg-dark border-primary border-2 text-hover-white text-primary"
+          @click="extraSettingsDropFN"
+        >
+          <i class="fa-solid fa-filter text-primary"></i>
           Filter
           <span class="ms-2">
             <i
+              class="text-primary"
               :class="
                 dropdown ? 'fa-solid fa-angle-up' : 'fa-solid fa-chevron-down'
               "
@@ -194,6 +198,12 @@ import _ from 'lodash';
 export default defineComponent({
   name: 'UseDropzoneDemo',
   components: {},
+  props: {
+    orderBy: {
+      type: String,
+      default: 'capacity|asc',
+    },
+  },
   emits: ['searchByMap', 'searchTerrain'],
   setup(props, context) {
     const dropdown = ref(false);
@@ -209,8 +219,8 @@ export default defineComponent({
       hectare: 0,
       search: '',
       orderBy: {
-        table: 'capacity',
-        order: 'asc',
+        column: 'capacity',
+        direction: 'asc',
       },
     });
     const extraSettingsDropFN = () => {
@@ -223,6 +233,17 @@ export default defineComponent({
     watch(extraSettings.value, (newValue) => {
       debounceInput(newValue);
     });
+    watch(
+      () => props.orderBy,
+      (newValue) => {
+        const orderBy = newValue?.split('|', 2);
+        console.log(orderBy);
+        if (orderBy[1] === 'asc' || orderBy[1] === 'desc') {
+          extraSettings.value.orderBy.column = orderBy[0];
+          extraSettings.value.orderBy.direction = orderBy[1];
+        }
+      }
+    );
     return { extraSettingsDropFN, dropdown, extraSettings, debounceInput };
   },
 });

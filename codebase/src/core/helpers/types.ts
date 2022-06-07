@@ -89,6 +89,11 @@ export type TMarkersGMap = [
     terrain: TTerrain | null;
   }
 ];
+export type TDatePickerMarkers = {
+  date: Date;
+  type: string;
+  color: string;
+};
 export type extraSettingsSearch = {
   water: number;
   electricity: number;
@@ -101,7 +106,7 @@ export type extraSettingsSearch = {
   hectare: number;
   search: string;
   orderBy: {
-    table: string;
-    order: string;
+    column: string;
+    direction: string;
   };
 };

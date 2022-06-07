@@ -32,17 +32,12 @@
       <!--end::Aside mobile toggle-->
 
       <!--begin::Mobile logo-->
-      <div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
+      <div class="header-logo me-2 me-md-4">
         <router-link to="/dashboard">
           <img
             alt="Logo"
-            src="media/logos/logo-demo2.png"
-            class="logo-default h-25px"
-          />
-          <img
-            alt="Logo"
-            src="media/logos/logo-demo2-sticky.png"
-            class="logo-sticky h-25px"
+            src="media/grasshopper-transparent.png"
+            class="logo-default h-50px"
           />
         </router-link>
       </div>

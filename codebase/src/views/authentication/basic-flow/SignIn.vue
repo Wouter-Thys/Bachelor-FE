@@ -11,7 +11,7 @@
       <!--begin::Heading-->
       <div class="text-center mb-10">
         <!--begin::Title-->
-        <h1 class="text-dark mb-3">Sign In to Metronic</h1>
+        <h1 class="text-dark mb-3">Sign In to Grasshopper</h1>
         <!--end::Title-->
 
         <!--begin::Link-->
@@ -25,16 +25,6 @@
         <!--end::Link-->
       </div>
       <!--begin::Heading-->
-
-      <div class="mb-10 bg-light-info p-8 rounded">
-        <div class="text-info">
-          Use account
-          <strong>admin@admin.com</strong>
-          and
-          <strong>password</strong>
-          to continue.
-        </div>
-      </div>
 
       <!--begin::Input group-->
       <div class="fv-row mb-10">
@@ -164,18 +154,7 @@ export default defineComponent({
         const error = store.getters.getErrors[errorName];
 
         if (!error) {
-          Swal.fire({
-            text: 'You have successfully logged in!',
-            icon: 'success',
-            buttonsStyling: false,
-            confirmButtonText: 'Ok, got it!',
-            customClass: {
-              confirmButton: 'btn fw-bold btn-light-primary',
-            },
-          }).then(function () {
-            // Go to page after successfully login
-            router.push({ name: 'dashboard' });
-          });
+          router.push({ name: 'dashboard' });
         } else {
           Swal.fire({
             text: error[0],

@@ -2,9 +2,7 @@
   <!--begin::Dashboard-->
   <div class="row d-flex justify-content-center">
     <div class="col-12 d-flex justify-content-center">
-      <div
-        class="form-check btn btn-outline btn-outline-primary rounded-pill bg-white mx-4 p-0 border-primary border-2"
-      >
+      <div class="form-check mx-4 p-0 cbtn-dark">
         <label class="form-check-label p-5" for="exampleRadios1">
           <input
             id="exampleRadios1"
@@ -15,13 +13,11 @@
             checked
             @click="searchByMap(false)"
           />
-          <i class="fa-solid fa-list"></i>
+          <i class="fa-solid fa-list text-primary"></i>
           Search by List
         </label>
       </div>
-      <div
-        class="form-check btn btn-outline btn-outline-primary rounded-pill bg-white mx-4 p-0 border-primary border-2"
-      >
+      <div class="form-check cbtn-dark mx-4 p-0">
         <label class="form-check-label p-5" for="exampleRadios2">
           <input
             id="exampleRadios2"
@@ -31,16 +27,36 @@
             value="option2"
             @click="searchByMap(true)"
           />
-          <i class="fa-solid fa-map-location-dot"></i>
+          <i class="fa-solid fa-map-location-dot text-primary"></i>
           Search by Map
         </label>
       </div>
     </div>
-    <div class="col-6 mt-4">
-      <SearchTerrain @search-terrain="callback" />
+    <div class="col-6 my-4">
+      <SearchTerrain :order-by="orderBy" @search-terrain="callback" />
     </div>
   </div>
   <div v-if="!mapSearch" class="row">
+    <div class="row mt-10">
+      <div class="d-flex justify-content-between">
+        <h1 class="">Found Terrains</h1>
+        <select
+          v-model="orderBy"
+          class="form-select w-25"
+          aria-label="Select orderBy"
+        >
+          <option selected value="capacity|asc">Capacity: low - high</option>
+          <option value="capacity|desc">Capacity: high - low</option>
+          <option value="hectare|asc">Hectare: low - high</option>
+          <option value="hectare|desc">Hectare: high - low</option>
+          <option value="supermarket_rating|desc">Supermarket</option>
+          <option value="activities_rating|desc">Activities</option>
+          <option value="remote_rating|desc">Remote</option>
+          <option value="bakery_rating|desc">Bakery</option>
+          <option value="firstAid_rating|desc">First-aid</option>
+        </select>
+      </div>
+    </div>
     <TerrainCards :terrains="terrains" col="col-3" />
   </div>
   <div v-if="mapSearch" class="row mt-4">
@@ -82,6 +98,7 @@ export default defineComponent({
       { position: { lat: 0, lng: 0 }, terrain: null },
     ]);
     const mapSearch = ref(false);
+    const orderBy = ref('capacity|asc');
 
     onMounted(async () => {
       setCurrentPageTitle('');
@@ -112,7 +129,15 @@ export default defineComponent({
       });
     };
 
-    return { searchByMap, mapSearch, center, terrains, markers, callback };
+    return {
+      searchByMap,
+      mapSearch,
+      center,
+      terrains,
+      markers,
+      callback,
+      orderBy,
+    };
   },
 });
 </script>

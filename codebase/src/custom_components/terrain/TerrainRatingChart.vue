@@ -53,8 +53,8 @@
                 <p class="fs-6 text-muted p-0 m-0">4 = Between 4-3KM</p>
                 <p class="fs-6 text-muted p-0 m-0">5 = Further then 4KM</p>
               </div>
-              <div class="col-4">
-                <p class="fs-6p-0 m-0">Bakery access:</p>
+              <div class="col-4 mt-3">
+                <p class="fs-6 p-0 m-0">Bakery access:</p>
                 <p class="fs-6 text-muted p-0 m-0">closest bakery</p>
                 <p class="fs-6 text-muted p-0 m-0">1 = Further then 20KM</p>
                 <p class="fs-6 text-muted p-0 m-0">2 = Between 20-15KM</p>

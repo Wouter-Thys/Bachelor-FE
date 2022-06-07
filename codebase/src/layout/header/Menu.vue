@@ -29,7 +29,7 @@
                 :to="menuItem.route"
                 active-class="active"
               >
-                <span class="menu-title">
+                <span class="menu-title text-primary text-hover-white">
                   {{ translate(menuItem.heading) }}
                 </span>
               </router-link>
@@ -44,7 +44,9 @@
           class="menu-link"
           active-class="active"
         >
-          <span class="menu-title">My Terrains</span>
+          <span class="menu-title text-hover-white text-primary">
+            My Terrains
+          </span>
         </router-link>
       </div>
       <div v-if="isAuthenticated" class="menu-item me-lg-1">
@@ -54,7 +56,9 @@
           class="menu-link"
           active-class="active"
         >
-          <span class="menu-title">My Calendar</span>
+          <span class="menu-title text-hover-white text-primary">
+            My Calendar
+          </span>
         </router-link>
       </div>
       <!--end::Menu-->

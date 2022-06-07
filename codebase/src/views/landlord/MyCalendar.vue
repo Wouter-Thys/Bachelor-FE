@@ -13,6 +13,7 @@ import '@fullcalendar/core/vdom';
 import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 
 export default defineComponent({
   name: 'ProfileProjects',
@@ -34,6 +35,7 @@ export default defineComponent({
       events: [{}],
     });
     onMounted(async () => {
+      setCurrentPageTitle('');
       await getLandlordRentTerrains();
       options.value.events = [];
       rentTerrains.value.forEach((value) => {

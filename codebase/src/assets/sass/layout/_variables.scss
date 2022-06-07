@@ -49,7 +49,7 @@ $header-config: (
         (
           height: 65px,
           z-index: 97,
-          bg-color: $body-bg,
+          bg-color: $dark,
           box-shadow:
             if(isDarkMode(), none, 0px 10px 30px 0px rgba(82, 63, 105, 0.08)),
           border: 0,

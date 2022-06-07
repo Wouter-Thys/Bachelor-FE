@@ -6,10 +6,14 @@
 
 // Theme colors
 // Primary
-$primary: if(isDarkMode(), #3699ff, #009ef7);
-$primary-active: if(isDarkMode(), #187de4, #0095e8);
+$primary: if(isDarkMode(), #3699ff, #5EC43B);
+$primary-active: if(isDarkMode(), #187de4, #5EC43B);
 $primary-light: if(isDarkMode(), #212e48, #f1faff);
 $primary-inverse: #ffffff;
+//$body-bg: if(isDarkMode(), #1e1e2d, $white) !default;
+$dark: #1D2023;
+$hover-bg: rgba(255, 255, 255, 0.1);
+$white: #ffffff !default;
 
 // Success
 $success: if(isDarkMode(), #0bb783, #50cd89);
@@ -34,6 +38,10 @@ $warning: if(isDarkMode(), #ffa800, #ffc700);
 $warning-active: if(isDarkMode(), #ee9d01, #f1bc00);
 $warning-light: if(isDarkMode(), #392f28, #fff8dd);
 $warning-inverse: #ffffff;
+
+.cbtn-dark {
+  @extend .btn, .btn-outline, .btn-outline-primary, .rounded-pill, .bg-dark, .border-primary, .border-2, .text-hover-white, .text-primary;
+}
 
 // Forms
 //$form-label-font-weight:                          600;

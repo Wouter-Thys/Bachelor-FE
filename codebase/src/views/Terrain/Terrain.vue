@@ -403,14 +403,14 @@
                 range
                 multi-calendars
                 inline
-                :preview-format="format"
                 :enable-time-picker="false"
                 :min-date="new Date()"
                 auto-apply
+                :markers="miniCalendarMarkers"
+                :disabled-dates="disabledDates"
               ></Datepicker>
             </div>
           </div>
-
           <div class="modal-footer">
             <button type="button" class="btn btn-light" data-bs-dismiss="modal">
               Close
@@ -420,7 +420,7 @@
               class="btn btn-primary"
               @click="convertDate(date)"
             >
-              Save changes
+              Rent Terrain
             </button>
           </div>
         </div>
@@ -429,7 +429,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { computed, defineComponent, onMounted, ref } from 'vue';
 import useTerrains from '@/core/composables/terrain';
 import TerrainRatingChart from '@/custom_components/terrain/TerrainRatingChart.vue';
 import { useRoute } from 'vue-router';
@@ -437,6 +437,7 @@ import GoogleMap from '@/custom_components/GoogleMap.vue';
 import AddressService from '@/core/services/AddressService';
 import {
   TCenterGMap,
+  TDatePickerMarkers,
   TImages,
   TMarkersGMap,
   TSubmitDate,
@@ -478,6 +479,7 @@ export default defineComponent({
     const markers = ref<TMarkersGMap | null>([
       { position: { lat: 0, lng: 0 }, terrain: null },
     ]);
+    const miniCalendarMarkers = ref(<TDatePickerMarkers[]>[]);
     const user: User = store.getters.currentUser;
     const isAuthenticated = store.getters.isUserAuthenticated;
 
@@ -485,34 +487,20 @@ export default defineComponent({
       selectedImage.value = url;
     };
 
-    const format = (date: Date[]) => {
-      const day = date[0].getDate();
-      const month = date[0].getMonth() + 1;
-      const year = date[0].getFullYear();
-      if (date[1]) {
-        const day2 = date[1].getDate();
-        const month2 = date[1].getMonth() + 1;
-        const year2 = date[1].getFullYear();
-        return `${day}/${month}/${year} - ${day2}/${month2}/${year2}`;
-      }
-
-      return `${day}/${month}/${year}`;
-    };
-
-    const convertDate = (date: Date[]) => {
+    const convertDate = async (date: Date[]) => {
       if (date.length === 2) {
         submitDate.value.startDate = date[0].getTime();
         submitDate.value.endDate = date[1].getTime();
         submitDate.value.terrain_id = terrain.value.id;
-        submitRent(submitDate.value);
+        // submitRent(submitDate.value);
       }
     };
+
     const submitRent = (value) => {
-      console.log(value);
       apiService
         .post('user/rent-terrain', value)
         .then((r) => {
-          router.push({ name: 'profile' });
+          router.push({ name: 'profileOverview' });
         })
         .catch((err) => {
           console.error(err);
@@ -540,6 +528,20 @@ export default defineComponent({
       events: [{}],
     });
 
+    const disabledDates = computed(() => {
+      const dates: Date[] = [];
+      if (terrain.value.rented_dates) {
+        terrain.value.rented_dates.forEach((item) => {
+          let incDate = new Date(item.startDate);
+          while (incDate <= new Date(item.endDate)) {
+            dates.push(new Date(incDate));
+            incDate.setDate(incDate.getDate() + 1);
+          }
+        });
+      }
+      return dates;
+    });
+
     onMounted(async () => {
       setCurrentPageTitle('');
       await getTerrain(route.params.id);
@@ -564,11 +566,20 @@ export default defineComponent({
         if (value.approvalStatus === 'approved') color = 'green';
         if (value.approvalStatus !== 'rejected') {
           calOptions.value.events.push({
-            title: value.user.name + ' - ' + value.approvalStatus,
+            title: value.user.organization + ' - ' + value.approvalStatus,
             start: value.startDate,
             end: value.endDate,
             color: color,
           });
+        }
+        let incDate = new Date(value.startDate);
+        while (incDate <= new Date(value.endDate)) {
+          miniCalendarMarkers.value.push({
+            date: new Date(incDate),
+            type: 'line',
+            color: color,
+          });
+          incDate.setDate(incDate.getDate() + 1);
         }
       });
     });
@@ -579,7 +590,6 @@ export default defineComponent({
       submitRent,
       convertDate,
       date,
-      format,
       isAuthenticated,
       center,
       markers,
@@ -590,6 +600,8 @@ export default defineComponent({
       prevImage,
       AddressService,
       imagesChunks,
+      miniCalendarMarkers,
+      disabledDates,
     };
   },
 });
