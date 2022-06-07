@@ -260,6 +260,59 @@
                     />
                   </div>
                 </div>
+                <div class="row mt-5">
+                  <div class="separator separator-content my-10">
+                    Allowed on the Terrain
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-2">
+                    <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                      <span class="me-2">Open Fire</span>
+                    </label>
+                  </div>
+                  <div class="col-2">
+                    <input
+                      v-model="formData.openFire"
+                      class="form-check-input"
+                      type="checkbox"
+                      name="sinks"
+                      :value="true"
+                    />
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-2">
+                    <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                      <span class="me-2">Hudo's</span>
+                    </label>
+                  </div>
+                  <div class="col-2">
+                    <input
+                      v-model="formData.hudo"
+                      class="form-check-input"
+                      type="checkbox"
+                      name="sinks"
+                      :value="true"
+                    />
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-2">
+                    <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                      <span class="me-2">Digging</span>
+                    </label>
+                  </div>
+                  <div class="col-2">
+                    <input
+                      v-model="formData.digging"
+                      class="form-check-input"
+                      type="checkbox"
+                      name="sinks"
+                      :value="true"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <div data-kt-stepper-element="content">
@@ -538,6 +591,9 @@ export default defineComponent({
       showers: false,
       toilets: false,
       sinks: false,
+      openFire: false,
+      hudo: false,
+      digging: false,
       capacity: 0,
       hectare: 0,
       supermarket_rating: 1,

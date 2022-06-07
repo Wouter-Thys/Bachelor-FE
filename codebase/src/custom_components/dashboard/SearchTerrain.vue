@@ -153,35 +153,88 @@
                 :true-value="1"
               />
             </div>
-            <div class="d-flex m-2">
+            <div class="d-flex justify-content-start m-2">
               <label
-                class="d-flex align-items-center fs-5 fw-bold mx-2 w-100"
+                class="d-flex align-items-center fs-5 fw-bold mx-2"
                 for="ESSinks"
               >
-                Capacity
+                Open Fire
               </label>
               <input
                 id="ESShowers"
-                v-model="extraSettings.capacity"
-                class="form-control"
-                type="number"
-                name="maxPeople"
+                v-model="extraSettings.openFire"
+                class="form-check-input"
+                type="checkbox"
+                name="sinks"
+                :false-value="0"
+                :true-value="1"
               />
             </div>
-            <div class="d-flex m-2">
+            <div class="d-flex justify-content-start m-2">
               <label
-                class="d-flex align-items-center fs-5 fw-bold mx-2 w-100"
+                class="d-flex align-items-center fs-5 fw-bold mx-2"
                 for="ESSinks"
               >
-                Hectare
+                Hudo's
               </label>
               <input
                 id="ESShowers"
-                v-model="extraSettings.hectare"
-                class="form-control"
-                type="number"
-                name="maxPeople"
+                v-model="extraSettings.hudo"
+                class="form-check-input"
+                type="checkbox"
+                name="sinks"
+                :false-value="0"
+                :true-value="1"
               />
+            </div>
+            <div class="d-flex justify-content-start m-2">
+              <label
+                class="d-flex align-items-center fs-5 fw-bold mx-2"
+                for="ESSinks"
+              >
+                Digging
+              </label>
+              <input
+                id="ESShowers"
+                v-model="extraSettings.digging"
+                class="form-check-input"
+                type="checkbox"
+                name="sinks"
+                :false-value="0"
+                :true-value="1"
+              />
+            </div>
+            <div class="row">
+              <div class="d-flex align-items-center m-2">
+                <label
+                  class="d-flex align-items-center fs-5 fw-bold mx-2 w-100"
+                  for="ESSinks"
+                >
+                  Capacity
+                </label>
+                <input
+                  id="ESShowers"
+                  v-model="extraSettings.capacity"
+                  class="form-control"
+                  type="number"
+                  name="maxPeople"
+                />
+              </div>
+              <div class="d-flex m-2">
+                <label
+                  class="d-flex align-items-center fs-5 fw-bold mx-2 w-100"
+                  for="ESSinks"
+                >
+                  Hectare
+                </label>
+                <input
+                  id="ESShowers"
+                  v-model="extraSettings.hectare"
+                  class="form-control"
+                  type="number"
+                  name="maxPeople"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -215,6 +268,9 @@ export default defineComponent({
       showers: 0,
       toilets: 0,
       sinks: 0,
+      openFire: 0,
+      hudo: 0,
+      digging: 0,
       capacity: 0,
       hectare: 0,
       search: '',

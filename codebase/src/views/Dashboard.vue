@@ -57,7 +57,7 @@
         </select>
       </div>
     </div>
-    <TerrainCards :terrains="terrains" col="col-3" />
+    <TerrainCards :terrains="terrains" col="col-4" />
   </div>
   <div v-if="mapSearch" class="row mt-4">
     <GoogleMap

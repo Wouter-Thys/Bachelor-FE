@@ -226,13 +226,14 @@
                           Showers
                         </span>
                       </li>
-
                       <li
                         v-if="terrain.toilets"
                         class="list-group-item border-0"
                       >
                         <span class="fs-6 fw-bolder">
-                          <i class="fa-solid fa-circle-check text-success"></i>
+                          <i
+                            class="fa-solid fa-circle-check text-success fa-lg"
+                          ></i>
                           Toilets
                         </span>
                       </li>
@@ -243,6 +244,36 @@
                             class="fa-solid fa-circle-check text-success fa-lg"
                           ></i>
                           Sinks
+                        </span>
+                      </li>
+                      <li
+                        v-if="terrain.openFire"
+                        class="list-group-item border-0"
+                      >
+                        <span class="fs-6 fw-bolder">
+                          <i
+                            class="fa-solid fa-circle-check text-success fa-lg"
+                          ></i>
+                          Open fire
+                        </span>
+                      </li>
+                      <li v-if="terrain.hudo" class="list-group-item border-0">
+                        <span class="fs-6 fw-bolder">
+                          <i
+                            class="fa-solid fa-circle-check text-success fa-lg"
+                          ></i>
+                          Hudo's
+                        </span>
+                      </li>
+                      <li
+                        v-if="terrain.digging"
+                        class="list-group-item border-0"
+                      >
+                        <span class="fs-6 fw-bolder">
+                          <i
+                            class="fa-solid fa-circle-check text-success fa-lg"
+                          ></i>
+                          Digging
                         </span>
                       </li>
                     </ul>

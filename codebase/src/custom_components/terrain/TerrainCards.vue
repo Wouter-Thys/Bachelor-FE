@@ -57,7 +57,7 @@
             <div class="px-2">
               <!--end::Avatar-->
               <!--begin::Name-->
-              <div class="row d-flex justify-content-between mt-3">
+              <div class="row d-flex justify-content-between mt-3 mb-5">
                 <div class="col-8">
                   <span class="fs-3 text-gray-800 fw-bolder">
                     {{ terrain.name }}
@@ -123,7 +123,7 @@
               </div>
             </div>
             <div class="mx-2 mt-2 row">
-              <span class="fs-6 fw-bolder col-12">
+              <span class="fs-6 fw-bolder text-black-50 col-6">
                 <i
                   :class="
                     terrain.water
@@ -134,7 +134,7 @@
                 ></i>
                 Water
               </span>
-              <span class="fs-6 fw-bolder col-12">
+              <span class="fs-6 fw-bolder text-black-50 col-6">
                 <i
                   :class="
                     terrain.electricity
@@ -145,7 +145,7 @@
                 ></i>
                 Electricity
               </span>
-              <span class="fs-6 fw-bolder col-12">
+              <span class="fs-6 fw-bolder text-black-50 col-6">
                 <i
                   :class="
                     terrain.threePhaseElectricity
@@ -156,7 +156,7 @@
                 ></i>
                 3 Phase Electricity
               </span>
-              <span class="fs-6 fw-bolder col-12">
+              <span class="fs-6 fw-bolder text-black-50 col-6">
                 <i
                   :class="
                     terrain.sanitaryBlock
@@ -167,7 +167,7 @@
                 ></i>
                 Sanitary Block
               </span>
-              <span class="fs-6 fw-bolder col-12">
+              <span class="fs-6 fw-bolder text-black-50 col-6">
                 <i
                   :class="
                     terrain.showers
@@ -178,7 +178,7 @@
                 ></i>
                 Showers
               </span>
-              <span class="fs-6 fw-bolder col-12">
+              <span class="fs-6 fw-bolder text-black-50 col-6">
                 <i
                   :class="
                     terrain.toilets
@@ -189,7 +189,7 @@
                 ></i>
                 Toilets
               </span>
-              <span class="fs-6 fw-bolder col-12">
+              <span class="fs-6 fw-bolder text-black-50 col-6">
                 <i
                   :class="
                     terrain.sinks
@@ -199,6 +199,39 @@
                   class="fa-lg"
                 ></i>
                 Sinks
+              </span>
+              <span class="fs-6 fw-bolder text-black-50 col-6">
+                <i
+                  :class="
+                    terrain.openFire
+                      ? 'fa-solid fa-circle-check text-success'
+                      : 'fa-solid fa-circle-xmark text-danger'
+                  "
+                  class="fa-lg"
+                ></i>
+                Open Fire
+              </span>
+              <span class="fs-6 fw-bolder text-black-50 col-6">
+                <i
+                  :class="
+                    terrain.hudo
+                      ? 'fa-solid fa-circle-check text-success'
+                      : 'fa-solid fa-circle-xmark text-danger'
+                  "
+                  class="fa-lg"
+                ></i>
+                Hudo's
+              </span>
+              <span class="fs-6 fw-bolder text-black-50 col-6">
+                <i
+                  :class="
+                    terrain.digging
+                      ? 'fa-solid fa-circle-check text-success'
+                      : 'fa-solid fa-circle-xmark text-danger'
+                  "
+                  class="fa-lg"
+                ></i>
+                Digging
               </span>
             </div>
             <!--end::Stats-->

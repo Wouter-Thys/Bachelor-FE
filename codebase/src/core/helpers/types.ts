@@ -43,6 +43,9 @@ export type TTerrain = {
   showers: boolean;
   toilets: boolean;
   sinks: boolean;
+  openFire: boolean;
+  hudo: boolean;
+  digging: boolean;
   capacity: number;
   hectare: number;
   supermarket_rating: number;
@@ -102,6 +105,9 @@ export type extraSettingsSearch = {
   showers: number;
   toilets: number;
   sinks: number;
+  openFire: number;
+  hudo: number;
+  digging: number;
   capacity: number;
   hectare: number;
   search: string;
