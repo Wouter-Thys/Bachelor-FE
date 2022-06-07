@@ -70,6 +70,13 @@
             </span>
           </span>
           <span v-if="props.column.field === 'actions'" class="btn-group">
+            <router-link
+              :to="'/terrain/' + props.row.terrain.id"
+              class="btn btn-primary vgt-center-align"
+            >
+              <i class="fa-solid fa-eye"></i>
+              View
+            </router-link>
             <button
               v-if="props.row.approvalStatus === 'pending'"
               class="btn btn-danger vgt-center-align"

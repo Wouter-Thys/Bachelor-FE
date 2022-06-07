@@ -41,6 +41,7 @@ import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
+import router from '@/router/router';
 
 export default defineComponent({
   name: 'AccountOverview',
@@ -55,6 +56,13 @@ export default defineComponent({
       aspectRatio: 1,
       height: 450,
       events: [{}],
+      eventClick: function (info) {
+        info.jsEvent.preventDefault(); // don't let the browser navigate
+
+        if (info.event.url) {
+          router.push({ path: info.event.url });
+        }
+      },
     });
 
     const getTerrainRR = async () => {
@@ -70,6 +78,7 @@ export default defineComponent({
             start: value.startDate,
             end: value.endDate,
             color: color,
+            url: '/terrain/' + value.terrain.id,
           });
         }
       });
@@ -89,6 +98,7 @@ export default defineComponent({
             start: value.startDate,
             end: value.endDate,
             color: color,
+            url: '/terrain/' + value.terrain.id,
           });
         }
       });

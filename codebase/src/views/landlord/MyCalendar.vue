@@ -14,6 +14,7 @@ import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
+import router from '@/router/router';
 
 export default defineComponent({
   name: 'ProfileProjects',
@@ -33,6 +34,13 @@ export default defineComponent({
       initialView: 'dayGridMonth',
       aspectRatio: 2,
       events: [{}],
+      eventClick: function (info) {
+        info.jsEvent.preventDefault(); // don't let the browser navigate
+
+        if (info.event.url) {
+          router.push({ path: info.event.url });
+        }
+      },
     });
     onMounted(async () => {
       setCurrentPageTitle('');
@@ -53,6 +61,7 @@ export default defineComponent({
           start: value.startDate,
           end: value.endDate,
           color: color,
+          url: '/terrain/' + value.terrain.id,
         });
       });
     });
