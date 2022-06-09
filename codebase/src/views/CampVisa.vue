@@ -62,6 +62,7 @@
                 name="tents"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -85,6 +86,7 @@
                 type="checkbox"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -109,6 +111,7 @@
                 name="theme"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -133,6 +136,7 @@
                 name="camp_booklet"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -157,6 +161,7 @@
                 name="tools"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -188,6 +193,7 @@
                 :false-value="0"
                 :true-value="1"
               />
+              @change="updateCampVisaFN(campVisa.camp_visa)"
             </div>
           </div>
           <div class="col-6 my-4">
@@ -211,6 +217,7 @@
                 name="municipality_contact"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -236,6 +243,7 @@
                 name="fire_agency_contact"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -262,6 +270,7 @@
                 name="parents_info_session"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -285,6 +294,7 @@
                 name="leaders_info_session"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -310,6 +320,7 @@
                 name="extra_info_session"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -333,6 +344,7 @@
                 name="camp_registration"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -356,6 +368,7 @@
                 name="final_contact_landlord"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -384,6 +397,7 @@
                 name="fire_insurance"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -408,6 +422,7 @@
                 name="transport_insurance"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -431,6 +446,7 @@
                 name="persons_insurance"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -454,6 +470,7 @@
                 name="cars_insurance"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -477,6 +494,7 @@
                 name="theft_insurance"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -499,6 +517,7 @@
                 name="social_assistance_insurance"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -522,6 +541,7 @@
                 name="group_equipment_insurance"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -545,6 +565,7 @@
                 name="medical_assistance_certificate"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
             </div>
           </div>
@@ -582,9 +603,18 @@ export default defineComponent({
   name: 'MainDashboard',
   components: {},
   setup() {
-    const { rentTerrains, campVisa, getApprovedTerrains, getCampVisa } =
-      useCampVisa();
+    const {
+      rentTerrains,
+      campVisa,
+      getApprovedTerrains,
+      getCampVisa,
+      updateCampVisa,
+    } = useCampVisa();
     const searchCampVisa = ref();
+
+    const updateCampVisaFN = (test) => {
+      updateCampVisa(test.id, test);
+    };
 
     watch(searchCampVisa, async (newValue) => {
       await getCampVisa(newValue);
@@ -601,7 +631,7 @@ export default defineComponent({
       }
     });
 
-    return { rentTerrains, campVisa, searchCampVisa };
+    return { rentTerrains, campVisa, searchCampVisa, updateCampVisaFN };
   },
 });
 </script>

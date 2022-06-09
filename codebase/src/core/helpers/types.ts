@@ -119,6 +119,7 @@ export type extraSettingsSearch = {
 };
 export type TCampVisa = TTerrainRent & {
   camp_visa: {
+    id: number;
     tents: number;
     activities: number;
     theme: number;

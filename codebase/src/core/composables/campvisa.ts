@@ -45,6 +45,18 @@ export default function useCampVisa() {
         console.log(e.response.data.message);
       });
   };
+  const updateCampVisa = async (id, params) => {
+    isLoading.value = true;
+    errors.value = { data: null, message: null };
+    await ApiService.update('user/camp-visa', id, params)
+      .then((r) => {
+        isLoading.value = false;
+        return (campVisa.value = r.data.data);
+      })
+      .catch((e) => {
+        console.log(e.response.data.message);
+      });
+  };
 
   return {
     rentTerrains,
@@ -54,5 +66,6 @@ export default function useCampVisa() {
     getApprovedTerrains,
     getCampVisa,
     getCampVisas,
+    updateCampVisa,
   };
 }
