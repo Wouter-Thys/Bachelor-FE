@@ -531,7 +531,7 @@ export default defineComponent({
       apiService
         .post('user/rent-terrain', value)
         .then((r) => {
-          router.push({ name: 'profileOverview' });
+          router.push({ name: 'campVisa' });
         })
         .catch((err) => {
           console.error(err);
@@ -575,44 +575,49 @@ export default defineComponent({
 
     onMounted(async () => {
       setCurrentPageTitle('');
-      await getTerrain(route.params.id);
-      selectedImage.value = terrain.value.images[0].url;
-      if (terrain.value.latitude && terrain.value.longitude) {
-        center.value.lat = terrain.value.latitude;
-        center.value.lng = terrain.value.longitude;
-        if (markers.value) {
-          markers.value[0].position.lat = terrain.value.latitude;
-          markers.value[0].position.lng = terrain.value.longitude;
-        }
-      } else {
-        markers.value = null;
-        markers.value = null;
-      }
-      imagesChunks.value = _.chunk(Object.values(terrain.value.images), 5);
+      await getTerrain(route.params.id)
+        .then(() => {
+          selectedImage.value = terrain.value.images[0].url;
+          if (terrain.value.latitude && terrain.value.longitude) {
+            center.value.lat = terrain.value.latitude;
+            center.value.lng = terrain.value.longitude;
+            if (markers.value) {
+              markers.value[0].position.lat = terrain.value.latitude;
+              markers.value[0].position.lng = terrain.value.longitude;
+            }
+          } else {
+            markers.value = null;
+            markers.value = null;
+          }
+          imagesChunks.value = _.chunk(Object.values(terrain.value.images), 5);
 
-      calOptions.value.events = [];
-      terrain.value.rented_dates.forEach((value) => {
-        let color = '';
-        if (value.approvalStatus === 'pending') color = 'orange';
-        if (value.approvalStatus === 'approved') color = 'green';
-        if (value.approvalStatus !== 'rejected') {
-          calOptions.value.events.push({
-            title: value.user.organization + ' - ' + value.approvalStatus,
-            start: value.startDate,
-            end: value.endDate,
-            color: color,
+          calOptions.value.events = [];
+          terrain.value.rented_dates.forEach((value) => {
+            let color = '';
+            if (value.approvalStatus === 'pending') color = 'orange';
+            if (value.approvalStatus === 'approved') color = 'green';
+            if (value.approvalStatus !== 'rejected') {
+              calOptions.value.events.push({
+                title: value.user.organization + ' - ' + value.approvalStatus,
+                start: value.startDate,
+                end: value.endDate,
+                color: color,
+              });
+            }
+            let incDate = new Date(value.startDate);
+            while (incDate <= new Date(value.endDate)) {
+              miniCalendarMarkers.value.push({
+                date: new Date(incDate),
+                type: 'line',
+                color: color,
+              });
+              incDate.setDate(incDate.getDate() + 1);
+            }
           });
-        }
-        let incDate = new Date(value.startDate);
-        while (incDate <= new Date(value.endDate)) {
-          miniCalendarMarkers.value.push({
-            date: new Date(incDate),
-            type: 'line',
-            color: color,
-          });
-          incDate.setDate(incDate.getDate() + 1);
-        }
-      });
+        })
+        .catch((e) => {
+          router.push({ name: 'dashboard' });
+        });
     });
 
     return {

@@ -91,7 +91,7 @@ export default function useTerrains() {
   const getUserTerrainsRentRequest = async () => {
     isLoading.value = true;
     errors.value = { data: null, message: null };
-    await ApiService.get('/user/rent-request')
+    await ApiService.get('/user/terrain-rent')
       .then((r) => {
         isLoading.value = false;
         return (rentTerrains.value = r.data.data);
@@ -115,7 +115,7 @@ export default function useTerrains() {
   const deleteUserTerrainsRentRequest = async (value) => {
     isLoading.value = true;
     errors.value = { data: null, message: null };
-    await ApiService.delete('/user/rent-request', value)
+    await ApiService.delete('/user/terrain-rent', value)
       .then((r) => {
         isLoading.value = false;
         return (rentTerrains.value = r.data.data);

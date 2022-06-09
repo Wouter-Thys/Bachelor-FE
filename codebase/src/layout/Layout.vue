@@ -33,6 +33,7 @@
         <!-- end:: Content Body -->
       </div>
       <!-- end:: Content -->
+      <KTFooter />
     </div>
   </div>
   <!-- end:: Body -->
@@ -44,6 +45,7 @@ import { defineComponent, computed, onMounted, watch, nextTick } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import KTHeader from '@/layout/header/Header.vue';
+import KTFooter from '@/layout/footer/Footer.vue';
 import HtmlClass from '@/core/services/LayoutService';
 import KTToolbar from '@/layout/toolbar/Toolbar.vue';
 import KTScrollTop from '@/layout/extras/ScrollTop.vue';
@@ -67,6 +69,7 @@ export default defineComponent({
   name: 'MasterLayout',
   components: {
     KTHeader,
+    KTFooter,
     KTToolbar,
     KTScrollTop,
     KTLoader,

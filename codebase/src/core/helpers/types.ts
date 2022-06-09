@@ -18,8 +18,8 @@ export type TImages = {
 
 export type TTerrainRent = {
   id: number;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   approvalStatus: string;
   user: TUser;
   terrain: TTerrain;
@@ -115,5 +115,31 @@ export type extraSettingsSearch = {
   orderBy: {
     column: string;
     direction: string;
+  };
+};
+export type TCampVisa = TTerrainRent & {
+  camp_visa: {
+    tents: number;
+    activities: number;
+    theme: number;
+    camp_booklet: number;
+    forest_permission: number;
+    municipality_contact: number;
+    fire_agency_contact: number;
+    tools: number;
+    parents_info_session: number;
+    leaders_info_session: number;
+    extra_info_session: number;
+    fire_insurance: number;
+    transport_insurance: number;
+    persons_insurance: number;
+    cars_insurance: number;
+    theft_insurance: number;
+    social_assistance_insurance: number;
+    group_equipment_insurance: number;
+    medical_assistance_certificate: number;
+    camp_registration: number;
+    final_contact_landlord: number;
+    rent_terrain: TTerrainRent;
   };
 };

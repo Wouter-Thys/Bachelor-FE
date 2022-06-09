@@ -1,6 +1,6 @@
 <template>
   <!--begin::Toolbar-->
-  <div id="kt_toolbar" class="toolbar py-5 py-lg-15">
+  <div id="kt_toolbar" class="toolbar py-10">
     <!--begin::Container-->
     <div
       id="kt_toolbar_container"

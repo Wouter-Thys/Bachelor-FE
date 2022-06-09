@@ -36,7 +36,7 @@
       <SearchTerrain :order-by="orderBy" @search-terrain="callback" />
     </div>
   </div>
-  <div v-if="!mapSearch" class="row">
+  <div v-if="!mapSearch" class="row mt-10">
     <div class="row mt-10">
       <div class="d-flex justify-content-between">
         <h1 class="">Found Terrains</h1>

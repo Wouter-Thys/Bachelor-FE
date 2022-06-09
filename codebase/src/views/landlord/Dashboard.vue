@@ -35,7 +35,7 @@
     >
       <div class="row">
         <div class="d-flex justify-content-center">
-          <span class="fs-1 text-white">
+          <span class="fs-1 text-primary">
             No one as requested to rent a terrain at this time
           </span>
         </div>
@@ -92,7 +92,9 @@ export default defineComponent({
 
     const getTerrainRR = async () => {
       await getLandlordTerrainsRentRequest();
+      await getLandlordTerrain(rentTerrains.value[0].terrain.id);
       selectedRentInfo.value = rentTerrains.value[0];
+      await fillCalendarEvents(terrain.value);
     };
 
     const options = ref({
@@ -110,21 +112,8 @@ export default defineComponent({
         selectedRentInfo.value = rentTerrains.value[0];
         const calendarApi = fullCalendar.value.getApi();
         calendarApi.gotoDate(selectedRentInfo.value.startDate);
+        await fillCalendarEvents(terrain.value);
 
-        options.value.events = [];
-        terrain.value.rented_dates.forEach((value) => {
-          let color = '';
-          if (value.approvalStatus === 'pending') color = 'orange';
-          if (value.approvalStatus === 'approved') color = 'green';
-          if (value.approvalStatus !== 'rejected') {
-            options.value.events.push({
-              title: value.user.name + ' - ' + value.approvalStatus,
-              start: value.startDate,
-              end: value.endDate,
-              color: color,
-            });
-          }
-        });
         setCurrentPageTitle('Latest Application');
       }
     });
@@ -133,8 +122,12 @@ export default defineComponent({
       await getLandlordTerrain(newValue);
       const calendarApi = fullCalendar.value.getApi();
       calendarApi.gotoDate(selectedRentInfo.value.startDate);
+      await fillCalendarEvents(terrain.value);
+    });
+
+    const fillCalendarEvents = (terrain) => {
       options.value.events = [];
-      terrain.value.rented_dates.forEach((value) => {
+      terrain.rented_dates.forEach((value) => {
         let color = '';
         if (value.approvalStatus === 'pending') color = 'orange';
         if (value.approvalStatus === 'approved') color = 'green';
@@ -147,7 +140,7 @@ export default defineComponent({
           });
         }
       });
-    });
+    };
 
     return {
       fullCalendar,

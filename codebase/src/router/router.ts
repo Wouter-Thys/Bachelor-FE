@@ -52,6 +52,12 @@ const routes: Array<RouteRecordRaw> = [
         name: 'terrain',
         component: () => import('@/views/Terrain/Terrain.vue'),
       },
+      {
+        beforeEnter: [isAuth, user],
+        path: 'camp-visa',
+        name: 'campVisa',
+        component: () => import('@/views/CampVisa.vue'),
+      },
     ],
   },
   {

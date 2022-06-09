@@ -61,6 +61,13 @@
           </span>
         </router-link>
       </div>
+      <div v-if="isAuthenticated" class="menu-item me-lg-1">
+        <router-link to="/camp-visa" class="menu-link" active-class="active">
+          <span class="menu-title text-hover-white text-primary">
+            Camp Visa
+          </span>
+        </router-link>
+      </div>
       <!--end::Menu-->
     </div>
   </div>

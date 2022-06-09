@@ -124,6 +124,9 @@ export default defineComponent({
           top: 1,
         },
       },
+      legend: {
+        show: false,
+      },
       stroke: {
         curve: 'smooth',
         show: true,
