@@ -192,8 +192,8 @@
                 name="forest_permission"
                 :false-value="0"
                 :true-value="1"
+                @change="updateCampVisaFN(campVisa.camp_visa)"
               />
-              @change="updateCampVisaFN(campVisa.camp_visa)"
             </div>
           </div>
           <div class="col-6 my-4">
