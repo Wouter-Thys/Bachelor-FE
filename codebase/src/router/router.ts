@@ -142,6 +142,18 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
   {
+    path: '/',
+    component: () => import('@/components/page-layouts/LandingPage.vue'),
+    beforeEnter: [isAuth],
+    children: [
+      {
+        path: '/email/verify-email',
+        name: 'verifyEmail',
+        component: () => import('@/views/Email/VerifyEmail.vue'),
+      },
+    ],
+  },
+  {
     // the 404 route, when none of the above matches
     path: '/404',
     name: '404',

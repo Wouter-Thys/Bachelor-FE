@@ -233,7 +233,6 @@ export default defineComponent({
       });
     });
 
-    console.log(submitButton);
     const onSubmitRegister = async (values) => {
       // Clear existing errors
       await store.dispatch(Actions.LOGOUT);
