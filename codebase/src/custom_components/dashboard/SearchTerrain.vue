@@ -293,7 +293,6 @@ export default defineComponent({
       () => props.orderBy,
       (newValue) => {
         const orderBy = newValue?.split('|', 2);
-        console.log(orderBy);
         if (orderBy[1] === 'asc' || orderBy[1] === 'desc') {
           extraSettings.value.orderBy.column = orderBy[0];
           extraSettings.value.orderBy.direction = orderBy[1];

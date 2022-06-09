@@ -46,8 +46,6 @@ export default defineComponent({
     const baseColor = getCSSVariableValue('--bs-info');
     const lightColor = getCSSVariableValue('--bs-light-info');
 
-    console.log(props.terrains.map((a) => a.name));
-
     const options = {
       chart: {
         fontFamily: 'inherit',

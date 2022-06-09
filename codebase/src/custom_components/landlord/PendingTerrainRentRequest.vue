@@ -76,9 +76,6 @@ export default defineComponent({
   setup(props, context) {
     const approveTerrainRentFn = (id, value) => {
       const approveTerrainRent = { approveTerrainRent: value };
-      console.log(id);
-      console.log(value);
-      console.log(approveTerrainRent);
       ApiService.update('landlord/rent-request', id, approveTerrainRent as any)
         .then((r) => {
           context.emit('get-terrains');
