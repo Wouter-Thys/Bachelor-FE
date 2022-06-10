@@ -1,32 +1,34 @@
 <template>
   <Suspense>
-    <div v-if="selectedRentInfo" class="row pb-5">
-      <div v-if="terrain" class="col-4" style="height: 520px">
-        <TerrainCards :terrains="[terrain]" col="col-12" />
-      </div>
-      <div
-        v-if="selectedRentInfo"
-        class="col-4 d-flex align-items-center justify-content-center p-0"
-      >
-        <PendingTerrainRentRequest
-          :selected-rent-info="selectedRentInfo"
-          @get-terrains="getTerrainRR"
-        />
-      </div>
-      <div v-if="selectedRentInfo && options" class="col-4">
-        <div class="card p-5 mb-5">
-          <FullCalendar ref="fullCalendar" :options="options" />
+    <div v-if="rentTerrains.length" class="row pb-5">
+      <div v-if="selectedRentInfo" class="row pb-5">
+        <div v-if="terrain" class="col-4" style="height: 520px">
+          <TerrainCards :terrains="[terrain]" col="col-12" />
         </div>
-      </div>
-      <div class="col-12">
-        <TerrainsRentRequestTable
-          v-model:rent-terrains="rentTerrains"
-          v-model:is-loading="isLoading"
-          v-model:selected-terrain="selectedTerrain"
-          v-model:selected-rent-info="selectedRentInfo"
-          widget-classes="card-xxl-stretch mb-5 mb-xl-8"
-          @get-terrains="getTerrainRR"
-        ></TerrainsRentRequestTable>
+        <div
+          v-if="selectedRentInfo"
+          class="col-4 d-flex align-items-center justify-content-center p-0"
+        >
+          <PendingTerrainRentRequest
+            :selected-rent-info="selectedRentInfo"
+            @get-terrains="getTerrainRR"
+          />
+        </div>
+        <div v-if="selectedRentInfo && options" class="col-4">
+          <div class="card p-5 mb-5">
+            <FullCalendar ref="fullCalendar" :options="options" />
+          </div>
+        </div>
+        <div class="col-12">
+          <TerrainsRentRequestTable
+            v-model:rent-terrains="rentTerrains"
+            v-model:is-loading="isLoading"
+            v-model:selected-terrain="selectedTerrain"
+            v-model:selected-rent-info="selectedRentInfo"
+            widget-classes="card-xxl-stretch mb-5 mb-xl-8"
+            @get-terrains="getTerrainRR"
+          ></TerrainsRentRequestTable>
+        </div>
       </div>
     </div>
     <div
@@ -92,9 +94,11 @@ export default defineComponent({
 
     const getTerrainRR = async () => {
       await getLandlordTerrainsRentRequest();
-      await getLandlordTerrain(rentTerrains.value[0].terrain.id);
-      selectedRentInfo.value = rentTerrains.value[0];
-      await fillCalendarEvents(terrain.value);
+      if (rentTerrains.value.length) {
+        await getLandlordTerrain(rentTerrains.value[0].terrain.id);
+        selectedRentInfo.value = rentTerrains.value[0];
+        await fillCalendarEvents(terrain.value);
+      }
     };
 
     const options = ref({
@@ -107,6 +111,7 @@ export default defineComponent({
     onMounted(async () => {
       setCurrentPageTitle('');
       await getTerrainRR();
+      console.log(selectedRentInfo.value);
       if (rentTerrains.value.length) {
         await getLandlordTerrain(rentTerrains.value[0].terrain.id);
         selectedRentInfo.value = rentTerrains.value[0];
