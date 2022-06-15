@@ -563,10 +563,12 @@ export default defineComponent({
       const dates: Date[] = [];
       if (terrain.value.rented_dates) {
         terrain.value.rented_dates.forEach((item) => {
-          let incDate = new Date(item.startDate);
-          while (incDate <= new Date(item.endDate)) {
-            dates.push(new Date(incDate));
-            incDate.setDate(incDate.getDate() + 1);
+          if (item.approvalStatus !== 'rejected') {
+            let incDate = new Date(item.startDate);
+            while (incDate <= new Date(item.endDate)) {
+              dates.push(new Date(incDate));
+              incDate.setDate(incDate.getDate() + 1);
+            }
           }
         });
       }
@@ -603,15 +605,15 @@ export default defineComponent({
                 end: value.endDate,
                 color: color,
               });
-            }
-            let incDate = new Date(value.startDate);
-            while (incDate <= new Date(value.endDate)) {
-              miniCalendarMarkers.value.push({
-                date: new Date(incDate),
-                type: 'line',
-                color: color,
-              });
-              incDate.setDate(incDate.getDate() + 1);
+              let incDate = new Date(value.startDate);
+              while (incDate <= new Date(value.endDate)) {
+                miniCalendarMarkers.value.push({
+                  date: new Date(incDate),
+                  type: 'line',
+                  color: color,
+                });
+                incDate.setDate(incDate.getDate() + 1);
+              }
             }
           });
         })
