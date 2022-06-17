@@ -7,7 +7,7 @@
             Are you trying to find the perfect terrain?
           </h1>
           <p>
-            camp with your friends or even with your youth association? Look no
+            Camp with your friends or even with your youth association? Look no
             further. Grasshopper wil help you find a terrain with help of an
             advance search and google api.
           </p>
