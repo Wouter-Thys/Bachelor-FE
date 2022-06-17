@@ -8,7 +8,7 @@
           </h1>
           <p>
             camp with your friends or even with your youth association? Look no
-            further. This site wil help you find a terrain with help of an
+            further. Grasshopper wil help you find a terrain with help of an
             advance search and google api.
           </p>
           <p class="mt-10">
@@ -26,7 +26,7 @@
           <div class="d-flex justify-content-center mt-8">
             <router-link to="/dashboard" class="cbtn-dark py-5 px-6">
               <i class="fa-solid fa-magnifying-glass text-primary"></i>
-              Browser terrains
+              Browse terrains
             </router-link>
           </div>
         </div>
