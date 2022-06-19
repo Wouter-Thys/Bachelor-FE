@@ -78,10 +78,10 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
-import SearchTerrain from '@/custom_components/dashboard/SearchTerrain.vue';
-import TerrainCards from '@/custom_components/terrain/TerrainCards.vue';
+import SearchTerrain from '@/components/dashboard/SearchTerrain.vue';
+import TerrainCards from '@/components/terrain/TerrainCards.vue';
 import useTerrains from '@/core/composables/terrain';
-import GoogleMap from '@/custom_components/GoogleMap.vue';
+import GoogleMap from '@/components/GoogleMap.vue';
 import { TCenterGMap, TMarkersGMap } from '@/core/helpers/types';
 
 export default defineComponent({

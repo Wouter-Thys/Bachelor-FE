@@ -462,9 +462,9 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from 'vue';
 import useTerrains from '@/core/composables/terrain';
-import TerrainRatingChart from '@/custom_components/terrain/TerrainRatingChart.vue';
+import TerrainRatingChart from '@/components/terrain/TerrainRatingChart.vue';
 import { useRoute } from 'vue-router';
-import GoogleMap from '@/custom_components/GoogleMap.vue';
+import GoogleMap from '@/components/GoogleMap.vue';
 import AddressService from '@/core/services/AddressService';
 import {
   TCenterGMap,

@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
-import TerrainsRentRequestTable from '@/custom_components/user/TerrainsRentRequestTable.vue';
+import TerrainsRentRequestTable from '@/components/user/TerrainsRentRequestTable.vue';
 import useTerrains from '@/core/composables/terrain';
 import '@fullcalendar/core/vdom';
 import FullCalendar from '@fullcalendar/vue3';

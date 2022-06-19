@@ -65,13 +65,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import KTSearch from '@/layout/header/partials/Search.vue';
 import KTUserMenu from '@/layout/header/partials/UserMenu.vue';
 import MainMenuConfig from '@/core/config/TopbarMenu';
 import { useI18n } from 'vue-i18n/index';
 import { useStore } from 'vuex';
 import { User } from '@/store/modules/AuthModule';
-import store from '@/store';
 
 export default defineComponent({
   name: 'LayoutTopbar',

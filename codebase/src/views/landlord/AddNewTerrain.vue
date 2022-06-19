@@ -529,8 +529,8 @@ import { defineComponent, onMounted, ref, computed } from 'vue';
 import { StepperComponent } from '@/assets/ts/components/_StepperComponent';
 import { useForm } from 'vee-validate';
 import { getIllustrationsPath } from '@/core/helpers/assets';
-import addressInput from '@/custom_components/landlord/forms/AddressInput.vue';
-import DropzoneFiles from '@/custom_components/Dropzone.vue';
+import addressInput from '@/components/landlord/forms/AddressInput.vue';
+import DropzoneFiles from '@/components/Dropzone.vue';
 import ApiService from '@/core/services/ApiService';
 import router from '@/router/router';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
@@ -637,7 +637,7 @@ export default defineComponent({
           loading.value = false;
           router.push({ name: 'landlordDashboard' });
         })
-        .catch(function () {
+        .catch(() => {
           console.log('FAILURE!!');
         });
     };

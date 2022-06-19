@@ -42,8 +42,8 @@ export default defineComponent({
   name: 'MobilePageTitle',
   components: {},
   props: {
-    breadcrumbs: Array,
-    title: String,
+    breadcrumbs: { type: Array, default: () => [] },
+    title: { type: String, default: '' },
   },
 });
 </script>

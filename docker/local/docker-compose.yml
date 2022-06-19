@@ -12,6 +12,22 @@ services:
       - ${DLLOCAL_PATH}/${STORAGE_PATH}/codebase:/app:cached
     networks:
       - proxy
+  www:
+    image: nginx:latest
+    container_name: ${COMPOSE_PROJECT_NAME}-build
+    restart: unless-stopped
+    ports:
+      - "80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-www.entrypoints=websecure"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-www.tls=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-www.rule=Host(`febuild.lokal.host`)"
+    volumes:
+      - ${DLLOCAL_PATH}/${STORAGE_PATH}/codebase/dist:/usr/share/nginx/html:cached
+    networks:
+      - default
+      - proxy
 
 networks:
   proxy:

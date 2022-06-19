@@ -57,9 +57,9 @@ import { defineComponent, onMounted, ref, watch } from 'vue';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 import useTerrains from '@/core/composables/terrain';
 
-import TerrainsRentRequestTable from '@/custom_components/landlord/TerrainsRentRequestTable.vue';
-import PendingTerrainRentRequest from '@/custom_components/landlord/PendingTerrainRentRequest.vue';
-import TerrainCards from '@/custom_components/terrain/TerrainCards.vue';
+import TerrainsRentRequestTable from '@/components/landlord/TerrainsRentRequestTable.vue';
+import PendingTerrainRentRequest from '@/components/landlord/PendingTerrainRentRequest.vue';
+import TerrainCards from '@/components/terrain/TerrainCards.vue';
 import { TTerrainRent } from '@/core/helpers/types';
 import '@fullcalendar/core/vdom';
 import FullCalendar from '@fullcalendar/vue3';

@@ -3,7 +3,7 @@
     <div v-if="terrains.length" class="col-12">
       <LandlordApexChart1
         v-model:terrains="terrains"
-        widget-classes=" mb-xl-8"
+        widget-classes="mb-xl-8"
       ></LandlordApexChart1>
     </div>
   </div>
@@ -40,9 +40,9 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
-import LandlordApexChart1 from '@/custom_components/landlord/LandlordApexChart1.vue';
+import LandlordApexChart1 from '@/components/landlord/LandlordApexChart1.vue';
 import useTerrains from '@/core/composables/terrain';
-import TerrainCards from '@/custom_components/terrain/TerrainCards.vue';
+import TerrainCards from '@/components/terrain/TerrainCards.vue';
 
 export default defineComponent({
   name: 'ProfileProjects',

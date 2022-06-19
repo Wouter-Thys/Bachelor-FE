@@ -33,7 +33,7 @@ import { useStore } from 'vuex';
 export default defineComponent({
   name: 'LayoutLoader',
   props: {
-    logo: String,
+    logo: { type: String, required: true },
   },
   setup() {
     const store = useStore();

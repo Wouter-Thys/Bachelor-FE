@@ -337,9 +337,9 @@
 import { defineComponent, onMounted, ref } from 'vue';
 import useTerrains from '@/core/composables/terrain';
 import { useRoute } from 'vue-router';
-import DropzoneFile from '@/custom_components/Dropzone.vue';
+import DropzoneFile from '@/components/Dropzone.vue';
 import { TEditTerrain } from '@/core/helpers/types';
-import AddressInput from '@/custom_components/landlord/forms/AddressInput.vue';
+import AddressInput from '@/components/landlord/forms/AddressInput.vue';
 import ApiService from '@/core/services/ApiService';
 import router from '@/router/router';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';

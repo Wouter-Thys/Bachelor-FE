@@ -36,9 +36,9 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
-import usersTable from '@/custom_components/admin/UsersTable.vue';
-import UsersPendingLandlord from '@/custom_components/admin/UsersPendingLandlordTable.vue';
-import UserPendingLandlord from '@/custom_components/admin/UserPendingLandlordCard.vue';
+import usersTable from '@/components/admin/UsersTable.vue';
+import UsersPendingLandlord from '@/components/admin/UsersPendingLandlordTable.vue';
+import UserPendingLandlord from '@/components/admin/UserPendingLandlordCard.vue';
 import { setCurrentPageTitle } from '@/core/helpers/breadcrumb';
 import useUsers from '@/core/composables/users';
 
