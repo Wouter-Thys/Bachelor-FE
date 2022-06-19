@@ -6,7 +6,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "serve": "vue-cli-service serve",
-    "prettify": "prettier --write \"src/**/*.ts*\""
+    "prettify": "prettier --write \"src/**/*.{ts*,vue}\"",
+    "prettier:check": "prettier --check \"src/**/*.{ts*,vue}\""
   },
   "dependencies": {
     "@fawmi/vue-google-maps": "^0.9.67",
